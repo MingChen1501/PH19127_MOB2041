@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:title="Quản lý"
+        android:checkableBehavior="single">
+        <menu>
+            <item
+                android:id="@+id/nav_PhieuMuon"
+                android:icon="@drawable/ic_baseline_home_24"
+                android:title="@string/menu_phieuMuon" />
+            <item
+                android:id="@+id/nav_LoaiSach"
+                android:icon="@drawable/ic_baseline_library_books_24"
+                android:title="@string/menu_loaiSach" />
+            <item
+                android:id="@+id/nav_Sach"
+                android:icon="@drawable/ic_baseline_menu_book_24"
+                android:title="@string/menu_sach" />
+            <item
+                android:id="@+id/nav_thanhVien"
+                android:icon="@drawable/ic_baseline_people_24"
+                android:title="@string/menu_thanhVien" />
+            <item
+                android:id="@+id/nav_thuThu"
+                android:icon="@drawable/ic_baseline_people_24"
+                android:visible="false"
+                android:title="@string/menu_thuThu" />
+        </menu>
+    </item>
+    <item
+        android:title="Thống kê"
+        android:checkableBehavior="single">
+        <menu>
+            <item
+                android:id="@+id/nav_top10Sach"
+                android:icon="@drawable/ic_baseline_vertical_align_top_24"
+                android:title="@string/menu_top10" />
+            <item
+                android:id="@+id/nav_doanhThu"
+                android:icon="@drawable/ic_baseline_attach_money_24"
+                android:title="@string/menu_doanhTHu" />
+        </menu>
+    </item>
+    <item
+        android:title="Người dùng"
+        android:checkableBehavior="single">
+        <menu>
+            <item
+                android:id="@+id/nav_doiMatKhau"
+                android:icon="@drawable/ic_baseline_key_24"
+                android:title="@string/menu_doiMatKhau" />
+            <item
+                android:id="@+id/nav_dangXuat"
+                android:icon="@drawable/ic_baseline_logout_24"
+                android:title="@string/menu_dangXuat" />
+        </menu>
+    </item>
+
+
+</menu>
