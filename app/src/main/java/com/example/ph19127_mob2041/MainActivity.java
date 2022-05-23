@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(R.id.nav_PhieuMuon).setChecked(true);
         getSupportActionBar().setTitle("Quản lý phiếu mượn");
+        replaceFragment(new PhieuMuonFragment(), "Quản lý phiếu mượn");
 
 
 

@@ -39,7 +39,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String THU_THU_SDT = "soDienThoai";
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
-        getWritableDatabase();
     }
 
     @Override

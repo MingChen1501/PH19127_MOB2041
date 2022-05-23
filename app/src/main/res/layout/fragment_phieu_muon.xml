@@ -13,8 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:id="@+id/fabAddPhieuMuon"
-        android:src="@drawable/add"/>
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_add_circle_24"/>
 
 </LinearLayout>
