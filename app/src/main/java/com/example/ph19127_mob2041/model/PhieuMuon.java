@@ -24,6 +24,16 @@ public class PhieuMuon {
         this.maPhieuMuon = maPhieuMuon;
     }
 
+    @Override
+    public String toString() {
+        return "PhieuMuon{" +
+                "maPhieuMuon='" + maPhieuMuon + '\'' +
+                ", maThanhVien='" + maThanhVien + '\'' +
+                ", maSach='" + maSach + '\'' +
+                ", maThuThu='" + maThuThu + '\'' +
+                '}';
+    }
+
     public String getMaThanhVien() {
         return maThanhVien;
     }
