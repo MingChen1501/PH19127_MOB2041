@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.ph19127_mob2041.database.DBHelper;
 import com.example.ph19127_mob2041.fragment.AddUserFragment;
 import com.example.ph19127_mob2041.fragment.ChangePassFragment;
 import com.example.ph19127_mob2041.fragment.DoanhThuFragment;
@@ -41,6 +42,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findView();
+        try {
+
+            DBHelper dbHelper = new DBHelper(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //findviewByID
 
         setSupportActionBar(toolbar);
@@ -55,8 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(R.id.nav_PhieuMuon).setChecked(true);
-
-        //replaceFragment(new PhieuMuonFragment(), "Quản lý phiếu mượn");
         getSupportActionBar().setTitle("Quản lý phiếu mượn");
 
 
@@ -123,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 break;
             case R.id.nav_dangXuat:
-                onDestroy();
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
