@@ -8,6 +8,30 @@ public class ThanhVien {
     public ThanhVien() {
     }
 
+    public ThanhVien(String maThanhVien) {
+        this.maThanhVien = maThanhVien;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ThanhVien thanhVien = (ThanhVien) o;
+
+        return maThanhVien.equals(thanhVien.maThanhVien);
+    }
+
+    @Override
+    public int hashCode() {
+        return maThanhVien.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return maThanhVien + " - " + tenThanhVien;
+    }
+
     public ThanhVien(String maThanhVien, String tenThanhVien, String soDienThoai) {
         this.maThanhVien = maThanhVien;
         this.tenThanhVien = tenThanhVien;

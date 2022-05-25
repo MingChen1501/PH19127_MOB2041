@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "PhuongNamLIB";
-    public static final int VERSION = 5;
+    public static final int VERSION = 9;
 
     public static final String TABLE_PHIEU_MUON = "PhieuMuon";
     public static final String PHIEU_MUON_ID = "maPhieuMuon";
@@ -108,9 +108,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO ThuThu VALUES ('MATHUTHU', 'PWTHUTHU','HOTENTT', 'SDT')");
         db.execSQL("INSERT INTO ThanhVien VALUES ('MATHANHVIEN', 'TENTHANHVIEN','SDT')");
+        db.execSQL("INSERT INTO ThanhVien VALUES ('MATHANHVIEN2', 'TENTHANHVIEN','SDT')");
         db.execSQL("INSERT INTO LoaiSach VALUES ('MALOAISACH', 'TENLOAISACH')");
         db.execSQL("INSERT INTO Sach VALUES ('MASACH', 'MALOAISACH','TIEUDE', 'TACGIA',10000)");
+        db.execSQL("INSERT INTO Sach VALUES ('MASACH2', 'MALOAISACH','TIEUDE', 'TACGIA',10000)");
+        db.execSQL("INSERT INTO Sach VALUES ('MASACH3', 'MALOAISACH','TIEUDE', 'TACGIA',10000)");
         db.execSQL("INSERT INTO PhieuMuon VALUES ('MAPHIEUMUON','MASACH', 'MATHANHVIEN', 'MATHUTHU')");
+        db.execSQL("INSERT INTO PhieuMuon VALUES ('MAPHIEUMUON2','MASACH2', 'MATHANHVIEN2', 'MATHUTHU')");
     }
 
     @Override
@@ -119,7 +123,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SACH);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOAI_SACH);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_THANH_VIEN);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PHIEU_MUON);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_THU_THU);
         onCreate(db);
     }
 

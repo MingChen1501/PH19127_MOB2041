@@ -12,6 +12,26 @@ public class LoaiSach {
         this.tenLoaiSach = tenLoaiSach;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LoaiSach loaiSach = (LoaiSach) o;
+
+        return maLoaiSach.equals(loaiSach.maLoaiSach);
+    }
+
+    @Override
+    public int hashCode() {
+        return maLoaiSach.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return maLoaiSach + " - " + tenLoaiSach;
+    }
+
     public String getMaLoaiSach() {
         return maLoaiSach;
     }

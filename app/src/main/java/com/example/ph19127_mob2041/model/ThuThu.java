@@ -16,6 +16,30 @@ public class ThuThu {
     public ThuThu() {
     }
 
+    public ThuThu(String maThuThu) {
+        this.maThuThu = maThuThu;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ThuThu thuThu = (ThuThu) o;
+
+        return maThuThu.equals(thuThu.maThuThu);
+    }
+
+    @Override
+    public int hashCode() {
+        return maThuThu.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return maThuThu + " - " + hoTen;
+    }
+
     public String getMaThuThu() {
         return maThuThu;
     }

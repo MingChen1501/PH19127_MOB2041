@@ -27,8 +27,8 @@ public class PhieuMuonDAO implements DAO<PhieuMuon>{
                 cs.moveToFirst();
                 while (!cs.isAfterLast()) {
                     String idPM = cs.getString(0);
-                    String idThanhVien = cs.getString(1);
-                    String idSach = cs.getString(2);
+                    String idSach = cs.getString(1);
+                    String idThanhVien = cs.getString(2);
                     String idThuThu = cs.getString(3);
                     phieuMuons.add(new PhieuMuon(idPM, idThanhVien, idSach, idThuThu));
                     cs.moveToNext();
@@ -83,7 +83,7 @@ public class PhieuMuonDAO implements DAO<PhieuMuon>{
         contentValues.put(DBHelper.PHIEU_MUON_ID_THU_THU, phieuMuon.getMaThuThu());
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
             return db.update(DBHelper.TABLE_PHIEU_MUON,
-                    contentValues, DBHelper.SACH_ID + " = ?",
+                    contentValues, DBHelper.PHIEU_MUON_ID + " = ?",
                     new String[] {phieuMuon.getMaPhieuMuon()});
         }
     }

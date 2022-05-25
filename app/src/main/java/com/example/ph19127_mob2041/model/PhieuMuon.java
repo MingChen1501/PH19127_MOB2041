@@ -6,6 +6,21 @@ public class PhieuMuon {
     private String maSach;
     private String maThuThu;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PhieuMuon phieuMuon = (PhieuMuon) o;
+
+        return maPhieuMuon.equals(phieuMuon.maPhieuMuon);
+    }
+
+    @Override
+    public int hashCode() {
+        return maPhieuMuon.hashCode();
+    }
+
     public PhieuMuon() {
     }
 

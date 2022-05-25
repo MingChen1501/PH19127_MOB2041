@@ -11,6 +11,9 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/activity_splash.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/app_bar_main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/content_main.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_create_phieu_muon.xml" value="0.1" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_update_phieu_muon.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_change_pass.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_gallery.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_home.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_phieu_muon.xml" value="0.17552083333333332" />
@@ -22,11 +25,16 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/phieu_muon_view_item.xml" value="0.22" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/sach_view_item.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/thanh_vien_view_item.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/view_item_loai_sach.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/view_item_phieu_muon.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/view_item_sach.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/view_item_thanh_vien.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/menu/activity_main2_drawer.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/menu/activity_main_drawer3.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/menu/main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/menu/main_activity2.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/PC/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.17552083333333332" />
       </map>
     </option>
   </component>

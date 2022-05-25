@@ -12,6 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.ph19127_mob2041.dao.LoaiSachDAO;
+import com.example.ph19127_mob2041.dao.PhieuMuonDAO;
+import com.example.ph19127_mob2041.dao.SachDAO;
+import com.example.ph19127_mob2041.dao.ThanhVienDAO;
+import com.example.ph19127_mob2041.dao.ThuThuDAO;
 import com.example.ph19127_mob2041.database.DBHelper;
 import com.example.ph19127_mob2041.fragment.AddUserFragment;
 import com.example.ph19127_mob2041.fragment.ChangePassFragment;
@@ -21,7 +26,15 @@ import com.example.ph19127_mob2041.fragment.PhieuMuonFragment;
 import com.example.ph19127_mob2041.fragment.SachFragment;
 import com.example.ph19127_mob2041.fragment.ThanhVienFragment;
 import com.example.ph19127_mob2041.fragment.TopFragment;
+import com.example.ph19127_mob2041.model.LoaiSach;
+import com.example.ph19127_mob2041.model.PhieuMuon;
+import com.example.ph19127_mob2041.model.Sach;
+import com.example.ph19127_mob2041.model.ThanhVien;
+import com.example.ph19127_mob2041.model.ThuThu;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int FRAGMENT_PHIEU_MUON = 0;
@@ -37,18 +50,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private NavigationView navigationView;
     private int idNavChecked = R.id.nav_PhieuMuon;
+
+    private List<PhieuMuon> phieuMuonList;
+    private List<ThanhVien> thanhVienList;
+    private List<ThuThu> thuThuList;
+    private List<LoaiSach> loaiSachList;
+    private List<Sach> sachList;
+
+    private PhieuMuonDAO phieuMuonDAO;
+    private SachDAO sachDAO;
+    private LoaiSachDAO loaiSachDAO;
+    private ThuThuDAO thuThuDAO;
+    private ThanhVienDAO thanhVienDAO;
+
+    private PhieuMuonFragment phieuMuonFragment;
+    private SachFragment sachFragment;
+    private LoaiSachFragment loaiSachFragment;
+    private ThanhVienFragment thanhVienFragment;
+    private AddUserFragment addUserFragment;
+
+    private TopFragment topFragment;
+    private DoanhThuFragment doanhThuFragment;
+    private ChangePassFragment changePassFragment;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findView();
-        try {
-
-            DBHelper dbHelper = new DBHelper(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         //findviewByID
+        DBHelper dbHelper = new DBHelper(this);
+        //TODO test database
+        createDao();
+        createRepository();
+        getData();
+
+        thanhVienFragment = new ThanhVienFragment();
+        sachFragment = new SachFragment();
+        loaiSachFragment = new LoaiSachFragment();
+        phieuMuonFragment = new PhieuMuonFragment(phieuMuonList, thanhVienList, thuThuList, loaiSachList, sachList);
+        addUserFragment = new AddUserFragment();
+        topFragment = new TopFragment();
+        doanhThuFragment = new DoanhThuFragment();
+        changePassFragment = new ChangePassFragment();
 
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
@@ -63,10 +109,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(R.id.nav_PhieuMuon).setChecked(true);
         getSupportActionBar().setTitle("Quản lý phiếu mượn");
-        replaceFragment(new PhieuMuonFragment(), "Quản lý phiếu mượn");
+        replaceFragment(phieuMuonFragment, "Quản lý phiếu mượn");
 
 
 
+    }
+
+    private void createRepository() {
+        phieuMuonList = new ArrayList<>();
+        sachList = new ArrayList<>();
+        loaiSachList = new ArrayList<>();
+        thanhVienList = new ArrayList<>();
+        thuThuList =  new ArrayList<>();
+    }
+
+    private void createDao() {
+        phieuMuonDAO = new PhieuMuonDAO(this);
+        loaiSachDAO = new LoaiSachDAO(this);
+        sachDAO = new SachDAO(this);
+        thanhVienDAO = new ThanhVienDAO(this);
+        thuThuDAO = new ThuThuDAO(this);
+    }
+
+    private void getData() {
+        phieuMuonList.addAll(phieuMuonDAO.getAll());
+        sachList.addAll(sachDAO.getAll());
+        loaiSachList.addAll(loaiSachDAO.getAll() );
+        thanhVienList.addAll(thanhVienDAO.getAll());
+        thuThuList.addAll(thuThuDAO.getAll());
     }
 
     @Override
@@ -75,56 +145,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             case R.id.nav_PhieuMuon:
                 if (mCurrentFragment != FRAGMENT_PHIEU_MUON) {
-                    replaceFragment(new PhieuMuonFragment(), "Quản lý phiếu mượn");
+                    replaceFragment(phieuMuonFragment, "Quản lý phiếu mượn");
                     mCurrentFragment = FRAGMENT_PHIEU_MUON;
                 }
                 break;
 
             case R.id.nav_LoaiSach:
                 if (mCurrentFragment != FRAGMENT_LOAI_SACH) {
-                    replaceFragment(new LoaiSachFragment(), "Quản lý loại sách");
+                    replaceFragment(loaiSachFragment, "Quản lý loại sách");
                     mCurrentFragment = FRAGMENT_LOAI_SACH;
                 }
                 break;
 
             case R.id.nav_Sach:
                 if (mCurrentFragment != FRAGMENT_SACH) {
-                    replaceFragment(new SachFragment(), "Quản lý sách");
+                    replaceFragment(sachFragment, "Quản lý sách");
                     mCurrentFragment = FRAGMENT_SACH;
                 }
                 break;
 
             case R.id.nav_thanhVien:
                 if (mCurrentFragment != FRAGMENT_THANH_VIEN) {
-                    replaceFragment(new ThanhVienFragment(), "Quản lý thành viên");
+                    replaceFragment(thanhVienFragment, "Quản lý thành viên");
                     mCurrentFragment = FRAGMENT_THANH_VIEN;
                 }
                 break;
 
             case R.id.nav_thuThu:
                 if (mCurrentFragment != FRAGMENT_ADD_USER) {
-                    replaceFragment(new AddUserFragment(), "Quản lý thủ thư");
+                    replaceFragment(addUserFragment, "Quản lý thủ thư");
                     mCurrentFragment = FRAGMENT_ADD_USER;
                 }
                 break;
 
             case R.id.nav_top10Sach:
                 if (mCurrentFragment != FRAGMENT_TOP) {
-                    replaceFragment(new TopFragment(), "Top 10 sách mượn nhiều nhất");
+                    replaceFragment(topFragment, "Top 10 sách mượn nhiều nhất");
                     mCurrentFragment = FRAGMENT_TOP;
                 }
                 break;
 
             case R.id.nav_doanhThu:
                 if (mCurrentFragment != FRAGMENT_DOANH_THU) {
-                    replaceFragment(new DoanhThuFragment(), "Doanh thu");
+                    replaceFragment(doanhThuFragment, "Doanh thu");
                     mCurrentFragment = FRAGMENT_DOANH_THU;
                 }
                 break;
 
             case R.id.nav_doiMatKhau:
                 if (mCurrentFragment != FRAGMENT_CHANGE_PASS) {
-                    replaceFragment(new ChangePassFragment(), "Đổi mật khẩu");
+                    replaceFragment(changePassFragment, "Đổi mật khẩu");
                     mCurrentFragment = FRAGMENT_CHANGE_PASS;
                 }
                 break;
