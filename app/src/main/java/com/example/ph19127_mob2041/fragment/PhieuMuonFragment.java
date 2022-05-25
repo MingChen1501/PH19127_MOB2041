@@ -1,6 +1,5 @@
 package com.example.ph19127_mob2041.fragment;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 
@@ -11,12 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.ph19127_mob2041.R;
 import com.example.ph19127_mob2041.adapter.PhieuMuonAdapter;
@@ -81,19 +82,45 @@ public class PhieuMuonFragment extends Fragment {
             private void openDiaglogCreate() {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 LayoutInflater inflater = LayoutInflater.from(getContext());
-                View view = inflater.inflate(R.layout.dialog_view_create_phieu_muon, null);
+                View view = inflater.inflate(R.layout.dialog_view_phieu_muon_create, null);
                 builder.setView(view);
                 Dialog dialog = builder.create();
                 dialog.show();
 
+                EditText etPhieuMuon;
                 Spinner spnSach, spnThanhVien, spnThuThu;
                 Button btnThem, btnHuy;
 
+                etPhieuMuon = view.findViewById(R.id.etPhieuMuon_dialogCreatePhieuMuon);
                 spnSach = view.findViewById(R.id.spnSach_dialogCreatePhieuMuon);
                 spnThanhVien = view.findViewById(R.id.spnThanhVien_dialogCreatePhieuMuon);
                 spnThuThu = view.findViewById(R.id.spnThuThu_dialogCreatePhieuMuon);
                 btnThem = view.findViewById(R.id.btnSua_dialogCreatePhieuMuon);
                 btnHuy = view.findViewById(R.id.btnQuayLai_dialogCreatePhieuMuon);
+                ArrayAdapter<Sach> spnSachAdapter = new ArrayAdapter<>(
+                        view.getContext(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        sachList
+                );
+                spnSach.setAdapter(spnSachAdapter);
+                spnSach.setSelection(0);
+
+                ArrayAdapter<ThanhVien> spnThanhVienAdapter = new ArrayAdapter<>(
+                        view.getContext(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        thanhVienList
+                );
+                spnThanhVien.setAdapter(spnThanhVienAdapter);
+                spnThanhVien.setSelection(0);
+
+
+                ArrayAdapter<ThuThu> spnThuThuAdapter = new ArrayAdapter<>(
+                        view.getContext(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        thuThuList
+                );
+                spnThuThu.setAdapter(spnThuThuAdapter);
+                spnThuThu.setSelection(0);
 
                 btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -103,6 +130,21 @@ public class PhieuMuonFragment extends Fragment {
 
                     private void addPhieuMuon() {
                         //TODO code add PhieuMuon to database
+                        String idPhieuMuon = etPhieuMuon.getText().toString();
+                        String idSach = ((Sach)spnSach.getSelectedItem()).getMaSach();
+                        String idThanhVien = ((ThanhVien)spnThanhVien.getSelectedItem()).getMaThanhVien();
+                        String idThuThu = ((ThuThu)spnThuThu.getSelectedItem()).getMaThuThu();
+
+                        PhieuMuon newPhieuMuon = new PhieuMuon(idPhieuMuon,idThanhVien, idSach, idThuThu);
+                        if (phieuMuonDAO.insert(newPhieuMuon) != -1) {
+                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            phieuMuonList.clear();
+                            phieuMuonList.addAll(phieuMuonDAO.getAll());
+                            dialog.dismiss();
+                            phieuMuonAdapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 btnHuy.setOnClickListener(new View.OnClickListener() {

@@ -10,9 +10,35 @@
         android:layout_height="wrap_content"
         android:background="#FFD600"
         android:gravity="center"
-        android:text="Chi tiết phiếu mượn"
+        android:text="Tạo mới phiếu mượn"
         android:textSize="35sp" />
 
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Chọn loại sách"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spnLoaiSach_dialogCreatePhieuMuon"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="18dp" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Nhập mã phiếu mượn"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <EditText
+        android:id="@+id/etPhieuMuon_dialogCreatePhieuMuon"
+        android:hint="nhập mã phiếu mượn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="18dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +48,7 @@
         android:textStyle="bold" />
 
     <Spinner
-        android:id="@+id/spnSach_dialogUpdatePhieuMuon"
+        android:id="@+id/spnSach_dialogCreatePhieuMuon"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="18dp" />
@@ -36,7 +62,7 @@
         android:textStyle="bold" />
 
     <Spinner
-        android:id="@+id/spnThanhVien_dialogUpdatePhieuMuon"
+        android:id="@+id/spnThanhVien_dialogCreatePhieuMuon"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="18dp" />
@@ -50,7 +76,7 @@
         android:textStyle="bold" />
 
     <Spinner
-        android:id="@+id/spnThuThu_dialogUpdatePhieuMuon"
+        android:id="@+id/spnThuThu_dialogCreatePhieuMuon"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="18dp" />
@@ -62,16 +88,16 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnSua_dialogUpdatePhieuMuon"
+            android:id="@+id/btnSua_dialogCreatePhieuMuon"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:backgroundTint="#FF6D00"
-            android:text="SỬA MỚI" />
+            android:text="THÊM MỚI" />
 
         <Button
-            android:id="@+id/btnQuayLai_dialogUpdatePhieuMuon"
+            android:id="@+id/btnQuayLai_dialogCreatePhieuMuon"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="8dp"

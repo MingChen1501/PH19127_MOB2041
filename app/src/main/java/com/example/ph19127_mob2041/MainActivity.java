@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         thanhVienFragment = new ThanhVienFragment();
         sachFragment = new SachFragment();
-        loaiSachFragment = new LoaiSachFragment();
+        loaiSachFragment = new LoaiSachFragment(loaiSachList, loaiSachDAO);
         phieuMuonFragment = new PhieuMuonFragment(phieuMuonList, thanhVienList, thuThuList, loaiSachList, sachList);
         addUserFragment = new AddUserFragment();
         topFragment = new TopFragment();

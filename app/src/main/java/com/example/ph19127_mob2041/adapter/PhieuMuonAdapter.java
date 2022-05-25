@@ -3,16 +3,13 @@ package com.example.ph19127_mob2041.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +37,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
     private List<ThuThu> thuThuList;
     private List<LoaiSach> loaiSachList;
     private List<Sach> sachList;
+//    private List<Sach> sachListByLoaiSach;
 
     public PhieuMuonAdapter(Context context, List<PhieuMuon> phieuMuonList, PhieuMuonDAO phieuMuonDAO) {
     }
@@ -84,21 +82,41 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
             private void openDialogUpdate(PhieuMuon phieuMuon) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_view_update_phieu_muon, null);
+                View view = inflater.inflate(R.layout.dialog_view_phieu_muon_update, null);
 
                 builder.setView(view);
                 Dialog dialog = builder.create();
                 dialog.show();
 
-                Spinner spnSach, spnThanhVien, spnThuThu;
+                Spinner spnLoaiSach, spnSach, spnThanhVien, spnThuThu;
                 Button btnSua, btnHuy;
 
+                //spnLoaiSach = view.findViewById(R.id.spnLoaiSach_dialogUpdatePhieuMuon);
                 spnSach = view.findViewById(R.id.spnSach_dialogUpdatePhieuMuon);
                 spnThanhVien = view.findViewById(R.id.spnThanhVien_dialogUpdatePhieuMuon);
                 spnThuThu = view.findViewById(R.id.spnThuThu_dialogUpdatePhieuMuon);
                 btnSua = view.findViewById(R.id.btnSua_dialogUpdatePhieuMuon);
                 btnHuy = view.findViewById(R.id.btnQuayLai_dialogUpdatePhieuMuon);
-;
+
+                /*ArrayAdapter<LoaiSach> spnLoaiSachAdapter = new ArrayAdapter<>(
+                        view.getContext(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        loaiSachList
+                );
+                spnLoaiSach.setAdapter(spnLoaiSachAdapter);
+                spnLoaiSach.setSelection(loaiSachList.indexOf(new Sach(phieuMuon.getMaSach())));
+*/
+                /*sachListByLoaiSach = sachList.stream().filter(sach ->
+                    ((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach().equals(sach.getMaLoaiSach())
+                ).collect(Collectors.toList());
+                Log.i("sachlist",sachListByLoaiSach.toString());*/
+
+                /*for (Sach sach : sachList) {
+                    if (sach.getMaLoaiSach().equals(
+                            ((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach()))
+                        sachListByLoaiSach.add(sach);
+                }
+                Log.i("sachlist",sachListByLoaiSach.toString());*/
                 ArrayAdapter<Sach> spnSachAdapter = new ArrayAdapter<>(
                         view.getContext(),
                         android.R.layout.simple_spinner_dropdown_item,
@@ -112,6 +130,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                         android.R.layout.simple_spinner_dropdown_item,
                         thanhVienList
                 );
+
                 spnThanhVien.setAdapter(spnThanhVienAdapter);
                 spnThanhVien.setSelection(thanhVienList.indexOf(new ThanhVien(phieuMuon.getMaThanhVien())));
 
