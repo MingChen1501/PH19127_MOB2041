@@ -10,22 +10,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ph19127_mob2041.R;
 import com.example.ph19127_mob2041.adapter.LoaiSachAdapter;
 import com.example.ph19127_mob2041.dao.LoaiSachDAO;
 import com.example.ph19127_mob2041.model.LoaiSach;
-import com.example.ph19127_mob2041.model.Sach;
-import com.example.ph19127_mob2041.model.ThanhVien;
-import com.example.ph19127_mob2041.model.ThuThu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -84,14 +80,13 @@ public class LoaiSachFragment extends Fragment {
                 btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        addPhieuMuon();
+                        addLoaiSach();
                     }
 
-                    private void addPhieuMuon() {
+                    private void addLoaiSach() {
                         //TODO code add PhieuMuon to database
                         String maLoaiSach = etMaLoaiSach.getText().toString();
                         String tenLoaiSach = etTenLoaiSach.getText().toString();
-
                         LoaiSach newLoaiSach = new LoaiSach(maLoaiSach, tenLoaiSach);
                         if (loaiSachDAO.insert(newLoaiSach) != -1) {
                             Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();

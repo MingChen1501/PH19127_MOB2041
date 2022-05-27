@@ -15,16 +15,19 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_create_phieu_muon.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_loai_sach_create.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_loai_sach_update.xml" value="0.1" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_phieu_muon_create.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_phieu_muon_update.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_sach_create.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_sach_update.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_update_loai_sach.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_update_phieu_muon.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_change_pass.xml" value="0.1" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_doanh_thu.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_gallery.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_home.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_loai_sach.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_loai_sach.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_phieu_muon.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_sach.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_slideshow.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_thanh_vien.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/layout_header_nav.xml" value="0.17447916666666666" />

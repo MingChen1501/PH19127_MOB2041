@@ -87,7 +87,8 @@ public class SachDAO implements DAO<Sach> {
         contentValues.put(DBHelper.SACH_DON_GIA, sach.getDonGia());
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
             return db.update(DBHelper.TABLE_SACH,
-                    contentValues, DBHelper.SACH_ID + " = ?",
+                    contentValues,
+                    DBHelper.SACH_ID + " = ?",
                     new String[] {sach.getMaSach()});
         }
     }
@@ -95,9 +96,13 @@ public class SachDAO implements DAO<Sach> {
     @Override
     public long delete(Sach sach) {
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
-            return db.delete(DBHelper.TABLE_SACH
-                    , DBHelper.SACH_ID + " = ?"
-                    , new String[] {sach.getMaSach()});
+            int a = db.delete(DBHelper.TABLE_PHIEU_MUON,
+                    DBHelper.PHIEU_MUON_ID_SACH + " = ? ",
+                    new String[] {sach.getMaSach()});
+            int b = db.delete(DBHelper.TABLE_SACH,
+                    DBHelper.SACH_ID + " = ?",
+                    new String[] {sach.getMaSach()});
+            return a + b;
         }
     }
 }

@@ -4,24 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFD600"
         android:gravity="center"
-        android:text="Tạo mới loại sách"
+        android:text="Tạo mới sách"
         android:textSize="35sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Nhập mã loại sách"
+        android:text="Chọn loại sách"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <Spinner
+        android:id="@+id/spn_dialogThemSach_maLoaiSach"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Nhập mã sách"
         android:textSize="24sp"
         android:textStyle="bold" />
     <EditText
-        android:id="@+id/etMaLoaiSach_dialogCreateLoaiSach"
-        android:hint="nhập tên loại sách"
+        android:id="@+id/et_dialogThemSach_maSach"
+        android:hint="nhập mã sách"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="18dp" />
@@ -29,12 +39,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Nhập tên loại sách"
+        android:text="Nhập tiêu đề sách"
         android:textSize="24sp"
         android:textStyle="bold" />
     <EditText
-        android:id="@+id/etTenLoaiSach_dialogCreateLoaiSach"
-        android:hint="nhập tên loại sách"
+        android:id="@+id/et_dialogThemSach_tieuDeSach"
+        android:hint="nhập tiêu đề sách"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="18dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Nhập tác giả sách"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <EditText
+        android:id="@+id/et_dialogThemSach_tacGiaSach"
+        android:hint="nhập tác giả sách"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="18dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Nhập giá sách"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <EditText
+        android:id="@+id/et_dialogThemSach_giaSach"
+        android:hint="nhập giá sách"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="18dp" />
@@ -46,7 +83,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCreate_dialogCreateLoaiSach"
+            android:id="@+id/btn_dialogThemSach_themMoi"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="8dp"
@@ -55,7 +92,7 @@
             android:text="THÊM MỚI" />
 
         <Button
-            android:id="@+id/btnCancel_dialogCreatePhieuMuon"
+            android:id="@+id/btn_dialogThemSach_quayLai"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="8dp"

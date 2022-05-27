@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="8dp"
+    app:cardElevation="20dp"
+    android:id="@+id/cardviewSach">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/iv_sachAdapter_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_baseline_library_books_24"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_sachAdapter_TenLoaiSach"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="tên loại sách"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_sachAdapter_maSach"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="mã sách"
+                android:textSize="15sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_sachAdapter_tieuDe"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="tiêu đề sách"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_sachAdapter_tacGia"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="tác giả sách"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_sachAdapter_donGia"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="đơn giá"
+                android:textSize="15sp"/>
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/iv_sachAdapter_xoa"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_delete_24"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

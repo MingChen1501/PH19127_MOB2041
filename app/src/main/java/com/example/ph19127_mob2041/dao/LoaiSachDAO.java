@@ -62,7 +62,7 @@ public class LoaiSachDAO implements DAO<LoaiSach>{
     public long insert(LoaiSach loaiSach) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DBHelper.LOAI_SACH_ID, loaiSach.getMaLoaiSach());
-        contentValues.put(DBHelper.LOAI_SACH_TEN, loaiSach.getMaLoaiSach());
+        contentValues.put(DBHelper.LOAI_SACH_TEN, loaiSach.getTenLoaiSach());
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
             return db.insert(DBHelper.TABLE_LOAI_SACH, null, contentValues);
 

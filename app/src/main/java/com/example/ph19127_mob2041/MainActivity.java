@@ -88,9 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getData();
 
         thanhVienFragment = new ThanhVienFragment();
-        sachFragment = new SachFragment();
+        sachFragment = new SachFragment(sachList, loaiSachList, sachDAO);
         loaiSachFragment = new LoaiSachFragment(loaiSachList, loaiSachDAO);
-        phieuMuonFragment = new PhieuMuonFragment(phieuMuonList, thanhVienList, thuThuList, loaiSachList, sachList);
+        phieuMuonFragment = new PhieuMuonFragment(phieuMuonList, thanhVienList, thuThuList, loaiSachList, sachList, phieuMuonDAO);
         addUserFragment = new AddUserFragment();
         topFragment = new TopFragment();
         doanhThuFragment = new DoanhThuFragment();
@@ -231,5 +231,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else
             super.onBackPressed();
     }
-
 }

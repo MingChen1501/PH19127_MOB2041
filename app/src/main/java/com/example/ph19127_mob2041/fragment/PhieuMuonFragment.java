@@ -46,12 +46,18 @@ public class PhieuMuonFragment extends Fragment {
     private PhieuMuonAdapter phieuMuonAdapter;
     private FloatingActionButton fab;
 
-    public PhieuMuonFragment(List<PhieuMuon> phieuMuonList, List<ThanhVien> thanhVienList, List<ThuThu> thuThuList, List<LoaiSach> loaiSachList, List<Sach> sachList) {
+    public PhieuMuonFragment(List<PhieuMuon> phieuMuonList,
+                             List<ThanhVien> thanhVienList,
+                             List<ThuThu> thuThuList,
+                             List<LoaiSach> loaiSachList,
+                             List<Sach> sachList,
+                             PhieuMuonDAO phieuMuonDAO) {
         this.phieuMuonList = phieuMuonList;
         this.thanhVienList = thanhVienList;
         this.thuThuList = thuThuList;
         this.loaiSachList = loaiSachList;
         this.sachList = sachList;
+        this.phieuMuonDAO = phieuMuonDAO;
     }
 
     @Override
@@ -63,7 +69,6 @@ public class PhieuMuonFragment extends Fragment {
         layoutManager = new LinearLayoutManager(view.getContext());
         rcvPhieuMuon.setLayoutManager(layoutManager);
 
-        phieuMuonDAO = new PhieuMuonDAO(view.getContext());
         phieuMuonList = phieuMuonDAO.getAll();
         phieuMuonAdapter = new PhieuMuonAdapter(view.getContext(),
                 phieuMuonDAO,
