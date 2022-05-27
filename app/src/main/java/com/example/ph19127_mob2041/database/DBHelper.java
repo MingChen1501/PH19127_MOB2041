@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "PhuongNamLIB";
-    public static final int VERSION = 9;
+    public static final int VERSION = 2;
 
     public static final String TABLE_PHIEU_MUON = "PhieuMuon";
     public static final String PHIEU_MUON_ID = "maPhieuMuon";
@@ -68,9 +68,9 @@ public class DBHelper extends SQLiteOpenHelper {
         String crateTableSach = "CREATE TABLE IF NOT EXISTS " + TABLE_SACH + "(" +
                 SACH_ID + " TEXT NOT NULL PRIMARY KEY, " +
                 SACH_ID_LOAI_SACH + " TEXT NOT NULL, " +
-                SACH_TIEU_DE + "TEXT," +
+                SACH_TIEU_DE + " TEXT," +
                 SACH_TAC_GIA + " TEXT, " +
-                SACH_DON_GIA + "REAL," +
+                SACH_DON_GIA + " REAL," +
                 "FOREIGN KEY (" +
                 SACH_ID_LOAI_SACH +") " +
                 "REFERENCES " +

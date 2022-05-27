@@ -3,6 +3,7 @@ package com.example.ph19127_mob2041.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,14 +171,29 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (phieuMuonDAO.delete(phieuMuon) != 0) {
-                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                    phieuMuonList.clear();
-                    phieuMuonList.addAll(phieuMuonDAO.getAll());
-                    notifyDataSetChanged();
-                } else {
-                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Xóa Phiếu Mượn").setMessage("Bạn chắc chắn muốn xóa phiếu mượn này");
+                builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (phieuMuonDAO.delete(phieuMuon) != 0) {
+                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            phieuMuonList.clear();
+                            phieuMuonList.addAll(phieuMuonDAO.getAll());
+                            notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                builder.setPositiveButton("Quay lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //TODO làm gì đó
+                    }
+                });
             }
         });
     }

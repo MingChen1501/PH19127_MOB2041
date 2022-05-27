@@ -7,11 +7,9 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,20 +21,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ph19127_mob2041.R;
 import com.example.ph19127_mob2041.dao.LoaiSachDAO;
 import com.example.ph19127_mob2041.model.LoaiSach;
-import com.example.ph19127_mob2041.model.PhieuMuon;
-import com.example.ph19127_mob2041.model.Sach;
-import com.example.ph19127_mob2041.model.ThanhVien;
-import com.example.ph19127_mob2041.model.ThuThu;
 
 import java.util.List;
 
-public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.PhieuMuonViewHolder> {
+public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.PhieuMuonViewHolder> {
     private Context context;
     private LoaiSachDAO loaiSachDAO;
     private List<LoaiSach> loaiSachList;
 //    private List<Sach> sachListByLoaiSach;
 
-    public LoaiSachAdapter(Context context, List<LoaiSach> loaiSachList, LoaiSachDAO loaiSachDAO) {
+    public ThanhVienAdapter(Context context, List<LoaiSach> loaiSachList, LoaiSachDAO loaiSachDAO) {
         this.context = context;
         this.loaiSachDAO = loaiSachDAO;
         this.loaiSachList = loaiSachList;

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.ph19127_mob2041.database.DBHelper;
 import com.example.ph19127_mob2041.model.LoaiSach;
@@ -83,9 +84,29 @@ public class LoaiSachDAO implements DAO<LoaiSach>{
     @Override
     public long delete(LoaiSach loaiSach) {
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
-            return db.delete(DBHelper.TABLE_LOAI_SACH
+
+
+            int a = db.delete(DBHelper.TABLE_PHIEU_MUON,
+                    DBHelper.PHIEU_MUON_ID_SACH + " in (" +
+                            "SELECT "+ DBHelper.SACH_ID +" FROM " +
+                            DBHelper.TABLE_SACH + " " +
+                            "WHERE " + DBHelper.SACH_ID_LOAI_SACH + " = ? " +
+                            ")",
+                    new String[] {loaiSach.getMaLoaiSach()});
+            //delete record from table phieu muon
+
+            int b = db.delete(DBHelper.TABLE_SACH,
+                    DBHelper.SACH_ID_LOAI_SACH + " = ?",
+                    new String[] {loaiSach.getMaLoaiSach()});
+            //delete record from table sach
+
+
+            int c = db.delete(DBHelper.TABLE_LOAI_SACH
                     , DBHelper.LOAI_SACH_ID + " = ?"
                     , new String[] {loaiSach.getMaLoaiSach()});
+            //delete record from table loai sach
+
+            return a + b + c;
         }
     }
 }

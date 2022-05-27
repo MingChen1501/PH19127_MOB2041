@@ -3,15 +3,12 @@ package com.example.ph19127_mob2041.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,20 +20,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ph19127_mob2041.R;
 import com.example.ph19127_mob2041.dao.LoaiSachDAO;
 import com.example.ph19127_mob2041.model.LoaiSach;
-import com.example.ph19127_mob2041.model.PhieuMuon;
-import com.example.ph19127_mob2041.model.Sach;
-import com.example.ph19127_mob2041.model.ThanhVien;
-import com.example.ph19127_mob2041.model.ThuThu;
 
 import java.util.List;
 
-public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.PhieuMuonViewHolder> {
+public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewHolder> {
     private Context context;
     private LoaiSachDAO loaiSachDAO;
     private List<LoaiSach> loaiSachList;
 //    private List<Sach> sachListByLoaiSach;
 
-    public LoaiSachAdapter(Context context, List<LoaiSach> loaiSachList, LoaiSachDAO loaiSachDAO) {
+    public SachAdapter(Context context, List<LoaiSach> loaiSachList, LoaiSachDAO loaiSachDAO) {
         this.context = context;
         this.loaiSachDAO = loaiSachDAO;
         this.loaiSachList = loaiSachList;
@@ -112,30 +105,15 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.PhieuM
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Xóa Loại Sách").setMessage("Xóa " + loaiSach.toString() + " sẽ xóa theo \nCác sách liên quan \nCác phiếu mượn liên quan" +
-                        "\nBạn có chắc chắn sẽ xóa " + loaiSach.toString() + " ?");
 
-                builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (loaiSachDAO.delete(loaiSach) != 0) {
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            loaiSachList.clear();
-                            loaiSachList.addAll(loaiSachDAO.getAll());
-                            notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                builder.setPositiveButton("Quay Lại", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //TODO làm gì đó
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                /*if (loaiSachDAO.delete(loaiSach) != 0) {
+                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    loaiSachList.clear();
+                    loaiSachList.addAll(loaiSachDAO.getAll());
+                    notifyDataSetChanged();
+                } else {
+                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                }*/
             }
         });
     }

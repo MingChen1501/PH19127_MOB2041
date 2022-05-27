@@ -10,32 +10,30 @@
         android:layout_height="wrap_content"
         android:background="#FFD600"
         android:gravity="center"
-        android:text="Sửa loại sách"
+        android:text="Tạo mới loại sách"
         android:textSize="35sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Mã loại sách"
+        android:text="Nhập mã loại sách"
         android:textSize="24sp"
         android:textStyle="bold" />
     <EditText
-        android:id="@+id/etMaLoaiSach_dialogUpdateLoaiSach"
+        android:id="@+id/etMaLoaiSach_dialogCreateLoaiSach"
         android:hint="nhập tên loại sách"
         android:layout_width="match_parent"
-        android:inputType="none"
-        android:enabled="false"
         android:layout_height="48dp"
         android:layout_marginTop="18dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Tên loại sách"
+        android:text="Nhập tên loại sách"
         android:textSize="24sp"
         android:textStyle="bold" />
     <EditText
-        android:id="@+id/etTenLoaiSach_dialogUpdateLoaiSach"
+        android:id="@+id/etTenLoaiSach_dialogCreateLoaiSach"
         android:hint="nhập tên loại sách"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -48,16 +46,16 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCreate_dialogUpdateLoaiSach"
+            android:id="@+id/btnCreate_dialogCreateLoaiSach"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:backgroundTint="#FF6D00"
-            android:text="SỬA" />
+            android:text="THÊM MỚI" />
 
         <Button
-            android:id="@+id/btnCancel_dialogUpdateLoaiSach"
+            android:id="@+id/btnCancel_dialogCreatePhieuMuon"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="8dp"
