@@ -86,9 +86,13 @@ public class ThanhVienDAO implements DAO<ThanhVien> {
     @Override
     public long delete(ThanhVien thanhVien) {
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
-            return db.delete(DBHelper.TABLE_THANH_VIEN
+            long b = db.delete(DBHelper.TABLE_PHIEU_MUON,
+                    DBHelper.PHIEU_MUON_ID_THANH_VIEN + " = ?",
+                    new String[] {thanhVien.getMaThanhVien()});
+            long a = db.delete(DBHelper.TABLE_THANH_VIEN
                     , DBHelper.THANH_VIEN_ID + " = ?"
                     , new String[] {thanhVien.getMaThanhVien()});
+            return a + b;
         }
     }
 }

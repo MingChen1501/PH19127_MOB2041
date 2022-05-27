@@ -27,12 +27,15 @@ public class ThuThu {
 
         ThuThu thuThu = (ThuThu) o;
 
-        return maThuThu.equals(thuThu.maThuThu);
+        if (!maThuThu.equals(thuThu.maThuThu)) return false;
+        return password.equals(thuThu.password);
     }
 
     @Override
     public int hashCode() {
-        return maThuThu.hashCode();
+        int result = maThuThu.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
     }
 
     @Override

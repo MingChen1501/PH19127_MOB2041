@@ -19,77 +19,81 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ph19127_mob2041.R;
-import com.example.ph19127_mob2041.dao.LoaiSachDAO;
-import com.example.ph19127_mob2041.model.LoaiSach;
+import com.example.ph19127_mob2041.dao.ThanhVienDAO;
+import com.example.ph19127_mob2041.model.ThanhVien;
 
 import java.util.List;
 
-public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.PhieuMuonViewHolder> {
-    private Context context;
-    private LoaiSachDAO loaiSachDAO;
-    private List<LoaiSach> loaiSachList;
+public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.ThanhVienHolder> {
+    private Context mContext;
+    private ThanhVienDAO mthanhVienDAO;
+    private List<ThanhVien> mthanhVienList;
 //    private List<Sach> sachListByLoaiSach;
 
-    public ThanhVienAdapter(Context context, List<LoaiSach> loaiSachList, LoaiSachDAO loaiSachDAO) {
-        this.context = context;
-        this.loaiSachDAO = loaiSachDAO;
-        this.loaiSachList = loaiSachList;
+    public ThanhVienAdapter(Context context, List<ThanhVien> thanhVienList, ThanhVienDAO thanhVienDAO) {
+        this.mContext = context;
+        this.mthanhVienDAO = thanhVienDAO;
+        this.mthanhVienList = thanhVienList;
     }
 
     @NonNull
     @Override
-    public PhieuMuonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_item_loai_sach, parent, false);
-        return new PhieuMuonViewHolder(view);
+    public ThanhVienHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.view_item_thanh_vien, parent, false);
+        return new ThanhVienHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PhieuMuonViewHolder holder, int position) {
-        LoaiSach loaiSach = loaiSachList.get(position);
-        holder.tvMaLoaiSach.setText(loaiSach.getMaLoaiSach());
-        holder.tvTenLoaiSach.setText(loaiSach.getTenLoaiSach());
-        holder.cardViewLoaiSach.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(@NonNull ThanhVienHolder holder, int position) {
+        ThanhVien thanhVien = mthanhVienList.get(position);
+        holder.tvMaThanhVien.setText(thanhVien.getMaThanhVien());
+        holder.tvTenThanhVien.setText(thanhVien.getTenThanhVien());
+        holder.tvSoDienThoai.setText(thanhVien.getSoDienThoai());
+        holder.cardViewThanhVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialogUpdate(loaiSach);
+                openDialogUpdate(thanhVien);
             }
 
-            private void openDialogUpdate(LoaiSach loaiSach) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_view_loai_sach_update, null);
+            private void openDialogUpdate(ThanhVien thanhVien) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                LayoutInflater inflater = ((Activity)mContext).getLayoutInflater();
+                View view = inflater.inflate(R.layout.dialog_view_thanh_vien_update, null);
 
                 builder.setView(view);
                 Dialog dialog = builder.create();
                 dialog.show();
 
-                EditText etMaLoaiSach, etTenLoaiSach;
+                EditText etMaThanhVien, etTenThanhVien, etSoDienThoai;
                 Button btnSua, btnHuy;
 
 
-                etMaLoaiSach = view.findViewById(R.id.etMaLoaiSach_dialogUpdateLoaiSach);
-                etTenLoaiSach = view.findViewById(R.id.etTenLoaiSach_dialogUpdateLoaiSach);
-                btnSua = view.findViewById(R.id.btnCreate_dialogUpdateLoaiSach);
-                btnHuy = view.findViewById(R.id.btnCancel_dialogUpdateLoaiSach);
+                etMaThanhVien = view.findViewById(R.id.et_dialogSuaThanhVien_maThanhVien);
+                etTenThanhVien = view.findViewById(R.id.et_dialogSuaThanhVien_tenThanhVien);
+                etSoDienThoai = view.findViewById(R.id.et_dialogSuaThanhVien_soDienThoai);
+                btnSua = view.findViewById(R.id.btn_dialogSuaThanhVien_sua);
+                btnHuy = view.findViewById(R.id.btn_dialogSuaThanhVien_quayLai);
 
-                etMaLoaiSach.setText(loaiSach.getMaLoaiSach());
-                etTenLoaiSach.setText(loaiSach.getTenLoaiSach());
+                etMaThanhVien.setText(thanhVien.getMaThanhVien());
+                etTenThanhVien.setText(thanhVien.getTenThanhVien());
+                etSoDienThoai.setText(thanhVien.getSoDienThoai());
 
 
                 btnSua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        loaiSach.setTenLoaiSach(etTenLoaiSach.getText().toString());
+                        thanhVien.setTenThanhVien(etTenThanhVien.getText().toString());
+                        thanhVien.setSoDienThoai(etSoDienThoai.getText().toString());
 
-                        if (loaiSachDAO.update(loaiSach) > 0) {
-                            Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                            loaiSachList.clear();
-                            loaiSachList.addAll(loaiSachDAO.getAll());
+                        if (mthanhVienDAO.update(thanhVien) > 0) {
+                            Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                            mthanhVienList.clear();
+                            mthanhVienList.addAll(mthanhVienDAO.getAll());
                             notifyDataSetChanged();
                             dialog.dismiss();
                         } else {
-                            Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                             //TODO validate ...
                         }
                     }
@@ -105,20 +109,21 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Phie
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Xóa Loại Sách").setMessage("Xóa " + loaiSach.toString() + " sẽ xóa theo \nCác sách liên quan \nCác phiếu mượn liên quan" +
-                        "\nBạn có chắc chắn sẽ xóa " + loaiSach.toString() + " ?");
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Xóa thành viên").setMessage("Xóa " + thanhVien.toString() +
+                        " sẽ xóa theo các phiếu mượn liên quan" +
+                        "\nBạn có chắc chắn sẽ xóa " + thanhVien.toString() + " ?");
 
                 builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (loaiSachDAO.delete(loaiSach) != 0) {
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            loaiSachList.clear();
-                            loaiSachList.addAll(loaiSachDAO.getAll());
+                        if (mthanhVienDAO.delete(thanhVien) != 0) {
+                            Toast.makeText(mContext, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            mthanhVienList.clear();
+                            mthanhVienList.addAll(mthanhVienDAO.getAll());
                             notifyDataSetChanged();
                         } else {
-                            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -137,23 +142,24 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Phie
 
     @Override
     public int getItemCount() {
-        return loaiSachList.size();
+        return mthanhVienList.size();
     }
 
-    public class PhieuMuonViewHolder extends RecyclerView.ViewHolder{
-        TextView tvMaLoaiSach, tvTenLoaiSach;
+    public class ThanhVienHolder extends RecyclerView.ViewHolder{
+        TextView tvMaThanhVien, tvTenThanhVien, tvSoDienThoai;
         ImageView ivIcon, ivDelete;
-        CardView cardViewLoaiSach;
+        CardView cardViewThanhVien;
 
-        public PhieuMuonViewHolder(@NonNull View itemView) {
+        public ThanhVienHolder(@NonNull View itemView) {
             super(itemView);
-            tvMaLoaiSach = itemView.findViewById(R.id.tvMaLoaiSach_view_item_loai_sach);
-            tvTenLoaiSach = itemView.findViewById(R.id.tvTenLoaiSach_view_item_loai_sach);
+            tvMaThanhVien = itemView.findViewById(R.id.tv_view_item_thanh_vien_maThanhVien);
+            tvTenThanhVien = itemView.findViewById(R.id.tv_view_item_thanh_vien_tenThanhVien);
+            tvSoDienThoai = itemView.findViewById(R.id.tv_view_item_thanh_vien_soDienThoai);
 
-            ivIcon = itemView.findViewById(R.id.ivIcon_view_item_loai_sach);
-            ivDelete = itemView.findViewById(R.id.ivDelete_view_item_loai_sach);
+            ivIcon = itemView.findViewById(R.id.iv_view_item_thanh_vien_icon);
+            ivDelete = itemView.findViewById(R.id.iv_view_item_thanh_vien_delete);
 
-            cardViewLoaiSach = itemView.findViewById(R.id.cardViewLoaiSach);
+            cardViewThanhVien = itemView.findViewById(R.id.cardViewThanhVien);
         }
     }
 }

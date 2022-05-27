@@ -12,10 +12,10 @@ import com.example.ph19127_mob2041.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddUserFragment#newInstance} factory method to
+ * Use the {@link ThuThuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddUserFragment extends Fragment {
+public class ThuThuFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class AddUserFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AddUserFragment() {
+    public ThuThuFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class AddUserFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddUserFragment.
+     * @return A new instance of fragment ThuThuFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddUserFragment newInstance(String param1, String param2) {
-        AddUserFragment fragment = new AddUserFragment();
+    public static ThuThuFragment newInstance(String param1, String param2) {
+        ThuThuFragment fragment = new ThuThuFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

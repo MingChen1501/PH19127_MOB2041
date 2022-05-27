@@ -9,8 +9,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.ph19127_mob2041.dao.LoaiSachDAO;
 import com.example.ph19127_mob2041.dao.PhieuMuonDAO;
@@ -18,7 +21,7 @@ import com.example.ph19127_mob2041.dao.SachDAO;
 import com.example.ph19127_mob2041.dao.ThanhVienDAO;
 import com.example.ph19127_mob2041.dao.ThuThuDAO;
 import com.example.ph19127_mob2041.database.DBHelper;
-import com.example.ph19127_mob2041.fragment.AddUserFragment;
+import com.example.ph19127_mob2041.fragment.ThuThuFragment;
 import com.example.ph19127_mob2041.fragment.ChangePassFragment;
 import com.example.ph19127_mob2041.fragment.DoanhThuFragment;
 import com.example.ph19127_mob2041.fragment.LoaiSachFragment;
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SachFragment sachFragment;
     private LoaiSachFragment loaiSachFragment;
     private ThanhVienFragment thanhVienFragment;
-    private AddUserFragment addUserFragment;
+    private ThuThuFragment thuThuFragment;
 
     private TopFragment topFragment;
     private DoanhThuFragment doanhThuFragment;
@@ -77,21 +80,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        boolean isAdmin = intent.getBooleanExtra("isAdmin", false);
+        String user = "Xin chào " + intent.getStringExtra("name");
+        //lấy tên người đăng nhập
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findView();
         //findviewByID
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUserName = headerView.findViewById(R.id.username);
+        navUserName.setText(user);
+        if (isAdmin) navigationView.getMenu()
+                .findItem(R.id.nav_thuThu)
+                .setVisible(true)
+                .setEnabled(true);
+        else navigationView.getMenu()
+                .findItem(R.id.nav_thuThu)
+                .setVisible(false)
+                .setEnabled(false);
+
         DBHelper dbHelper = new DBHelper(this);
         //TODO test database
         createDao();
         createRepository();
         getData();
 
-        thanhVienFragment = new ThanhVienFragment();
+        thanhVienFragment = new ThanhVienFragment(thanhVienList, thanhVienDAO);
         sachFragment = new SachFragment(sachList, loaiSachList, sachDAO);
         loaiSachFragment = new LoaiSachFragment(loaiSachList, loaiSachDAO);
         phieuMuonFragment = new PhieuMuonFragment(phieuMuonList, thanhVienList, thuThuList, loaiSachList, sachList, phieuMuonDAO);
-        addUserFragment = new AddUserFragment();
+        thuThuFragment = new ThuThuFragment();
         topFragment = new TopFragment();
         doanhThuFragment = new DoanhThuFragment();
         changePassFragment = new ChangePassFragment();
@@ -107,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //thêm listener vào drawrlayout
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
         navigationView.getMenu().findItem(R.id.nav_PhieuMuon).setChecked(true);
         getSupportActionBar().setTitle("Quản lý phiếu mượn");
         replaceFragment(phieuMuonFragment, "Quản lý phiếu mượn");
@@ -173,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_thuThu:
                 if (mCurrentFragment != FRAGMENT_ADD_USER) {
-                    replaceFragment(addUserFragment, "Quản lý thủ thư");
+                    replaceFragment(thuThuFragment, "Quản lý thủ thư");
                     mCurrentFragment = FRAGMENT_ADD_USER;
                 }
                 break;
@@ -199,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 break;
             case R.id.nav_dangXuat:
+                finish();
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

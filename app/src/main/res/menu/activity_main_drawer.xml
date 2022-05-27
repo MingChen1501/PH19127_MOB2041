@@ -27,6 +27,7 @@
                 android:id="@+id/nav_thuThu"
                 android:icon="@drawable/ic_baseline_people_24"
                 android:visible="false"
+                android:enabled="false"
                 android:title="@string/menu_thuThu" />
         </menu>
     </item>

@@ -15,7 +15,7 @@
         android:src="@drawable/cateicon"/>
 
     <EditText
-        android:id="@+id/edUserName"
+        android:id="@+id/et_loginActivity_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -24,7 +24,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/edPassword"
+        android:id="@+id/et_loginActivity_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -33,6 +33,7 @@
         android:minHeight="48dp"
         android:text="" />
     <CheckBox
+        android:id="@+id/chk_loginActivity_rememberPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="nhớ mật khẩu"/>
@@ -42,17 +43,21 @@
         android:gravity="center"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btn_loginActivity_login"
             android:gravity="center"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="#DD2C00"
+            android:layout_margin="5dp"
             android:text="Đăng nhập"/>
         <Button
-            android:id="@+id/btnCancel"
+            android:id="@+id/btn_loginActivity_cancel"
             android:gravity="center"
             android:layout_width="150dp"
+            android:backgroundTint="#DD2C00"
+            android:layout_margin="5dp"
             android:layout_height="wrap_content"
-            android:text="Hủy"/>
+            android:text="THOÁT"/>
     </LinearLayout>
 
 </LinearLayout>

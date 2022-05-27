@@ -111,7 +111,7 @@ public class SachFragment extends Fragment {
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
-
+                        //TODO không biết làm gì. có thể set item cũ vào nếu không select item nào
                     }
                 });
 
