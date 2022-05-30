@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "PhuongNamLIB";
-    public static final int VERSION = 3;
+    public static final int VERSION = 9;
 
 
     public static final String TABLE_PHIEU_MUON = "PhieuMuon";
@@ -49,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 THU_THU_ID + " TEXT NOT NULL PRIMARY KEY, " +
                 THU_THU_PASSWORD + " TEXT NOT NULL, " +
                 THU_THU_TEN + " TEXT, " +
-                THU_THU_SDT + "TEXT" +
+                THU_THU_SDT + " TEXT" +
                 ")";
         db.execSQL(crateTableThuThu);
 
@@ -107,15 +107,19 @@ public class DBHelper extends SQLiteOpenHelper {
                 ")";
         db.execSQL(crateTablePhieuMuon);
 
-        db.execSQL("INSERT INTO ThuThu VALUES ('MATHUTHU', 'PWTHUTHU','HOTENTT', 'SDT')");
-        db.execSQL("INSERT INTO ThanhVien VALUES ('MATHANHVIEN', 'TENTHANHVIEN','SDT')");
-        db.execSQL("INSERT INTO ThanhVien VALUES ('MATHANHVIEN2', 'TENTHANHVIEN','SDT')");
-        db.execSQL("INSERT INTO LoaiSach VALUES ('MALOAISACH', 'TENLOAISACH')");
-        db.execSQL("INSERT INTO Sach VALUES ('MASACH', 'MALOAISACH','TIEUDE', 'TACGIA',10000)");
-        db.execSQL("INSERT INTO Sach VALUES ('MASACH2', 'MALOAISACH','TIEUDE', 'TACGIA',10000)");
-        db.execSQL("INSERT INTO Sach VALUES ('MASACH3', 'MALOAISACH','TIEUDE', 'TACGIA',10000)");
-        db.execSQL("INSERT INTO PhieuMuon VALUES ('MAPHIEUMUON','MASACH', 'MATHANHVIEN', 'MATHUTHU')");
-        db.execSQL("INSERT INTO PhieuMuon VALUES ('MAPHIEUMUON2','MASACH2', 'MATHANHVIEN2', 'MATHUTHU')");
+        db.execSQL("INSERT INTO ThuThu VALUES ('tminh400', '123456','tran cong minh', '0389119966')");
+        db.execSQL("INSERT INTO ThuThu VALUES ('tminh401', '123456','tran cong minh', '0389119966')");
+        db.execSQL("INSERT INTO ThuThu VALUES ('tminh402', '123456','tran cong minh', '0389119966')");
+        db.execSQL("INSERT INTO ThanhVien VALUES ('MATHANHVIEN1', 'nguyen van a','098888888')");
+        db.execSQL("INSERT INTO ThanhVien VALUES ('MATHANHVIEN2', 'nguyen van b','098888888')");
+        db.execSQL("INSERT INTO LoaiSach VALUES ('1', 'hoc tap')");
+        db.execSQL("INSERT INTO LoaiSach VALUES ('2', 'tieu thuyet')");
+        db.execSQL("INSERT INTO LoaiSach VALUES ('3', 'tai lieu')");
+        db.execSQL("INSERT INTO Sach VALUES ('1', '1','html css', 'nguyen van c',5000)");
+        db.execSQL("INSERT INTO Sach VALUES ('2', '2','nghin le 1 dem', 'nguyen van d',10000)");
+        db.execSQL("INSERT INTO Sach VALUES ('3', '3','Datastructure & algorithm', 'nguyen van e',9000)");
+        db.execSQL("INSERT INTO PhieuMuon VALUES ('1','1', 'MATHANHVIEN1', 'tminh400')");
+        db.execSQL("INSERT INTO PhieuMuon VALUES ('2','2', 'MATHANHVIEN2', 'tminh401')");
     }
 
     @Override

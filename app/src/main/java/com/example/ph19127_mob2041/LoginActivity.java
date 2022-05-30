@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,22 +12,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ph19127_mob2041.dao.ThuThuDAO;
-import com.example.ph19127_mob2041.database.DBHelper;
 import com.example.ph19127_mob2041.model.ThuThu;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LoginActivity extends AppCompatActivity {
-    private List<ThuThu> mThuThuList;
-    private ThuThuDAO mthuThuDAO;
+    private static final String EMPTY = "empty id";
+    private static final String INVALID = "invalid password";
+    private ThuThuDAO mThuThuDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mThuThuList = new ArrayList<>();
-        mthuThuDAO = new ThuThuDAO(this);
-        mThuThuList.addAll(mthuThuDAO.getAll());
+        mThuThuDao = new ThuThuDAO(this);
         EditText etId, etPassword;
         CheckBox chkRemember;
         Button btnLogin, btnCancel;
@@ -40,42 +36,46 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                boolean isCorrect = false;
-                String id = etId.getText().toString();
-                String pasword = etPassword.getText().toString();
-                ThuThu thuThu = new ThuThu(id, pasword, "", "");
-                boolean remember = chkRemember.isChecked();
-                if (id.equals("admin") && pasword.equals("admin")) {
-                    intent.putExtra("name", "admin");
-                    intent.putExtra("isAdmin", true);
-                    isCorrect = true;
-                    startActivity(intent);
-                    if (!remember) {
-                        etId.setText("");
-                        etPassword.setText("");
-                    }
-                } else {
-                    for (ThuThu element : mThuThuList) {
-                        if (element.equals(thuThu)) {
-                            intent.putExtra("id", element.getMaThuThu());
-                            intent.putExtra("password", element.getPassword());
-                            intent.putExtra("name", element.getHoTen());
-                            intent.putExtra("phoneNumber", element.getSoDienThoai());
-                            intent.putExtra("isAdmin", false);
-                            isCorrect = true;
-                            startActivity(intent);
-                            if (!remember) {
-                                etId.setText("");
-                                etPassword.setText("");
-                            }
-                            break;
+                try {
+                    String id = etId.getText().toString();
+                    String pasword = etPassword.getText().toString();
+                    if (id.isEmpty()) throw new NullPointerException(EMPTY);
+                    ThuThu accountRequest = mThuThuDao.getById(id);
+                    Toast.makeText(LoginActivity.this, accountRequest.toString(), Toast.LENGTH_SHORT).show();
+                    boolean isremember = chkRemember.isChecked();
+                    if (id.equals("admin") && pasword.equals("admin")) {
+                        intent.putExtra("name", "admin");
+                        intent.putExtra("isAdmin", true);
+                        startActivity(intent);
+                        Log.d("start", "admin");
+                        if (!isremember) {
+                            etId.setText("");
+                            etPassword.setText("");
+                            //TODO tách method
                         }
+                    } else if (id.equals(accountRequest.getMaThuThu())
+                            && pasword.equals(accountRequest.getPassword())){
+                        Log.d("start", "member");
+                        intent.putExtra("id", accountRequest.getMaThuThu());
+                        intent.putExtra("name", accountRequest.getHoTen());
+                        intent.putExtra("isAdmin", false);
+                        startActivity(intent);
+                        if (!isremember) {
+                            etId.setText("");
+                            etPassword.setText("");
+                        }
+                    } else {
+                        Toast.makeText(LoginActivity.this, "không đúng", Toast.LENGTH_SHORT).show();
                     }
+                } catch (NullPointerException e) {
+                    if (e.getMessage().equals(EMPTY)) {
+                        e.printStackTrace();
+                        Toast.makeText(LoginActivity.this, "Chưa tồn tại", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(LoginActivity.this, "Không thành công", Toast.LENGTH_SHORT).show();
                 }
-                if (!isCorrect)
-                    Toast.makeText(LoginActivity.this
-                            , "Tài khoản hoặc mật khẩu không hợp lệ"
-                            , Toast.LENGTH_SHORT).show();
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -85,4 +85,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

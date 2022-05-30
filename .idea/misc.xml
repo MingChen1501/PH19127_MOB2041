@@ -21,6 +21,8 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_sach_update.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_thanh_vien_create.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_thanh_vien_update.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_thu_thu_create.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_thu_thu_update.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_update_loai_sach.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/dialog_view_update_phieu_muon.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_change_pass.xml" value="0.1" />
@@ -32,6 +34,7 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_sach.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_slideshow.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_thanh_vien.xml" value="0.1" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/fragment_thu_thu.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/layout_header_nav.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/loai_sach_view_item.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/nav_header_main.xml" value="0.16666666666666666" />
@@ -42,6 +45,7 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/view_item_phieu_muon.xml" value="0.22" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/view_item_sach.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/view_item_thanh_vien.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/layout/view_item_thu_thu.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/menu/activity_main2_drawer.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/PH19127_MOB2041/app/src/main/res/menu/activity_main_drawer3.xml" value="0.17552083333333332" />

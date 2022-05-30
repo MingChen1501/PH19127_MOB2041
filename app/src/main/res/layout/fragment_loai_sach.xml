@@ -17,7 +17,7 @@
         android:layout_margin="8dp"
         android:layout_gravity="end"
         android:id="@+id/fabAddLoaiSach"
-        android:background="@color/white"
+        android:backgroundTint="#DD2C00"
         android:src="@drawable/ic_baseline_add_circle_24"/>
 
 </LinearLayout>

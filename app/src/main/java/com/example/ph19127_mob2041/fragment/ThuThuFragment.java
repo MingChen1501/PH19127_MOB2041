@@ -1,60 +1,117 @@
 package com.example.ph19127_mob2041.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ph19127_mob2041.R;
+import com.example.ph19127_mob2041.adapter.ThuThuAdapter;
+import com.example.ph19127_mob2041.dao.ThuThuDAO;
+import com.example.ph19127_mob2041.model.ThuThu;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ThuThuFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+
 public class ThuThuFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private List<ThuThu> mThuThuList;
+    private ThuThuDAO mThuThuDao;
+    private ThuThuAdapter mThuThuAdapter;
+    private RecyclerView mRcvThuThu;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private FloatingActionButton mFab;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public ThuThuFragment() {
-        // Required empty public constructor
+
+    public ThuThuFragment(List<ThuThu> thuThuList, ThuThuDAO thuThuDAO) {
+        this.mThuThuList = thuThuList;
+        this.mThuThuDao = thuThuDAO;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ThuThuFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ThuThuFragment newInstance(String param1, String param2) {
-        ThuThuFragment fragment = new ThuThuFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRcvThuThu = view.findViewById(R.id.rcvThuThu_ThuThuFragment);
+        mFab = view.findViewById(R.id.fabAddThuThu_ThuThuFragment);
+
+        mLayoutManager = new LinearLayoutManager(view.getContext());
+        mRcvThuThu.setLayoutManager(mLayoutManager);
+
+        mThuThuAdapter = new ThuThuAdapter(view.getContext(),
+                mThuThuList,
+                mThuThuDao);
+
+        mRcvThuThu.setAdapter(mThuThuAdapter);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDiaglogCreate();
+            }
+
+            private void openDiaglogCreate() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                View view = inflater.inflate(R.layout.dialog_view_thu_thu_create, null);
+                builder.setView(view);
+                Dialog dialog = builder.create();
+                dialog.show();
+
+                EditText etTenDangNhap, etMatKhau, etTen, etSdt;
+                Button btnCreate, btnCancel;
+
+                etTen = view.findViewById(R.id.et_dialogThemThuThu_tenThuThu);
+                etTenDangNhap = view.findViewById(R.id.et_dialogThemThuThu_maThuThu);
+                etMatKhau = view.findViewById(R.id.et_dialogThemThuThu_matKhau);
+                etSdt = view.findViewById(R.id.et_dialogThemThuThu_soDienThoai);
+
+                btnCreate = view.findViewById(R.id.btn_dialogThemThuThu_create);
+                btnCancel = view.findViewById(R.id.btn_dialogThemThuThu_cancel);
+
+                btnCreate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        createThuThu();
+                    }
+
+                    private void createThuThu() {
+                        String id, password, name, phoneNumber;
+                        id = etTenDangNhap.getText().toString();
+                        password = etMatKhau.getText().toString();
+                        name = etTen.getText().toString();
+                        phoneNumber = etSdt.getText().toString();
+
+                        ThuThu thuThu = new ThuThu(id, password, name, phoneNumber);
+                        Log.d("thuthu", thuThu.toString());
+                        if (mThuThuDao.insert(thuThu) != -1) {
+                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            mThuThuList.clear();
+                            mThuThuList.addAll(mThuThuDao.getAll());
+                            //TODO mThuThuList.add(ThuThu);
+                            dialog.dismiss();
+                            mThuThuAdapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                btnCancel.setOnClickListener(v -> dialog.dismiss());
+            }
+        });
     }
 
     @Override

@@ -20,6 +20,7 @@ public class ThuThu {
         this.maThuThu = maThuThu;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,15 +28,12 @@ public class ThuThu {
 
         ThuThu thuThu = (ThuThu) o;
 
-        if (!maThuThu.equals(thuThu.maThuThu)) return false;
-        return password.equals(thuThu.password);
+        return maThuThu != null ? maThuThu.equals(thuThu.maThuThu) : thuThu.maThuThu == null;
     }
 
     @Override
     public int hashCode() {
-        int result = maThuThu.hashCode();
-        result = 31 * result + password.hashCode();
-        return result;
+        return maThuThu != null ? maThuThu.hashCode() : 0;
     }
 
     @Override

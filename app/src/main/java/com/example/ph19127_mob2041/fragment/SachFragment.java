@@ -60,6 +60,8 @@ public class SachFragment extends Fragment {
         layoutManager = new LinearLayoutManager(view.getContext());
         rcvSach.setLayoutManager(layoutManager);
 
+        sachList.clear();
+        sachList.addAll(sachDAO.getAll());
         sachAdapter = new SachAdapter(view.getContext(),
                 sachList,
                 loaiSachList,

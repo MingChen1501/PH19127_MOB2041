@@ -54,9 +54,12 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewH
     @Override
     public void onBindViewHolder(@NonNull PhieuMuonViewHolder holder, int position) {
         Sach sach = sachList.get(position);
-        String tenLoaiSach = loaiSachList.
-                get(loaiSachList.indexOf(new LoaiSach(sach.getMaLoaiSach(), "")))
-                .getTenLoaiSach();
+        String tenLoaiSach = "";
+        if (! loaiSachList.isEmpty()) {
+            tenLoaiSach = loaiSachList.
+                    get(loaiSachList.indexOf(new LoaiSach(sach.getMaLoaiSach(), "")))
+                    .getTenLoaiSach();
+        }
         holder.tvTenLoaiSach.setText(tenLoaiSach);
         holder.tvMaSach.setText(sach.getMaSach());
         holder.tvTieuDe.setText(sach.getTieuDe());
@@ -149,6 +152,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewH
                             sachList.clear();
                             sachList.addAll(sachDAO.getAll());
                             notifyDataSetChanged();
+
                         } else {
                             Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                         }

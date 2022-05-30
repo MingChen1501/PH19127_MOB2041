@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,82 +20,95 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ph19127_mob2041.R;
-import com.example.ph19127_mob2041.dao.LoaiSachDAO;
-import com.example.ph19127_mob2041.model.LoaiSach;
+import com.example.ph19127_mob2041.dao.ThuThuDAO;
+import com.example.ph19127_mob2041.model.ThuThu;
 
 import java.util.List;
 
 public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonViewHolder> {
-    private Context context;
-    private LoaiSachDAO loaiSachDAO;
-    private List<LoaiSach> loaiSachList;
+    private final Context mContext;
+    private ThuThuDAO mThuThuDAO;
+    private List<ThuThu> mThuThuList;
 //    private List<Sach> sachListByLoaiSach;
 
-    public ThuThuAdapter(Context context, List<LoaiSach> loaiSachList, LoaiSachDAO loaiSachDAO) {
-        this.context = context;
-        this.loaiSachDAO = loaiSachDAO;
-        this.loaiSachList = loaiSachList;
+    public ThuThuAdapter(Context context, List<ThuThu> thuThuList, ThuThuDAO thuThuDAO) {
+        this.mContext = context;
+        this.mThuThuDAO = thuThuDAO;
+        this.mThuThuList = thuThuList;
     }
 
     @NonNull
     @Override
     public PhieuMuonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_item_loai_sach, parent, false);
+                .inflate(R.layout.view_item_thu_thu, parent, false);
         return new PhieuMuonViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PhieuMuonViewHolder holder, int position) {
-        LoaiSach loaiSach = loaiSachList.get(position);
-        holder.tvMaLoaiSach.setText(loaiSach.getMaLoaiSach());
-        holder.tvTenLoaiSach.setText(loaiSach.getTenLoaiSach());
-        holder.cardViewLoaiSach.setOnClickListener(new View.OnClickListener() {
+        int indexOfElement = position;
+        ThuThu thuThu = mThuThuList.get(position);
+        holder.tvId.setText(thuThu.getMaThuThu());
+        holder.tvName.setText(thuThu.getHoTen());
+        holder.tvPhoneNumber.setText(thuThu.getSoDienThoai());
+        holder.cardViewThuThu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialogUpdate(loaiSach);
+                openDialogUpdate(thuThu);
             }
 
-            private void openDialogUpdate(LoaiSach loaiSach) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_view_loai_sach_update, null);
+            private void openDialogUpdate(ThuThu thuThu) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+                View view = inflater.inflate(R.layout.dialog_view_thu_thu_update, null);
 
                 builder.setView(view);
                 Dialog dialog = builder.create();
                 dialog.show();
 
-                EditText etMaLoaiSach, etTenLoaiSach;
-                Button btnSua, btnHuy;
+                EditText etId, etPassword, etName, etNumberPhone;
+                Button btnUpdate, btnCancel;
 
 
-                etMaLoaiSach = view.findViewById(R.id.etMaLoaiSach_dialogUpdateLoaiSach);
-                etTenLoaiSach = view.findViewById(R.id.etTenLoaiSach_dialogUpdateLoaiSach);
-                btnSua = view.findViewById(R.id.btnCreate_dialogUpdateLoaiSach);
-                btnHuy = view.findViewById(R.id.btnCancel_dialogUpdateLoaiSach);
+                etId = view.findViewById(R.id.et_dialogSuaThuThu_maThuThu);
+                etPassword = view.findViewById(R.id.et_dialogSuaThuThu_matKhau);
+                etName = view.findViewById(R.id.et_dialogSuaThuThu_tenThuThu);
+                etNumberPhone = view.findViewById(R.id.et_dialogSuaThuThu_soDienThoai);
 
-                etMaLoaiSach.setText(loaiSach.getMaLoaiSach());
-                etTenLoaiSach.setText(loaiSach.getTenLoaiSach());
+                btnUpdate = view.findViewById(R.id.btn_dialogSuaThuThu_update);
+                btnCancel = view.findViewById(R.id.btn_dialogSuaThuThu_cancel);
+
+                etId.setText(thuThu.getMaThuThu());
+                etPassword.setText(thuThu.getPassword());
+                etName.setText(thuThu.getHoTen());
+                etNumberPhone.setText(thuThu.getSoDienThoai());
 
 
-                btnSua.setOnClickListener(new View.OnClickListener() {
+                btnUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        loaiSach.setTenLoaiSach(etTenLoaiSach.getText().toString());
+                        thuThu.setMaThuThu(etId.getText().toString());
+                        thuThu.setPassword(etPassword.getText().toString());
+                        thuThu.setHoTen(etName.getText().toString());
+                        thuThu.setSoDienThoai(etNumberPhone.getText().toString());
 
-                        if (loaiSachDAO.update(loaiSach) > 0) {
-                            Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                            loaiSachList.clear();
-                            loaiSachList.addAll(loaiSachDAO.getAll());
+                        if (mThuThuDAO.update(thuThu) > 0) {
+                            Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                            mThuThuList.get(indexOfElement).setMaThuThu(thuThu.getMaThuThu());
+                            mThuThuList.get(indexOfElement).setHoTen(thuThu.getHoTen());
+                            mThuThuList.get(indexOfElement).setPassword(thuThu.getPassword());
+                            mThuThuList.get(indexOfElement).setSoDienThoai(thuThu.getSoDienThoai());
                             notifyDataSetChanged();
                             dialog.dismiss();
+                            Log.d("d", mThuThuList.toString());
                         } else {
-                            Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                             //TODO validate ...
                         }
                     }
                 });
-                btnHuy.setOnClickListener(new View.OnClickListener() {
+                btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
@@ -105,20 +119,19 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Xóa Loại Sách").setMessage("Xóa " + loaiSach.toString() + " sẽ xóa theo \nCác sách liên quan \nCác phiếu mượn liên quan" +
-                        "\nBạn có chắc chắn sẽ xóa " + loaiSach.toString() + " ?");
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Xóa thủ thư").setMessage("Xóa " + thuThu.toString() + " sẽ xóa theo\nCác phiếu mượn liên quan" +
+                        "\nBạn có chắc chắn sẽ xóa " + thuThu.toString() + " ?");
 
                 builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (loaiSachDAO.delete(loaiSach) != 0) {
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            loaiSachList.clear();
-                            loaiSachList.addAll(loaiSachDAO.getAll());
+                        if (mThuThuDAO.delete(thuThu) != 0) {
+                            Toast.makeText(mContext, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            mThuThuList.remove(thuThu);
                             notifyDataSetChanged();
                         } else {
-                            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -137,23 +150,24 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
 
     @Override
     public int getItemCount() {
-        return loaiSachList.size();
+        return mThuThuList.size();
     }
 
     public class PhieuMuonViewHolder extends RecyclerView.ViewHolder{
-        TextView tvMaLoaiSach, tvTenLoaiSach;
+        TextView tvId, tvName, tvPhoneNumber;
         ImageView ivIcon, ivDelete;
-        CardView cardViewLoaiSach;
+        CardView cardViewThuThu;
 
         public PhieuMuonViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvMaLoaiSach = itemView.findViewById(R.id.tvMaLoaiSach_view_item_loai_sach);
-            tvTenLoaiSach = itemView.findViewById(R.id.tvTenLoaiSach_view_item_loai_sach);
+            tvId = itemView.findViewById(R.id.tv_thuThuAdapter_id);
+            tvName = itemView.findViewById(R.id.tv_thuThuAdapter_name);
+            tvPhoneNumber = itemView.findViewById(R.id.tv_thuThuAdapter_phoneNumber);
 
-            ivIcon = itemView.findViewById(R.id.ivIcon_view_item_loai_sach);
-            ivDelete = itemView.findViewById(R.id.ivDelete_view_item_loai_sach);
+            ivIcon = itemView.findViewById(R.id.iv_thuThuAdapter_icon);
+            ivDelete = itemView.findViewById(R.id.iv_thuThuAdapter_delete);
 
-            cardViewLoaiSach = itemView.findViewById(R.id.cardViewLoaiSach);
+            cardViewThuThu = itemView.findViewById(R.id.cardView_thuThuAdapter);
         }
     }
 }
