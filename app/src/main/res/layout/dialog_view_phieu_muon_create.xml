@@ -1,110 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFD600"
-        android:gravity="center"
-        android:text="Tạo mới phiếu mượn"
-        android:textSize="35sp" />
-
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Chọn loại sách"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/spnLoaiSach_dialogCreatePhieuMuon"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp" />-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Nhập mã phiếu mượn"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-    <EditText
-        android:id="@+id/etPhieuMuon_dialogCreatePhieuMuon"
-        android:hint="nhập mã phiếu mượn"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Chọn sách"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/spnSach_dialogCreatePhieuMuon"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Chọn thành viên"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/spnThanhVien_dialogCreatePhieuMuon"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Chọn thủ thư"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/spnThuThu_dialogCreatePhieuMuon"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp" />
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnSua_dialogCreatePhieuMuon"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFD600"
+            android:gravity="center"
+            android:text="Tạo mới phiếu mượn"
+            android:textSize="35sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Nhập mã phiếu mượn"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etPhieuMuon_dialogCreatePhieuMuon"
+            android:hint="nhập mã phiếu mượn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#FF6D00"
-            android:text="THÊM MỚI" />
+            android:layout_marginTop="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Chọn loại sách"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnQuayLai_dialogCreatePhieuMuon"
+        <Spinner
+            android:id="@+id/spnLoaiSach_dialogCreatePhieuMuon"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#FF6D00"
-            android:text="QUAY LẠI" />
+            android:layout_marginTop="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Chọn sách"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spnSach_dialogCreatePhieuMuon"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp" />
+        <TextView
+            android:id="@+id/tvGia_dialogCreatePhieuMuon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Giá thuê: "
+            android:textSize="18sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Chọn thành viên"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spnThanhVien_dialogCreatePhieuMuon"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp" />
+
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/tvNgayMuon_dialogCreatePhieuMuon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập ngày mượn"/>
+        <Switch
+            android:id="@+id/swDaTraSach_dialogCreatePhieuMuon"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:textSize="25sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:checked="false"
+            android:text="đã trả sách hay chưa" />
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSua_dialogCreatePhieuMuon"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FF6D00"
+                android:text="THÊM MỚI" />
+
+            <Button
+                android:id="@+id/btnQuayLai_dialogCreatePhieuMuon"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FF6D00"
+                android:text="QUAY LẠI" />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>

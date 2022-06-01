@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         boolean isAdmin = intent.getBooleanExtra("isAdmin", false);
-        String user = "Xin chào " + intent.getStringExtra("name");
+        String userName = "Xin chào " + intent.getStringExtra("name");
+        String userId = intent.getStringExtra("id");
         //lấy tên người đăng nhập
 
         super.onCreate(savedInstanceState);
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //findviewByID
         View headerView = navigationView.getHeaderView(0);
         TextView navUserName = headerView.findViewById(R.id.username);
-        navUserName.setText(user);
+        navUserName.setText(userName);
         if (isAdmin) navigationView.getMenu()
                 .findItem(R.id.nav_thuThu)
                 .setVisible(true)
@@ -110,7 +111,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         thanhVienFragment = new ThanhVienFragment(thanhVienList, thanhVienDAO);
         sachFragment = new SachFragment(sachList, loaiSachList, sachDAO);
         loaiSachFragment = new LoaiSachFragment(loaiSachList, loaiSachDAO);
-        phieuMuonFragment = new PhieuMuonFragment(phieuMuonList, thanhVienList, thuThuList, loaiSachList, sachList, phieuMuonDAO);
+        phieuMuonFragment = new PhieuMuonFragment(phieuMuonList,
+                thanhVienList,
+                thuThuList,
+                loaiSachList,
+                sachList,
+                phieuMuonDAO,
+                userId);
         thuThuFragment = new ThuThuFragment(thuThuList, thuThuDAO);
         topFragment = new TopFragment();
         doanhThuFragment = new DoanhThuFragment();

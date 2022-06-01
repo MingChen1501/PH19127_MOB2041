@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "PhuongNamLIB";
-    public static final int VERSION = 9;
+    public static final int VERSION = 14;
 
 
     public static final String TABLE_PHIEU_MUON = "PhieuMuon";
@@ -16,6 +16,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String PHIEU_MUON_ID_THANH_VIEN = "maThanhVien";
     public static final String PHIEU_MUON_ID_SACH = "maSach";
     public static final String PHIEU_MUON_ID_THU_THU = "maThuThu";
+    public static final String PHIEU_MUON_NGAY_MUON = "ngayMuon";
+    public static final String PHIEU_MUON_TRANG_THAI = "trangThai";
 
     public static final String TABLE_THANH_VIEN = "ThanhVien";
     public static final String THANH_VIEN_ID = "maThanhVien";
@@ -86,6 +88,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 PHIEU_MUON_ID_SACH + " TEXT NOT NULL, " +
                 PHIEU_MUON_ID_THANH_VIEN + " TEXT NOT NULL, " +
                 PHIEU_MUON_ID_THU_THU + " TEXT NOT NULL," +
+                PHIEU_MUON_NGAY_MUON + " TEXT NOT NULL," +
+                PHIEU_MUON_TRANG_THAI + " BOOLEAN NOT NULL," +
                 "FOREIGN KEY (" +
                 PHIEU_MUON_ID_SACH +") " +
                 "REFERENCES " +
@@ -116,10 +120,14 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO LoaiSach VALUES ('2', 'tieu thuyet')");
         db.execSQL("INSERT INTO LoaiSach VALUES ('3', 'tai lieu')");
         db.execSQL("INSERT INTO Sach VALUES ('1', '1','html css', 'nguyen van c',5000)");
-        db.execSQL("INSERT INTO Sach VALUES ('2', '2','nghin le 1 dem', 'nguyen van d',10000)");
-        db.execSQL("INSERT INTO Sach VALUES ('3', '3','Datastructure & algorithm', 'nguyen van e',9000)");
-        db.execSQL("INSERT INTO PhieuMuon VALUES ('1','1', 'MATHANHVIEN1', 'tminh400')");
-        db.execSQL("INSERT INTO PhieuMuon VALUES ('2','2', 'MATHANHVIEN2', 'tminh401')");
+        db.execSQL("INSERT INTO Sach VALUES ('2', '1','JAVA', 'nguyen van c',6000)");
+        db.execSQL("INSERT INTO Sach VALUES ('3', '1','C++', 'nguyen van c',7000)");
+        db.execSQL("INSERT INTO Sach VALUES ('4', '2','nghin le 1 dem', 'nguyen van d',10000)");
+        db.execSQL("INSERT INTO Sach VALUES ('5', '3','Datastructure & algorithm', 'nguyen van e',9000)");
+        /*db.execSQL("INSERT INTO PhieuMuon VALUES " +
+                "('1','1', 'MATHANHVIEN1', 'tminh400', '2022-06-01', 0)");
+        db.execSQL("INSERT INTO PhieuMuon VALUES " +
+                "('2','2', 'MATHANHVIEN2', 'tminh401', '2022-06-01', 0)");*/
     }
 
     @Override

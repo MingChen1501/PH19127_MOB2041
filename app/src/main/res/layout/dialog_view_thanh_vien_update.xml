@@ -1,83 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFD600"
-        android:gravity="center"
-        android:text="Sửa thành viên"
-        android:textSize="35sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Mã thành viên"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-    <EditText
-        android:id="@+id/et_dialogSuaThanhVien_maThanhVien"
-        android:layout_width="match_parent"
-        android:hint="Nhập mã thành viên"
-        android:inputType="none"
-        android:enabled="false"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Tên thành viên"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-    <EditText
-        android:id="@+id/et_dialogSuaThanhVien_tenThanhVien"
-        android:hint="nhập tên thành viên"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Số điện thoại"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-    <EditText
-        android:id="@+id/et_dialogSuaThanhVien_soDienThoai"
-        android:hint="nhập số điện thoại"
-        android:inputType="phone"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp" />
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_dialogSuaThanhVien_sua"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFD600"
+            android:gravity="center"
+            android:text="Sửa thành viên"
+            android:textSize="35sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Mã thành viên"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_dialogSuaThanhVien_maThanhVien"
+            android:layout_width="match_parent"
+            android:hint="Nhập mã thành viên"
+            android:inputType="none"
+            android:enabled="false"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Tên thành viên"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_dialogSuaThanhVien_tenThanhVien"
+            android:hint="nhập tên thành viên"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#FF6D00"
-            android:text="SỬA" />
-
-        <Button
-            android:id="@+id/btn_dialogSuaThanhVien_quayLai"
+            android:layout_marginTop="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Số điện thoại"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_dialogSuaThanhVien_soDienThoai"
+            android:hint="nhập số điện thoại"
+            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#FF6D00"
-            android:text="QUAY LẠI" />
+            android:layout_marginTop="18dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_dialogSuaThanhVien_sua"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FF6D00"
+                android:text="SỬA" />
+
+            <Button
+                android:id="@+id/btn_dialogSuaThanhVien_quayLai"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FF6D00"
+                android:text="QUAY LẠI" />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>

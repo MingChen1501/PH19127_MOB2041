@@ -4,18 +4,30 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.ph19127_mob2041.database.DBHelper;
 import com.example.ph19127_mob2041.model.PhieuMuon;
-import com.example.ph19127_mob2041.model.Sach;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class PhieuMuonDAO implements DAO<PhieuMuon>{
+    SimpleDateFormat simpleDateFormat;
     DBHelper helper;
     public PhieuMuonDAO(Context context) {
         this.helper = new DBHelper(context);
+        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
     }
     @Override
     public List<PhieuMuon> getAll() {
@@ -26,19 +38,45 @@ public class PhieuMuonDAO implements DAO<PhieuMuon>{
             if (cs != null && cs.getCount() > 0) {
                 cs.moveToFirst();
                 while (!cs.isAfterLast()) {
+                    DateFormat dateFormat = new DateFormat() {
+                        @NonNull
+                        @Override
+                        public StringBuffer format(@NonNull Date date, @NonNull StringBuffer toAppendTo, @NonNull FieldPosition fieldPosition) {
+                            return null;
+                        }
+
+                        @Nullable
+                        @Override
+                        public Date parse(@NonNull String source, @NonNull ParsePosition pos) {
+                            return null;
+                        }
+                    };
+                    //TODO replace new Date() to dateFormat.parse()...
                     String idPM = cs.getString(0);
                     String idSach = cs.getString(1);
                     String idThanhVien = cs.getString(2);
                     String idThuThu = cs.getString(3);
-                    phieuMuons.add(new PhieuMuon(idPM, idThanhVien, idSach, idThuThu));
+                    Date date = new Date(cs.getString(4));
+                    Log.d("date", simpleDateFormat.format(date));
+                    int i = Integer.parseInt(cs.getString(5));
+                    boolean isDaTra;
+                    if (i == 0) isDaTra = false;
+                    else isDaTra = true;
+                    phieuMuons.add(
+                            new PhieuMuon(idPM,
+                                    idThanhVien,
+                                    idSach,
+                                    idThuThu,
+                                    date,
+                                    isDaTra));
                     cs.moveToNext();
                 }
+                return phieuMuons;
             }
-            return phieuMuons;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return phieuMuons;
     }
 
     @Override
@@ -68,6 +106,8 @@ public class PhieuMuonDAO implements DAO<PhieuMuon>{
         contentValues.put(DBHelper.PHIEU_MUON_ID_SACH, phieuMuon.getMaSach());
         contentValues.put(DBHelper.PHIEU_MUON_ID_THANH_VIEN, phieuMuon.getMaThanhVien());
         contentValues.put(DBHelper.PHIEU_MUON_ID_THU_THU, phieuMuon.getMaThuThu());
+        contentValues.put(DBHelper.PHIEU_MUON_NGAY_MUON, phieuMuon.getNgayMuon().toString());
+        contentValues.put(DBHelper.PHIEU_MUON_TRANG_THAI, phieuMuon.isDaTra());
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
             return db.insert(DBHelper.TABLE_PHIEU_MUON, null, contentValues);
 
@@ -81,6 +121,8 @@ public class PhieuMuonDAO implements DAO<PhieuMuon>{
         contentValues.put(DBHelper.PHIEU_MUON_ID_SACH, phieuMuon.getMaSach());
         contentValues.put(DBHelper.PHIEU_MUON_ID_THANH_VIEN, phieuMuon.getMaThanhVien());
         contentValues.put(DBHelper.PHIEU_MUON_ID_THU_THU, phieuMuon.getMaThuThu());
+        contentValues.put(DBHelper.PHIEU_MUON_NGAY_MUON, phieuMuon.getNgayMuon().toString());
+        contentValues.put(DBHelper.PHIEU_MUON_TRANG_THAI, String.valueOf(phieuMuon.isDaTra()));
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
             return db.update(DBHelper.TABLE_PHIEU_MUON,
                     contentValues, DBHelper.PHIEU_MUON_ID + " = ?",

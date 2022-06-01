@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
@@ -27,6 +29,7 @@ import com.example.ph19127_mob2041.model.Sach;
 import com.example.ph19127_mob2041.model.ThanhVien;
 import com.example.ph19127_mob2041.model.ThuThu;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.PhieuMuonViewHolder> {
@@ -69,11 +72,23 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
 
     @Override
     public void onBindViewHolder(@NonNull PhieuMuonViewHolder holder, int position) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         PhieuMuon phieuMuon = phieuMuonList.get(position);
-        holder.tvMaPhieuMuon.setText(phieuMuon.getMaPhieuMuon());
-        holder.tvMaSach.setText(phieuMuon.getMaSach());
-        holder.tvMaThanhVien.setText(phieuMuon.getMaThanhVien());
-        holder.tvMaThuThu.setText(phieuMuon.getMaThuThu());
+        Sach sach = (sachList.get(sachList.indexOf(new Sach(phieuMuon.getMaSach()))));
+        LoaiSach loaiSach = (loaiSachList.get(loaiSachList.indexOf(new LoaiSach(sach.getMaLoaiSach())))) ;
+        holder.tvMaPhieuMuon.setText("Mã phiếu: #" + phieuMuon.getMaPhieuMuon());
+        holder.tvMaSach.setText("Tiêu đề sách: " + sach.getTieuDe());
+        holder.tvLoaiSach.setText("Loại sách: " + loaiSach.getTenLoaiSach());
+        holder.tvMaThanhVien.setText("Người mượn: " + phieuMuon.getMaThanhVien());
+        holder.tvMaThuThu.setText("Người tạo: " + phieuMuon.getMaThuThu());
+        holder.tvNgayMuon.setText(simpleDateFormat.format(phieuMuon.getNgayMuon()));
+        if (phieuMuon.isDaTra()) {
+            holder.tvTienTrangThai.setText("Tiền thuê: "+ sach.getDonGia() + "\nĐã trả");
+            holder.tvTienTrangThai.setTextColor(Color.GREEN);
+        } else {
+            holder.tvTienTrangThai.setText("Tiền thuê: "+ sach.getDonGia() + "\nChưa trả");
+            holder.tvTienTrangThai.setTextColor(Color.RED);
+        }
         holder.cardViewPhieuMuon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,16 +220,19 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
     }
 
     public class PhieuMuonViewHolder extends RecyclerView.ViewHolder{
-        TextView tvMaPhieuMuon, tvMaThanhVien, tvMaSach, tvMaThuThu;
+        TextView tvMaPhieuMuon, tvMaThanhVien, tvMaSach, tvMaThuThu, tvNgayMuon, tvTienTrangThai, tvLoaiSach;
         ImageView ivIcon, ivDelete;
         CardView cardViewPhieuMuon;
 
         public PhieuMuonViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMaPhieuMuon = itemView.findViewById(R.id.tvMaPhieuMuon);
-            tvMaThanhVien = itemView.findViewById(R.id.tvMaThanhVien);
-            tvMaSach = itemView.findViewById(R.id.tvMaSach);
-            tvMaThuThu = itemView.findViewById(R.id.tvMaThuThu);
+            tvMaThanhVien = itemView.findViewById(R.id.tvThanhVien);
+            tvMaSach = itemView.findViewById(R.id.tvTenSach);
+            tvLoaiSach = itemView.findViewById(R.id.tvTenLoaiSach);
+            tvMaThuThu = itemView.findViewById(R.id.tvThuThu);
+            tvNgayMuon = itemView.findViewById(R.id.tvNgayMuon);
+            tvTienTrangThai = itemView.findViewById(R.id.tvThongTin);
 
             ivIcon = itemView.findViewById(R.id.ivIcon);
             ivDelete = itemView.findViewById(R.id.ivDelete);

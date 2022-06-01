@@ -12,6 +12,10 @@ public class LoaiSach {
         this.tenLoaiSach = tenLoaiSach;
     }
 
+    public LoaiSach(String maLoaiSach) {
+        this.maLoaiSach = maLoaiSach;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

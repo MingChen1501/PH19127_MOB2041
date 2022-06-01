@@ -44,10 +44,11 @@ public class ThuThuDAO implements DAO<ThuThu> {
     @Override
     public ThuThu getById(String id) {
         String query = "SELECT * FROM " + DBHelper.TABLE_THU_THU + "" +
-                " Where " + DBHelper.THU_THU_ID + " LIKE " + id + "";
+                " Where " + DBHelper.THU_THU_ID + " LIKE '" + id + "'";
         try (SQLiteDatabase db = helper.getReadableDatabase();
              Cursor cs = db.rawQuery(query, null)) {
-            if (cs.moveToFirst()) {
+            if (cs.getCount() > 0) {
+                cs.moveToFirst();
                 String id1 = cs.getString(0);
                 String password = cs.getString(1);
                 String ten = cs.getString(2);
