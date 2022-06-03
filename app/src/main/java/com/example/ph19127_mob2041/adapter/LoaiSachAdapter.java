@@ -53,8 +53,8 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.PhieuM
     @Override
     public void onBindViewHolder(@NonNull PhieuMuonViewHolder holder, int position) {
         LoaiSach loaiSach = loaiSachList.get(position);
-        holder.tvMaLoaiSach.setText(loaiSach.getMaLoaiSach());
-        holder.tvTenLoaiSach.setText(loaiSach.getTenLoaiSach());
+        holder.tvMaLoaiSach.setText("Mã Loại: #" + loaiSach.getMaLoaiSach());
+        holder.tvTenLoaiSach.setText("Tên: " + loaiSach.getTenLoaiSach());
         holder.cardViewLoaiSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

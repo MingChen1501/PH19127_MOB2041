@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class PhieuMuonFragment extends Fragment {
-
+    private final String TAG = getClass().getSimpleName();
     private List<PhieuMuon> phieuMuonList;
     private List<ThanhVien> thanhVienList;
     private List<ThuThu> thuThuList;
@@ -91,7 +91,8 @@ public class PhieuMuonFragment extends Fragment {
                 thanhVienList,
                 thuThuList,
                 loaiSachList,
-                sachList);
+                sachList,
+                userId);
         rcvPhieuMuon.setAdapter(phieuMuonAdapter);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +126,7 @@ public class PhieuMuonFragment extends Fragment {
                 btnThem = view.findViewById(R.id.btnSua_dialogCreatePhieuMuon);
                 btnHuy = view.findViewById(R.id.btnQuayLai_dialogCreatePhieuMuon);
 
+                generateMaPhieuMuon(etPhieuMuon);
                 ArrayAdapter<Sach> spnSachAdapter = new ArrayAdapter<>(
                         view.getContext(),
                         android.R.layout.simple_spinner_dropdown_item,
@@ -163,6 +165,7 @@ public class PhieuMuonFragment extends Fragment {
                                     ((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach()))
                                 sachListByLoaiSach.add(sach);
                         }
+
                         spnSachAdapter.notifyDataSetChanged();
                         tvGiaThue
                                 .setText(String.valueOf(((Sach)spnSach.getSelectedItem()).getDonGia()));
@@ -223,29 +226,51 @@ public class PhieuMuonFragment extends Fragment {
 
                     private void addPhieuMuon() throws ParseException {
                         //TODO code add PhieuMuon to database
+                        try {
+                            String idPhieuMuon = etPhieuMuon.getText().toString().substring(1);
+                            String idSach = ((Sach)spnSach.getSelectedItem()).getMaSach();
+                            String idThanhVien = ((ThanhVien)spnThanhVien.getSelectedItem()).getMaThanhVien();
+                            String idThuThu = userId;
+                            boolean isDaTra = swDaTra.isChecked();
+                            Date ngayMuon = new SimpleDateFormat("dd-MM-yyyy").
+                                    parse((tvNgayMuon.getText().toString()).substring(10));
 
-                        String idPhieuMuon = etPhieuMuon.getText().toString();
-                        String idSach = ((Sach)spnSach.getSelectedItem()).getMaSach();
-                        String idThanhVien = ((ThanhVien)spnThanhVien.getSelectedItem()).getMaThanhVien();
-                        String idThuThu = userId;
-                        boolean isDaTra = swDaTra.isChecked();
-                        Log.d("isDaTra", String.valueOf(isDaTra));
-                        Date ngayMuon = new SimpleDateFormat("dd-MM-yyyy").
-                                parse((tvNgayMuon.getText().toString()).substring(10));
-                        Log.d("substring", new SimpleDateFormat("dd-MM-yyyy").
-                                parse((tvNgayMuon.getText().toString()).substring(10)).toString());
+                            if (idSach.isEmpty()) throw new Exception("Sach");
+                            if (idThanhVien.isEmpty()) throw new Exception("ThanhVien");
+                            if (idThuThu.isEmpty()) throw new Exception("ThuThu");
 
-                        PhieuMuon newPhieuMuon = new PhieuMuon(idPhieuMuon,idThanhVien, idSach, idThuThu, ngayMuon, isDaTra);
-                        if (phieuMuonDAO.insert(newPhieuMuon) != -1) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            phieuMuonList.clear();
-                            phieuMuonList.addAll(phieuMuonDAO.getAll());
-                            dialog.dismiss();
-                            phieuMuonAdapter.notifyDataSetChanged();
-                            Log.d("phieu muon", phieuMuonList.toString());
-                        } else {
+                            PhieuMuon newPhieuMuon = new PhieuMuon(idPhieuMuon,idThanhVien, idSach, idThuThu, ngayMuon, isDaTra);
+                            if (phieuMuonDAO.insert(newPhieuMuon) != -1) {
+                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                phieuMuonList.clear();
+                                phieuMuonList.addAll(phieuMuonDAO.getAll());
+                                dialog.dismiss();
+                                phieuMuonAdapter.notifyDataSetChanged();
+                                Log.d("phieu muon", phieuMuonList.toString());
+                            } else {
+                                Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (IndexOutOfBoundsException e) {
+                            Log.d(TAG, "addPhieuMuon: id substring() OR date subString()");
                             Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        } catch (ParseException e) {
+                            Log.d(TAG, "addPhieuMuon: Date ngayMuon khong the parse");
+                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            switch (e.getMessage()) {
+                                case "Sach":
+                                    Log.d(TAG, "addPhieuMuon: Sach null");
+                                    break;
+                                case "ThanhVien":
+                                    Log.d(TAG, "addPhieuMuon: ThanhVien null");
+                                    break;
+                                case "ThuThu":
+                                    Log.d(TAG, "addPhieuMuon: ThuThu null");
+                                    break;
+                            }
                         }
+
                     }
                 });
                 btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -256,6 +281,18 @@ public class PhieuMuonFragment extends Fragment {
                 });
 
             }
+
+            private void generateMaPhieuMuon(EditText etPhieuMuon) {
+                int id = 1;
+                try {
+                    id = Integer.parseInt(
+                            phieuMuonList.get(phieuMuonList.size() - 1).getMaPhieuMuon()) + 1;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    etPhieuMuon.setText("#" + id);
+                }
+            }
         });
     }
 
@@ -264,4 +301,5 @@ public class PhieuMuonFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_phieu_muon, container, false);
     }
+
 }

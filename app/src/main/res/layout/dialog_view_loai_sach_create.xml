@@ -30,6 +30,7 @@
         <EditText
             android:id="@+id/etMaLoaiSach_dialogCreateLoaiSach"
             android:hint="nhập tên loại sách"
+            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="18dp" />

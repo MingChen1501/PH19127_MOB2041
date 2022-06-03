@@ -60,11 +60,11 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewH
                     get(loaiSachList.indexOf(new LoaiSach(sach.getMaLoaiSach(), "")))
                     .getTenLoaiSach();
         }
-        holder.tvTenLoaiSach.setText(tenLoaiSach);
-        holder.tvMaSach.setText(sach.getMaSach());
-        holder.tvTieuDe.setText(sach.getTieuDe());
-        holder.tvTacGia.setText(sach.getTacGia());
-        holder.tvDonGia.setText(String.valueOf(sach.getDonGia()));
+        holder.tvTenLoaiSach.setText("Thể loại: " + tenLoaiSach);
+        holder.tvMaSach.setText("Mã: #" + sach.getMaSach());
+        holder.tvTieuDe.setText("Tiêu đề: " + sach.getTieuDe());
+        holder.tvTacGia.setText("Tác giả: " + sach.getTacGia());
+        holder.tvDonGia.setText("Giá thuê: " + sach.getDonGia());
         holder.cardViewSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +102,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewH
                 spnLoaiSach.setSelection(loaiSachList.indexOf(new LoaiSach(
                         sach.getMaLoaiSach(), "")
                 ));
-                etMaSach.setText(sach.getMaSach());
+                etMaSach.setText("#" + sach.getMaSach());
                 etTieuDe.setText(sach.getTieuDe());
                 etTacGia.setText(sach.getTacGia());
                 etDonGia.setText(String.valueOf(sach.getDonGia()));
@@ -113,7 +113,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewH
                     public void onClick(View v) {
                         sach.setMaLoaiSach(((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach());
 
-                        sach.setMaSach(etMaSach.getText().toString());
+
                         sach.setTieuDe(etTieuDe.getText().toString());
                         sach.setTacGia(etTacGia.getText().toString());
                         sach.setDonGia(Double.parseDouble(etDonGia.getText().toString()));

@@ -77,6 +77,8 @@ public class LoaiSachFragment extends Fragment {
                 btnThem = view.findViewById(R.id.btnCreate_dialogCreateLoaiSach);
                 btnHuy = view.findViewById(R.id.btnCancel_dialogCreatePhieuMuon);
 
+                generateId(etMaLoaiSach);
+
                 btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -85,7 +87,7 @@ public class LoaiSachFragment extends Fragment {
 
                     private void addLoaiSach() {
                         //TODO code add PhieuMuon to database
-                        String maLoaiSach = etMaLoaiSach.getText().toString();
+                        String maLoaiSach = etMaLoaiSach.getText().toString().substring(1);
                         String tenLoaiSach = etTenLoaiSach.getText().toString();
                         LoaiSach newLoaiSach = new LoaiSach(maLoaiSach, tenLoaiSach);
                         if (loaiSachDAO.insert(newLoaiSach) != -1) {
@@ -106,6 +108,18 @@ public class LoaiSachFragment extends Fragment {
                     }
                 });
 
+            }
+
+            private void generateId(EditText etMaLoaiSach) {
+                int id = 1;
+                try {
+                    id = Integer.parseInt(
+                            loaiSachList.get(loaiSachList.size() - 1).getMaLoaiSach()) + 1;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    etMaLoaiSach.setText("#" + id);
+                }
             }
         });
     }

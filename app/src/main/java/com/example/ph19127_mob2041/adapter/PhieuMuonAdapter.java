@@ -8,10 +8,13 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,8 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ph19127_mob2041.R;
@@ -28,9 +33,16 @@ import com.example.ph19127_mob2041.model.PhieuMuon;
 import com.example.ph19127_mob2041.model.Sach;
 import com.example.ph19127_mob2041.model.ThanhVien;
 import com.example.ph19127_mob2041.model.ThuThu;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.PhieuMuonViewHolder> {
     private Context context;
@@ -40,7 +52,9 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
     private List<ThanhVien> thanhVienList;
     private List<ThuThu> thuThuList;
     private List<LoaiSach> loaiSachList;
+    private List<Sach> sachListByLoaiSach;
     private List<Sach> sachList;
+    private String mThuThuId;
 //    private List<Sach> sachListByLoaiSach;
 
     public PhieuMuonAdapter(Context context, List<PhieuMuon> phieuMuonList, PhieuMuonDAO phieuMuonDAO) {
@@ -52,7 +66,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                             List<ThanhVien> thanhVienList,
                             List<ThuThu> thuThuList,
                             List<LoaiSach> loaiSachList,
-                            List<Sach> sachList) {
+                            List<Sach> sachList, String userId) {
         this.context = context;
         this.phieuMuonDAO = phieuMuonDAO;
         this.phieuMuonList = phieuMuonList;
@@ -60,6 +74,8 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
         this.thuThuList = thuThuList;
         this.loaiSachList = loaiSachList;
         this.sachList = sachList;
+        this.mThuThuId = userId;
+        this.sachListByLoaiSach = new ArrayList<>();
     }
 
     @NonNull
@@ -89,6 +105,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
             holder.tvTienTrangThai.setText("Tiền thuê: "+ sach.getDonGia() + "\nChưa trả");
             holder.tvTienTrangThai.setTextColor(Color.RED);
         }
+
         holder.cardViewPhieuMuon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,43 +121,126 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                 Dialog dialog = builder.create();
                 dialog.show();
 
-                Spinner spnLoaiSach, spnSach, spnThanhVien, spnThuThu;
+
+                Switch swTrangThai;
+                TextView tvGiaThue, tvNgayMuon;
+                EditText etMaPhieuMuon;
+                Spinner spnLoaiSach, spnSach, spnThanhVien;
                 Button btnSua, btnHuy;
 
-                //spnLoaiSach = view.findViewById(R.id.spnLoaiSach_dialogUpdatePhieuMuon);
+                tvNgayMuon = view.findViewById(R.id.tvNgayMuon_dialogUpdatePhieuMuon);
+                tvGiaThue = view.findViewById(R.id.tvGia_dialogUpdatePhieuMuon);
+
+                etMaPhieuMuon = view.findViewById(R.id.etPhieuMuon_dialogUpdatePhieuMuon);
+
+                spnLoaiSach = view.findViewById(R.id.spnLoaiSach_dialogUpdatePhieuMuon);
                 spnSach = view.findViewById(R.id.spnSach_dialogUpdatePhieuMuon);
                 spnThanhVien = view.findViewById(R.id.spnThanhVien_dialogUpdatePhieuMuon);
-                spnThuThu = view.findViewById(R.id.spnThuThu_dialogUpdatePhieuMuon);
+
+                swTrangThai = view.findViewById(R.id.swDaTraSach_dialogUpdatePhieuMuon);
+
                 btnSua = view.findViewById(R.id.btnSua_dialogUpdatePhieuMuon);
                 btnHuy = view.findViewById(R.id.btnQuayLai_dialogUpdatePhieuMuon);
+                /*
+                * tvNgayMuon use MaterialDatePicker*/
+                String NgayMuon = simpleDateFormat.format(phieuMuon.getNgayMuon());
+                StringBuilder mesageTvNgayMuon = new StringBuilder().append("Ngày tạo: ").append(NgayMuon);
+                tvNgayMuon.setText(mesageTvNgayMuon);
+                MaterialDatePicker.Builder materialDatePickerBuilder = MaterialDatePicker.Builder.datePicker();
+                materialDatePickerBuilder.setTitleText("Sửa ngày tạo phiếu mượn");
+                MaterialDatePicker materialDatePicker = materialDatePickerBuilder.build();
+                tvNgayMuon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        materialDatePicker.show(((FragmentActivity)context).getSupportFragmentManager(),
+                                "METARIAL DATE PICKER ADAPTER CARDVIEW FRM PHIEU MUON");
+                    }
+                });
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                    @Override
+                    public void onPositiveButtonClick(Object selection) {
+                        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+                        calendar.setTimeInMillis((Long)selection);
+                        String date = simpleDateFormat.format(calendar.getTime());
+                        tvNgayMuon.setText("Ngày tạo: " + date);
+                    }
+                });
+                /*
+                * genarate IDPhieuMuon autoincrement
+                * */
+                genarateMaPhieuMuon(etMaPhieuMuon);
+                /*
+                * spnSach
+                * */
+                ArrayAdapter<Sach> spnSachAdapter = new ArrayAdapter<>(
+                        view.getContext(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        sachListByLoaiSach
+                );
+                spnSach.setAdapter(spnSachAdapter);
+                Sach sachTemp = sachList.get(sachList.indexOf(new Sach(phieuMuon.getMaSach())));
+                spnSach.setSelection(sachListByLoaiSach.indexOf(sachTemp));
+                spnSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        tvGiaThue.setText(
+                                String.valueOf(
+                                        ((Sach)spnSach.getSelectedItem())
+                                                .getDonGia()
+                                )
+                        );
+                    }
 
-                /*ArrayAdapter<LoaiSach> spnLoaiSachAdapter = new ArrayAdapter<>(
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                /*
+                * spnLoaiSach
+                * */
+                ArrayAdapter<LoaiSach> spnLoaiSachAdapter = new ArrayAdapter<>(
                         view.getContext(),
                         android.R.layout.simple_spinner_dropdown_item,
                         loaiSachList
                 );
                 spnLoaiSach.setAdapter(spnLoaiSachAdapter);
-                spnLoaiSach.setSelection(loaiSachList.indexOf(new Sach(phieuMuon.getMaSach())));
-*/
-                /*sachListByLoaiSach = sachList.stream().filter(sach ->
-                    ((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach().equals(sach.getMaLoaiSach())
-                ).collect(Collectors.toList());
-                Log.i("sachlist",sachListByLoaiSach.toString());*/
+                spnLoaiSach.setSelection(loaiSachList.indexOf(new LoaiSach(sachTemp.getMaLoaiSach())));
+                spnLoaiSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                /*for (Sach sach : sachList) {
-                    if (sach.getMaLoaiSach().equals(
-                            ((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach()))
-                        sachListByLoaiSach.add(sach);
-                }
-                Log.i("sachlist",sachListByLoaiSach.toString());*/
-                ArrayAdapter<Sach> spnSachAdapter = new ArrayAdapter<>(
-                        view.getContext(),
-                        android.R.layout.simple_spinner_dropdown_item,
-                        sachList
-                );
-                spnSach.setAdapter(spnSachAdapter);
-                spnSach.setSelection(sachList.indexOf(new Sach(phieuMuon.getMaSach())));
+                        sachListByLoaiSach.clear();
+                        sachListByLoaiSach.addAll(sachList.stream().filter(sach1 ->
+                                sach1.getMaLoaiSach().equals(((LoaiSach)spnLoaiSach.getSelectedItem())
+                                        .getMaLoaiSach())
+                        ).collect(Collectors.toList()));
+                        spnSachAdapter.notifyDataSetChanged();
+                        try {
+                            spnSach.setSelection(0);
+                            tvGiaThue.setText(
+                                    String.valueOf(
+                                            ((Sach)spnSach.getSelectedItem())
+                                                    .getDonGia()
+                                    )
+                            );
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+
+
+
+                /*
+                * spnThanhVien*/
                 ArrayAdapter<ThanhVien> spnThanhVienAdapter = new ArrayAdapter<>(
                         view.getContext(),
                         android.R.layout.simple_spinner_dropdown_item,
@@ -150,24 +250,21 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                 spnThanhVien.setAdapter(spnThanhVienAdapter);
                 spnThanhVien.setSelection(thanhVienList.indexOf(new ThanhVien(phieuMuon.getMaThanhVien())));
 
-
-                ArrayAdapter<ThuThu> spnThuThuAdapter = new ArrayAdapter<>(
-                        view.getContext(),
-                        android.R.layout.simple_spinner_dropdown_item,
-                        thuThuList
-                );
-                spnThuThu.setAdapter(spnThuThuAdapter);
-                spnThuThu.setSelection(thuThuList.indexOf(new ThuThu(phieuMuon.getMaThuThu())));
-
+                swTrangThai.setChecked(phieuMuon.isDaTra());
                 btnSua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        phieuMuon.setDaTra(swTrangThai.isChecked());
                         phieuMuon.setMaSach(
                                 ((Sach)spnSach.getSelectedItem()).getMaSach());
                         phieuMuon.setMaThanhVien(
                                 ((ThanhVien)spnThanhVien.getSelectedItem()).getMaThanhVien());
-                        phieuMuon.setMaThuThu(
-                                ((ThuThu)spnThuThu.getSelectedItem()).getMaThuThu());
+                        phieuMuon.setMaThuThu(mThuThuId);
+                        try {
+                            phieuMuon.setNgayMuon(simpleDateFormat.parse((tvNgayMuon.getText().toString()).substring(10)));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         phieuMuonDAO.update(phieuMuon);
                         phieuMuonList.clear();
                         phieuMuonList.addAll(phieuMuonDAO.getAll());
@@ -181,6 +278,17 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                         dialog.dismiss();
                     }
                 });
+            }
+
+            private void genarateMaPhieuMuon(EditText etMaPhieuMuon) {
+                int id = 0;
+                try {
+                    id = Integer.parseInt(phieuMuonList.get(phieuMuonList.size() - 1).getMaPhieuMuon());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    etMaPhieuMuon.setText("#" + id);
+                }
             }
         });
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {

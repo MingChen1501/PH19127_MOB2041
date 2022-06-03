@@ -94,6 +94,7 @@ public class SachFragment extends Fragment {
                 btnThem = view.findViewById(R.id.btn_dialogThemSach_themMoi);
                 btnHuy = view.findViewById(R.id.btn_dialogThemSach_quayLai);
 
+                generateId(etMaSach);
                 ArrayAdapter<LoaiSach> spnLoaiSachAdapter = new ArrayAdapter<>(
                         view.getContext(),
                         android.R.layout.simple_spinner_dropdown_item,
@@ -127,7 +128,7 @@ public class SachFragment extends Fragment {
                     private void addSach() {
                         //TODO code add PhieuMuon to database
                         String maLoaiSach = ((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach();
-                        String maSach = etMaSach.getText().toString();
+                        String maSach = etMaSach.getText().toString().substring(1);
                         String tieuDe = etTieuDe.getText().toString();
                         String tacGia = etTacGia.getText().toString();
                         double donGia = Double.parseDouble(etGiaSach.getText().toString());
@@ -151,6 +152,17 @@ public class SachFragment extends Fragment {
                     }
                 });
 
+            }
+
+            private void generateId(EditText etMaSach) {
+                int id = 1;
+                try {
+                    id = Integer.parseInt(sachList.get(sachList.size() - 1).getMaSach()) + 1;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    etMaSach.setText("#" + id);
+                }
             }
         });
     }

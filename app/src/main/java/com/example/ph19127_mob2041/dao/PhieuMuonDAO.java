@@ -122,7 +122,7 @@ public class PhieuMuonDAO implements DAO<PhieuMuon>{
         contentValues.put(DBHelper.PHIEU_MUON_ID_THANH_VIEN, phieuMuon.getMaThanhVien());
         contentValues.put(DBHelper.PHIEU_MUON_ID_THU_THU, phieuMuon.getMaThuThu());
         contentValues.put(DBHelper.PHIEU_MUON_NGAY_MUON, phieuMuon.getNgayMuon().toString());
-        contentValues.put(DBHelper.PHIEU_MUON_TRANG_THAI, String.valueOf(phieuMuon.isDaTra()));
+        contentValues.put(DBHelper.PHIEU_MUON_TRANG_THAI, phieuMuon.isDaTra());
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
             return db.update(DBHelper.TABLE_PHIEU_MUON,
                     contentValues, DBHelper.PHIEU_MUON_ID + " = ?",

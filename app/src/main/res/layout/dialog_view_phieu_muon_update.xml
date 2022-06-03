@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="vertical"
+        android:background="#65FFFF8D"
         android:orientation="vertical">
 
         <TextView
@@ -20,25 +20,38 @@
             android:gravity="center"
             android:text="Chi tiết phiếu mượn"
             android:textSize="35sp" />
-        <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Chọn loại sách"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Mã phiếu mượn"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etPhieuMuon_dialogUpdatePhieuMuon"
+            android:hint="nhập mã phiếu mượn"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Chọn loại sách *"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spnLoaiSach_dialogUpdatePhieuMuon"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="18dp" />-->
-
+            android:layout_marginTop="18dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Chọn sách"
+            android:text="Chọn sách *"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -47,12 +60,20 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="18dp" />
+        <TextView
+            android:id="@+id/tvGia_dialogUpdatePhieuMuon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Giá thuê: "
+            android:textSize="18sp"
+            android:textStyle="normal" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Chọn thành viên"
+            android:text="Chọn thành viên *"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -60,21 +81,23 @@
             android:id="@+id/spnThanhVien_dialogUpdatePhieuMuon"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="18dp" />
+            android:layout_marginTop="18dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Chọn thủ thư"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/spnThuThu_dialogUpdatePhieuMuon"
+            android:id="@+id/tvNgayMuon_dialogUpdatePhieuMuon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập ngày mượn *"/>
+        <Switch
+            android:id="@+id/swDaTraSach_dialogUpdatePhieuMuon"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="18dp" />
+            android:textSize="25sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:checked="false"
+            android:text="đã trả sách hay chưa" />
 
         <LinearLayout
             android:layout_width="match_parent"

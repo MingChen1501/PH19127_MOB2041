@@ -18,27 +18,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:src="@drawable/ic_baseline_library_books_24"/>
+            android:src="@drawable/ic_baseline_menu_book_24"/>
+
         <TextView
             android:id="@+id/tvMaLoaiSach_view_item_loai_sach"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="mã loại sách"
-            android:textSize="15sp"/>
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tvTenLoaiSach_view_item_loai_sach"
-            android:layout_width="150dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
             android:text="tên loại sách"
-            android:textSize="15sp"/>
+            android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/ivDelete_view_item_loai_sach"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_delete_24"/>
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_baseline_delete_24" />
 
 
     </LinearLayout>

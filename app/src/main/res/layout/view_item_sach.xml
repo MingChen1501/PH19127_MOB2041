@@ -28,12 +28,13 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tên loại sách"
-                android:textSize="15sp"/>
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tv_sachAdapter_maSach"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="mã sách"
+                android:textStyle="bold"
                 android:textSize="15sp"/>
         </LinearLayout>
         <LinearLayout
@@ -45,19 +46,21 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tiêu đề sách"
-                android:textSize="15sp"/>
+                android:textStyle="bold"
+                android:textSize="18sp"/>
             <TextView
                 android:id="@+id/tv_sachAdapter_tacGia"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tác giả sách"
+                android:textStyle="italic"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_sachAdapter_donGia"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="đơn giá"
-                android:textSize="15sp"/>
+                android:textSize="17sp"/>
         </LinearLayout>
 
 
