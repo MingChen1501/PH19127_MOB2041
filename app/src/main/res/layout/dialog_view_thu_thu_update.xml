@@ -58,6 +58,21 @@
             android:hint="Mật khẩu"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="xác nhân mật khẩu"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_dialogSuaThuThu_matKhau2"
+            android:hint="Mật khẩu"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="textPassword"
             android:layout_marginTop="18dp" />
         <TextView
             android:layout_width="wrap_content"

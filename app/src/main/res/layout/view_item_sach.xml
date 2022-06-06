@@ -19,48 +19,66 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_baseline_library_books_24"/>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_sachAdapter_TenLoaiSach"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="tên loại sách"
-                android:textSize="16sp"/>
+
+
             <TextView
                 android:id="@+id/tv_sachAdapter_maSach"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="mã sách"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_sachAdapter_tieuDe"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tiêu đề sách"
-                android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_sachAdapter_TenLoaiSach"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="tên loại sách"
+                android:gravity="center"
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tv_sachAdapter_tacGia"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tác giả sách"
-                android:textStyle="italic"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="italic" />
+
             <TextView
                 android:id="@+id/tv_sachAdapter_donGia"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="đơn giá"
-                android:textSize="17sp"/>
+                android:gravity="center"
+                android:textSize="17sp" />
+        </LinearLayout>
+        <!--<LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </LinearLayout>-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         </LinearLayout>
 
 

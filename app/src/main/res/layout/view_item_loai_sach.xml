@@ -20,21 +20,30 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_baseline_menu_book_24"/>
 
-        <TextView
-            android:id="@+id/tvMaLoaiSach_view_item_loai_sach"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="281dp"
             android:layout_height="wrap_content"
-            android:text="mã loại sách"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvTenLoaiSach_view_item_loai_sach"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text="tên loại sách"
-            android:textSize="25sp" />
+            <TextView
+                android:id="@+id/tvMaLoaiSach_view_item_loai_sach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="mã loại sách"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTenLoaiSach_view_item_loai_sach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:text="tên loại sách"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/ivDelete_view_item_loai_sach"

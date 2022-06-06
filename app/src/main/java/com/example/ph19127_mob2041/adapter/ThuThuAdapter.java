@@ -49,9 +49,9 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
     public void onBindViewHolder(@NonNull PhieuMuonViewHolder holder, int position) {
         int indexOfElement = position;
         ThuThu thuThu = mThuThuList.get(position);
-        holder.tvId.setText(thuThu.getMaThuThu());
-        holder.tvName.setText(thuThu.getHoTen());
-        holder.tvPhoneNumber.setText(thuThu.getSoDienThoai());
+        holder.tvId.setText("Mã Thủ thư: " + thuThu.getMaThuThu());
+        holder.tvName.setText("Tên: " + thuThu.getHoTen());
+        holder.tvPhoneNumber.setText("SĐT: " + thuThu.getSoDienThoai());
         holder.cardViewThuThu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,12 +67,13 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
                 Dialog dialog = builder.create();
                 dialog.show();
 
-                EditText etId, etPassword, etName, etNumberPhone;
+                EditText etId, etPassword, etPassword2, etName, etNumberPhone;
                 Button btnUpdate, btnCancel;
 
 
                 etId = view.findViewById(R.id.et_dialogSuaThuThu_maThuThu);
                 etPassword = view.findViewById(R.id.et_dialogSuaThuThu_matKhau);
+                etPassword2 = view.findViewById(R.id.et_dialogSuaThuThu_matKhau2);
                 etName = view.findViewById(R.id.et_dialogSuaThuThu_tenThuThu);
                 etNumberPhone = view.findViewById(R.id.et_dialogSuaThuThu_soDienThoai);
 
@@ -88,6 +89,11 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
                 btnUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (!etPassword2.getText().equals(etPassword.getText())) {
+                            etPassword2.setError("mật khẩu không giống");
+                            etPassword.setError("mật khẩu không giống");
+                            return;
+                        }
                         thuThu.setMaThuThu(etId.getText().toString());
                         thuThu.setPassword(etPassword.getText().toString());
                         thuThu.setHoTen(etName.getText().toString());

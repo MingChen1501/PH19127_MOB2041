@@ -47,9 +47,9 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
     @Override
     public void onBindViewHolder(@NonNull ThanhVienHolder holder, int position) {
         ThanhVien thanhVien = mthanhVienList.get(position);
-        holder.tvMaThanhVien.setText(thanhVien.getMaThanhVien());
-        holder.tvTenThanhVien.setText(thanhVien.getTenThanhVien());
-        holder.tvSoDienThoai.setText(thanhVien.getSoDienThoai());
+        holder.tvMaThanhVien.setText("ID: " + thanhVien.getMaThanhVien());
+        holder.tvTenThanhVien.setText("Tên: " + thanhVien.getTenThanhVien());
+        holder.tvSoDienThoai.setText("SĐT: " + thanhVien.getSoDienThoai());
         holder.cardViewThanhVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

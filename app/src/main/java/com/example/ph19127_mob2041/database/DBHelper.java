@@ -111,6 +111,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 ")";
         db.execSQL(crateTablePhieuMuon);
 
+        db.execSQL("INSERT INTO ThuThu VALUES ('admin', 'admin','admin', '0389119966')");
         db.execSQL("INSERT INTO ThuThu VALUES ('tminh400', '123456','tran cong minh', '0389119966')");
         db.execSQL("INSERT INTO ThuThu VALUES ('tminh401', '123456','tran cong minh', '0389119966')");
         db.execSQL("INSERT INTO ThuThu VALUES ('tminh402', '123456','tran cong minh', '0389119966')");

@@ -71,12 +71,12 @@ public class ThuThuFragment extends Fragment {
                 Dialog dialog = builder.create();
                 dialog.show();
 
-                EditText etTenDangNhap, etMatKhau, etTen, etSdt;
+                EditText etTenDangNhap, etMatKhau, etMatKhau2, etTen, etSdt;
                 Button btnCreate, btnCancel;
-
                 etTen = view.findViewById(R.id.et_dialogThemThuThu_tenThuThu);
                 etTenDangNhap = view.findViewById(R.id.et_dialogThemThuThu_maThuThu);
                 etMatKhau = view.findViewById(R.id.et_dialogThemThuThu_matKhau);
+                etMatKhau2 = view.findViewById(R.id.et_dialogThemThuThu_matKhau2);
                 etSdt = view.findViewById(R.id.et_dialogThemThuThu_soDienThoai);
 
                 btnCreate = view.findViewById(R.id.btn_dialogThemThuThu_create);
@@ -89,12 +89,18 @@ public class ThuThuFragment extends Fragment {
                     }
 
                     private void createThuThu() {
-                        String id, password, name, phoneNumber;
+                        String id, password, password2, name, phoneNumber;
                         id = etTenDangNhap.getText().toString();
                         password = etMatKhau.getText().toString();
+                        password2 = etMatKhau2.getText().toString();
                         name = etTen.getText().toString();
                         phoneNumber = etSdt.getText().toString();
 
+                        if (!password.equals(password2)) {
+                            etMatKhau.setError("mat khau khong giong nhau");
+                            etMatKhau2.setError("mat khau khong giong nhau");
+                            return;
+                        }
                         ThuThu thuThu = new ThuThu(id, password, name, phoneNumber);
                         Log.d("thuthu", thuThu.toString());
                         if (mThuThuDao.insert(thuThu) != -1) {

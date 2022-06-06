@@ -23,20 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Tên thủ thư"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-        <EditText
-            android:id="@+id/et_dialogThemThuThu_tenThuThu"
-            android:hint="Tên thủ thư"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="18dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="Tên đăng nhập"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -50,6 +36,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:text="Tên thủ thư"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_dialogThemThuThu_tenThuThu"
+            android:hint="Tên thủ thư"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Mật khẩu"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -58,6 +59,21 @@
             android:hint="Nhập mật khẩu"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Mật khẩu"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_dialogThemThuThu_matKhau2"
+            android:hint="Nhập mật khẩu"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="textPassword"
             android:layout_marginTop="18dp" />
         <TextView
             android:layout_width="wrap_content"

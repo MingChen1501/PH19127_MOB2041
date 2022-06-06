@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThuThuDAO implements DAO<ThuThu> {
+    private static final String TAG = ThuThuDAO.class.getSimpleName();
     DBHelper helper;
     public ThuThuDAO(Context context) {
         this.helper = new DBHelper(context);
@@ -53,7 +54,9 @@ public class ThuThuDAO implements DAO<ThuThu> {
                 String password = cs.getString(1);
                 String ten = cs.getString(2);
                 String sdt = cs.getString(3);
-                return new ThuThu(id1, password, ten, sdt);
+                ThuThu thuThu = new ThuThu(id1, password, ten, sdt);
+                Log.d(TAG, "getById: " + thuThu.toString());
+                return thuThu;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,6 +100,24 @@ public class ThuThuDAO implements DAO<ThuThu> {
                     , DBHelper.THU_THU_ID + " = ?"
                     , new String[] {thuThu.getMaThuThu()});
             return a + b;
+        }
+    }
+    public int login(String id, String pass) {
+        String query = "SELECT * FROM " + DBHelper.TABLE_THU_THU + "" +
+                " Where " + DBHelper.THU_THU_ID + " LIKE '" + id + "'";
+        try (SQLiteDatabase db = helper.getReadableDatabase();
+             Cursor cs = db.rawQuery(query, null)) {
+            if (cs.getCount() > 0) {
+                cs.moveToFirst();
+                String id1 = cs.getString(0);
+                String password = cs.getString(1);
+                if (id1.equals(id) && password.equals(pass)) return 1;
+                else return -1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return 0;
         }
     }
 }

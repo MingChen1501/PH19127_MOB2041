@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TopFragment topFragment;
     private DoanhThuFragment doanhThuFragment;
     private ChangePassFragment changePassFragment;
-
+    //TODO memory leak in 7 fragments
 
 
     @Override
@@ -119,9 +119,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 phieuMuonDAO,
                 userId);
         thuThuFragment = new ThuThuFragment(thuThuList, thuThuDAO);
-        topFragment = new TopFragment();
+        topFragment = TopFragment.newInstance("","");
         doanhThuFragment = new DoanhThuFragment();
-        changePassFragment = new ChangePassFragment();
+        changePassFragment = ChangePassFragment.newInstance(userId, userName);
 
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,

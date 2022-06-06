@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_baseline_emoji_people_24"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,8 +27,9 @@
                 android:id="@+id/tv_view_item_thanh_vien_maThanhVien"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="Mã thành viên"
-                android:textSize="15sp"/>
+                android:textSize="18sp"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,12 +39,13 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Tên thành viên"
-                    android:textSize="15sp"/>
+                    android:textSize="20sp"/>
                 <TextView
                     android:id="@+id/tv_view_item_thanh_vien_soDienThoai"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="soDienThoai"
+                    android:textStyle="italic"
                     android:textSize="15sp"/>
             </LinearLayout>
         </LinearLayout>
@@ -51,8 +54,8 @@
             android:id="@+id/iv_view_item_thanh_vien_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_baseline_delete_24"/>
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_delete_24" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
