@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String userName = "Xin chào " + intent.getStringExtra("name");
         String userId = intent.getStringExtra("id");
         //lấy tên người đăng nhập
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findView();
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setVisible(false)
                 .setEnabled(false);
 
-        DBHelper dbHelper = new DBHelper(this);
+//        DBHelper dbHelper = new DBHelper(this);
         //TODO test database
         createDao();
         createRepository();
@@ -119,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 phieuMuonDAO,
                 userId);
         thuThuFragment = new ThuThuFragment(thuThuList, thuThuDAO);
-        topFragment = TopFragment.newInstance("","");
+        topFragment = TopFragment.newInstance(userId,userName);
         doanhThuFragment = new DoanhThuFragment();
         changePassFragment = ChangePassFragment.newInstance(userId, userName);
 

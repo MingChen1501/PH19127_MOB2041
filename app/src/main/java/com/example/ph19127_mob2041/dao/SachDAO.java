@@ -8,9 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.ph19127_mob2041.database.DBHelper;
 import com.example.ph19127_mob2041.model.LoaiSach;
 import com.example.ph19127_mob2041.model.Sach;
+import com.example.ph19127_mob2041.model.Top;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SachDAO implements DAO<Sach> {
     DBHelper helper;
@@ -104,5 +107,37 @@ public class SachDAO implements DAO<Sach> {
                     new String[] {sach.getMaSach()});
             return a + b;
         }
+    }
+    public List<Top> getTopTenRecordWithPhieuMuon() {
+        List<Top> res = new ArrayList<>();
+        String query = "SELECT " + DBHelper.PHIEU_MUON_ID_SACH + ", " +
+                "count("+ DBHelper.PHIEU_MUON_ID_SACH +") AS count" +
+                " FROM " + DBHelper.TABLE_PHIEU_MUON + " " +
+                "GROUP BY " + DBHelper.PHIEU_MUON_ID_SACH + " " +
+                "ORDER BY count DESC LIMIT 10";
+        String query2 = "SELECT s.*, count(pm.maSach) AS count FROM PhieuMuon pm JOIN sach s ON pm.maSach LIKE s.maSach GROUP BY pm.maSach ORDER BY count DESC LIMIT 10";
+        try (SQLiteDatabase db = helper.getReadableDatabase();
+             Cursor cs = db.rawQuery(query2, null)) {
+            if (cs != null && cs.getCount() > 0) {
+                cs.moveToFirst();
+                for (int i = 0; i < cs.getCount(); i++) {
+                    String idSach = cs.getString(0);
+                    String idLoai =cs.getString(1);
+                    String tieuDe = cs.getString(2);
+                    String TacGia =cs.getString(3);
+                    String donGia = cs.getString(4);
+                    Integer soLuong = Integer.parseInt(cs.getString(5));
+                    Top top = new Top(idSach, idLoai, tieuDe, TacGia, Double.parseDouble(donGia), soLuong);
+                    res.add(top);
+                    cs.moveToNext();
+                }
+
+            }
+            return res;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

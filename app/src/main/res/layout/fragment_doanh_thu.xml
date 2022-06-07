@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFD180"
     tools:context=".fragment.DoanhThuFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -27,7 +28,6 @@
         android:id="@+id/tv_frmDoanhThu_doanhThu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Doanh thu: "
         android:gravity="center"
         android:textSize="30dp"
         android:layout_margin="30dp"/>

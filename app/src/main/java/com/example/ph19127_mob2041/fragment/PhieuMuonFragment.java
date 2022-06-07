@@ -167,6 +167,7 @@ public class PhieuMuonFragment extends Fragment {
                         }
 
                         spnSachAdapter.notifyDataSetChanged();
+                        spnSach.setSelection(0);
                         tvGiaThue
                                 .setText(String.valueOf(((Sach)spnSach.getSelectedItem()).getDonGia()));
                     }

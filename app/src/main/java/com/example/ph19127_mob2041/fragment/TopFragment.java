@@ -1,14 +1,31 @@
 package com.example.ph19127_mob2041.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ph19127_mob2041.R;
+import com.example.ph19127_mob2041.adapter.SachTopAdapter;
+import com.example.ph19127_mob2041.dao.SachDAO;
+import com.example.ph19127_mob2041.model.PhieuMuon;
+import com.example.ph19127_mob2041.model.Sach;
+import com.example.ph19127_mob2041.model.Top;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +33,7 @@ import com.example.ph19127_mob2041.R;
  * create an instance of this fragment.
  */
 public class TopFragment extends Fragment {
-
+    private static final String TAG = TopFragment.class.getSimpleName();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,8 +43,31 @@ public class TopFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private SachTopAdapter sachTopAdapter;
+    private List<Sach> sachList;
+    private List<Sach> sachListTopTen;
+    private SachDAO sachDAO;
+    private List<Top> topRecord;
     public TopFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        sachDAO = new SachDAO(getActivity().getApplicationContext());
+        sachList = new ArrayList<>();
+        sachListTopTen = new ArrayList<>();
+        sachList.addAll(sachDAO.getAll());
+        topRecord = new ArrayList<>();
+        try {
+            topRecord.addAll(sachDAO.getTopTenRecordWithPhieuMuon());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, "onAttach: " + e.getMessage());
+        }
     }
 
     /**
@@ -49,12 +89,26 @@ public class TopFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView = view.findViewById(R.id.rcv_fragmentTop);
+
+        layoutManager = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        sachTopAdapter = new SachTopAdapter(
+                topRecord);
+        recyclerView.setAdapter(sachTopAdapter);
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        Log.d(TAG, "onCreate: sach top 10" + sachListTopTen.toString());
     }
 
     @Override
