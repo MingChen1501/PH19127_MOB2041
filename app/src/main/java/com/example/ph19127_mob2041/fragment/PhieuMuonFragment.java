@@ -78,8 +78,8 @@ public class PhieuMuonFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rcvPhieuMuon = view.findViewById(R.id.rcvPhieuMuon);
-        fab = view.findViewById(R.id.fabAddPhieuMuon);
+        rcvPhieuMuon = view.findViewById(R.id.rcv_PhieuMuonFragment_showPhieuMuonList);
+        fab = view.findViewById(R.id.fab_PhieuMuonFragment_AddPhieuMuon);
 
         layoutManager = new LinearLayoutManager(view.getContext());
         rcvPhieuMuon.setLayoutManager(layoutManager);
@@ -116,15 +116,15 @@ public class PhieuMuonFragment extends Fragment {
                 List<Sach> sachListByLoaiSach = new ArrayList<>();
                 sachListByLoaiSach.addAll(sachList);
 
-                etPhieuMuon = view.findViewById(R.id.etPhieuMuon_dialogCreatePhieuMuon);
-                tvGiaThue = view.findViewById(R.id.tvGia_dialogCreatePhieuMuon);
-                tvNgayMuon = view.findViewById(R.id.tvNgayMuon_dialogCreatePhieuMuon);
-                spnSach = view.findViewById(R.id.spnSach_dialogCreatePhieuMuon);
-                spnLoaiSach = view.findViewById(R.id.spnLoaiSach_dialogCreatePhieuMuon);
-                spnThanhVien = view.findViewById(R.id.spnThanhVien_dialogCreatePhieuMuon);
-                swDaTra = view.findViewById(R.id.swDaTraSach_dialogCreatePhieuMuon);
-                btnThem = view.findViewById(R.id.btnSua_dialogCreatePhieuMuon);
-                btnHuy = view.findViewById(R.id.btnQuayLai_dialogCreatePhieuMuon);
+                etPhieuMuon = view.findViewById(R.id.et_dialogCreatePhieuMuon_maPhieuMuon);
+                tvGiaThue = view.findViewById(R.id.tv_dialogCreatePhieuMuon_giaSach);
+                tvNgayMuon = view.findViewById(R.id.tv_dialogCreatePhieuMuon_ngayMuon);
+                spnSach = view.findViewById(R.id.spn_dialogCreatePhieuMuon_sach);
+                spnLoaiSach = view.findViewById(R.id.spn_dialogCreatePhieuMuon_loaiSach);
+                spnThanhVien = view.findViewById(R.id.spn_dialogCreatePhieuMuon_thanhVien);
+                swDaTra = view.findViewById(R.id.sw_dialogCreatePhieuMuon_daTraSach);
+                btnThem = view.findViewById(R.id.btn_dialogCreatePhieuMuon_sua);
+                btnHuy = view.findViewById(R.id.btn_dialogCreatePhieuMuon_quayLai);
 
                 generateMaPhieuMuon(etPhieuMuon);
                 ArrayAdapter<Sach> spnSachAdapter = new ArrayAdapter<>(

@@ -81,7 +81,6 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
                 btnCancel = view.findViewById(R.id.btn_dialogSuaThuThu_cancel);
 
                 etId.setText(thuThu.getMaThuThu());
-                etPassword.setText(thuThu.getPassword());
                 etName.setText(thuThu.getHoTen());
                 etNumberPhone.setText(thuThu.getSoDienThoai());
 
@@ -166,14 +165,14 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
 
         public PhieuMuonViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvId = itemView.findViewById(R.id.tv_thuThuAdapter_id);
-            tvName = itemView.findViewById(R.id.tv_thuThuAdapter_name);
-            tvPhoneNumber = itemView.findViewById(R.id.tv_thuThuAdapter_phoneNumber);
+            tvId = itemView.findViewById(R.id.tv_ThuThuFragment_ThuThuViewItem_maThuThu);
+            tvName = itemView.findViewById(R.id.tv_ThuThuFragment_ThuThuViewItem_tenThuThu);
+            tvPhoneNumber = itemView.findViewById(R.id.tv_ThuThuFragment_ThuThuViewItem_soDienThoai);
 
-            ivIcon = itemView.findViewById(R.id.iv_thuThuAdapter_icon);
-            ivDelete = itemView.findViewById(R.id.iv_thuThuAdapter_delete);
+            ivIcon = itemView.findViewById(R.id.iv_ThuThuFragment_ThuThuViewItem_Icon);
+            ivDelete = itemView.findViewById(R.id.iv_ThuThuFragment_ThuThuViewItem_deleteItem);
 
-            cardViewThuThu = itemView.findViewById(R.id.cardView_thuThuAdapter);
+            cardViewThuThu = itemView.findViewById(R.id.cardView_ThuThuFragment_ThuThuViewItem);
         }
     }
 }

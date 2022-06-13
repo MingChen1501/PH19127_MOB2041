@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +21,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ph19127_mob2041.R;
-import com.example.ph19127_mob2041.dao.LoaiSachDAO;
 import com.example.ph19127_mob2041.dao.SachDAO;
 import com.example.ph19127_mob2041.model.LoaiSach;
 import com.example.ph19127_mob2041.model.Sach;
@@ -188,17 +186,17 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewH
 
         public PhieuMuonViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTenLoaiSach = itemView.findViewById(R.id.tv_sachAdapter_TenLoaiSach);
-            tvMaSach = itemView.findViewById(R.id.tv_sachAdapter_maSach);
-            tvTieuDe = itemView.findViewById(R.id.tv_sachAdapter_tieuDe);
-            tvTacGia = itemView.findViewById(R.id.tv_sachAdapter_tacGia);
-            tvDonGia = itemView.findViewById(R.id.tv_sachAdapter_donGia);
+            tvTenLoaiSach = itemView.findViewById(R.id.tv_SachFragment_viewItemSach_tenLoai);
+            tvMaSach = itemView.findViewById(R.id.tv_SachFragment_viewItemSach_maSach);
+            tvTieuDe = itemView.findViewById(R.id.tv_SachFragment_viewItemSach_tieuDe);
+            tvTacGia = itemView.findViewById(R.id.tv_SachFragment_viewItemSach_tacGia);
+            tvDonGia = itemView.findViewById(R.id.tv_SachFragment_viewItemSach_donGia);
 
 
-            ivIcon = itemView.findViewById(R.id.iv_sachAdapter_icon);
-            ivDelete = itemView.findViewById(R.id.iv_sachAdapter_xoa);
+            ivIcon = itemView.findViewById(R.id.iv_SachFragment_viewItemSach_icon);
+            ivDelete = itemView.findViewById(R.id.iv_SachFragment_viewItemSach_deleteItem);
 
-            cardViewSach = itemView.findViewById(R.id.cardviewSach);
+            cardViewSach = itemView.findViewById(R.id.cardView_SachFragment_viewItemSach);
         }
     }
 }

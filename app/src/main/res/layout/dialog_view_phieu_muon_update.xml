@@ -28,7 +28,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
         <EditText
-            android:id="@+id/etPhieuMuon_dialogUpdatePhieuMuon"
+            android:id="@+id/et_dialogUpdatePhieuMuon_phieuMuon"
             android:hint="nhập mã phiếu mượn"
             android:layout_width="match_parent"
             android:enabled="false"
@@ -43,7 +43,7 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spnLoaiSach_dialogUpdatePhieuMuon"
+            android:id="@+id/spn_dialogUpdatePhieuMuon_loaiSach"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="18dp" />
@@ -56,12 +56,12 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spnSach_dialogUpdatePhieuMuon"
+            android:id="@+id/spn_dialogUpdatePhieuMuon_sach"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="18dp" />
         <TextView
-            android:id="@+id/tvGia_dialogUpdatePhieuMuon"
+            android:id="@+id/tv_dialogUpdatePhieuMuon_giaSach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -78,19 +78,19 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spnThanhVien_dialogUpdatePhieuMuon"
+            android:id="@+id/spn_dialogUpdatePhieuMuon_thanhVien"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="18dp"/>
 
         <TextView
             android:padding="10dp"
-            android:id="@+id/tvNgayMuon_dialogUpdatePhieuMuon"
+            android:id="@+id/tv_dialogUpdatePhieuMuon_ngayMuon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nhập ngày mượn *"/>
         <Switch
-            android:id="@+id/swDaTraSach_dialogUpdatePhieuMuon"
+            android:id="@+id/sw_dialogUpdatePhieuMuon_daTraSach"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:textSize="25sp"
@@ -106,7 +106,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnSua_dialogUpdatePhieuMuon"
+                android:id="@+id/btn_dialogUpdatePhieuMuon_sua"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
@@ -115,7 +115,7 @@
                 android:text="SỬA MỚI" />
 
             <Button
-                android:id="@+id/btnQuayLai_dialogUpdatePhieuMuon"
+                android:id="@+id/btn_dialogUpdatePhieuMuon_quayLai"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"

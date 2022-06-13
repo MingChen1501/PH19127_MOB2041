@@ -1,6 +1,7 @@
 package com.example.ph19127_mob2041.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class ThanhVienFragment extends Fragment {
-
+    private Context mContext;
     private List<ThanhVien> mThanhVienList;
     private ThanhVienAdapter mThanhVienAdapter;
     private ThanhVienDAO mThanhVienDAO;
@@ -35,7 +36,8 @@ public class ThanhVienFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private FloatingActionButton mFab;
 
-    public ThanhVienFragment(List<ThanhVien> mNhanVienList, ThanhVienDAO mThanhVienDAO) {
+    public ThanhVienFragment(List<ThanhVien> mNhanVienList, ThanhVienDAO mThanhVienDAO, Context context) {
+        this.mContext = context;
         this.mThanhVienList = mNhanVienList;
         this.mThanhVienDAO = mThanhVienDAO;
     }
@@ -49,13 +51,13 @@ public class ThanhVienFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRcvThanhVien = view.findViewById(R.id.rcvSach_fragment_thanhVien);
-        mFab = view.findViewById(R.id.fabAddSach_fragment_thanhVien);
+        mRcvThanhVien = view.findViewById(R.id.rcv_ThanhVienFragment_showThanhVienList);
+        mFab = view.findViewById(R.id.fab_ThanhVienFragment_addThanhVien);
 
-        mLayoutManager = new LinearLayoutManager(view.getContext());
+        mLayoutManager = new LinearLayoutManager(mContext);
         mRcvThanhVien.setLayoutManager(mLayoutManager);
 
-        mThanhVienAdapter = new ThanhVienAdapter(view.getContext(),
+        mThanhVienAdapter = new ThanhVienAdapter(mContext,
                 mThanhVienList,
                 mThanhVienDAO);
         mRcvThanhVien.setAdapter(mThanhVienAdapter);
@@ -67,8 +69,8 @@ public class ThanhVienFragment extends Fragment {
             }
 
             private void openDialogCreate() {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                LayoutInflater inflater = LayoutInflater.from(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                LayoutInflater inflater = LayoutInflater.from(mContext);
                 View view = inflater.inflate(R.layout.dialog_view_thanh_vien_create, null);
                 builder.setView(view);
                 Dialog dialog = builder.create();
@@ -112,5 +114,12 @@ public class ThanhVienFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mContext = null;
+        mFab.setOnClickListener(null);
     }
 }

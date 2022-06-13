@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +44,8 @@ public class LoaiSachFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rcvLoaiSach = view.findViewById(R.id.rcvLoaiSach);
-        fab = view.findViewById(R.id.fabAddLoaiSach);
+        rcvLoaiSach = view.findViewById(R.id.rcv_LoaiSachFragment_showLoaiSachList);
+        fab = view.findViewById(R.id.fab_loaiSachFragment_addLoaiSach);
 
         layoutManager = new LinearLayoutManager(view.getContext());
         rcvLoaiSach.setLayoutManager(layoutManager);
@@ -72,10 +71,10 @@ public class LoaiSachFragment extends Fragment {
                 EditText etMaLoaiSach, etTenLoaiSach;
                 Button btnThem, btnHuy;
 
-                etMaLoaiSach = view.findViewById(R.id.etMaLoaiSach_dialogCreateLoaiSach);
-                etTenLoaiSach = view.findViewById(R.id.etTenLoaiSach_dialogCreateLoaiSach);
-                btnThem = view.findViewById(R.id.btnCreate_dialogCreateLoaiSach);
-                btnHuy = view.findViewById(R.id.btnCancel_dialogCreatePhieuMuon);
+                etMaLoaiSach = view.findViewById(R.id.et_dialogCreateLoaiSach_maLoaiSach);
+                etTenLoaiSach = view.findViewById(R.id.et_dialogCreateLoaiSach_tenLoaiSach);
+                btnThem = view.findViewById(R.id.btn_dialogCreateLoaiSach_create);
+                btnHuy = view.findViewById(R.id.btn_dialogCreatePhieuMuon_cancel);
 
                 generateId(etMaLoaiSach);
 

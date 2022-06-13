@@ -7,11 +7,11 @@
     tools:context=".fragment.SachFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvSach_fragment_sach"
+        android:id="@+id/rcv_SachFragment_showSachList"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddSach_fragment_sach"
+        android:id="@+id/fab_SachFragment_addSach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

@@ -25,11 +25,9 @@ import com.example.ph19127_mob2041.adapter.SachAdapter;
 import com.example.ph19127_mob2041.dao.SachDAO;
 import com.example.ph19127_mob2041.model.LoaiSach;
 import com.example.ph19127_mob2041.model.Sach;
-import com.example.ph19127_mob2041.model.ThanhVien;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SachFragment extends Fragment {
@@ -55,8 +53,8 @@ public class SachFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rcvSach = view.findViewById(R.id.rcvSach_fragment_sach);
-        fab = view.findViewById(R.id.fabAddSach_fragment_sach);
+        rcvSach = view.findViewById(R.id.rcv_SachFragment_showSachList);
+        fab = view.findViewById(R.id.fab_SachFragment_addSach);
 
         layoutManager = new LinearLayoutManager(view.getContext());
         rcvSach.setLayoutManager(layoutManager);

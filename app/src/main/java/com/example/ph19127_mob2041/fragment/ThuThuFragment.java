@@ -46,8 +46,8 @@ public class ThuThuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRcvThuThu = view.findViewById(R.id.rcvThuThu_ThuThuFragment);
-        mFab = view.findViewById(R.id.fabAddThuThu_ThuThuFragment);
+        mRcvThuThu = view.findViewById(R.id.rcv_ThuThuFragment_showThuThuList);
+        mFab = view.findViewById(R.id.fab_ThuThuFragment_addThuThu);
 
         mLayoutManager = new LinearLayoutManager(view.getContext());
         mRcvThuThu.setLayoutManager(mLayoutManager);

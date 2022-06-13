@@ -9,6 +9,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#65FFFF8D"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="vertical"
 
@@ -31,7 +32,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
         <EditText
-            android:id="@+id/etMaLoaiSach_dialogUpdateLoaiSach"
+            android:id="@+id/et_dialogUpdateLoaiSach_maLoaiSach"
             android:hint="nhập tên loại sách"
             android:layout_width="match_parent"
             android:inputType="none"
@@ -46,7 +47,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
         <EditText
-            android:id="@+id/etTenLoaiSach_dialogUpdateLoaiSach"
+            android:id="@+id/et_dialogUpdateLoaiSach_tenLoaiSach"
             android:hint="nhập tên loại sách"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -59,7 +60,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnCreate_dialogUpdateLoaiSach"
+                android:id="@+id/btn_dialogUpdateLoaiSach_create"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
@@ -68,7 +69,7 @@
                 android:text="SỬA" />
 
             <Button
-                android:id="@+id/btnCancel_dialogUpdateLoaiSach"
+                android:id="@+id/btn_dialogUpdateLoaiSach_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"

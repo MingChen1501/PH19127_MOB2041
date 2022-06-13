@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         CheckBox chkRemember;
         Button btnLogin, btnCancel;
 
-        etId = findViewById(R.id.et_loginActivity_id);
+        etId = findViewById(R.id.et_loginActivity_username);
         etPassword = findViewById(R.id.et_loginActivity_password);
         chkRemember = findViewById(R.id.chk_loginActivity_rememberPassword);
         btnLogin = findViewById(R.id.btn_loginActivity_login);
@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO tối ưu
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 try {
                     String id = etId.getText().toString();
@@ -43,8 +44,9 @@ public class LoginActivity extends AppCompatActivity {
                     ThuThu accountRequest = mThuThuDao.getById(id);
                     Toast.makeText(LoginActivity.this, accountRequest.toString(), Toast.LENGTH_SHORT).show();
                     boolean isremember = chkRemember.isChecked();
-                    if (id.equals("admin") && pasword.equals("admin")) {
-                        intent.putExtra("name", "admin");
+                    if (id.equals("admin") && pasword.equals(accountRequest.getPassword())) {
+                        intent.putExtra("id", accountRequest.getMaThuThu());
+                        intent.putExtra("name", accountRequest.getHoTen());
                         intent.putExtra("isAdmin", true);
                         startActivity(intent);
                         Log.d("start", "admin");

@@ -17,15 +17,11 @@ import android.view.ViewGroup;
 import com.example.ph19127_mob2041.R;
 import com.example.ph19127_mob2041.adapter.SachTopAdapter;
 import com.example.ph19127_mob2041.dao.SachDAO;
-import com.example.ph19127_mob2041.model.PhieuMuon;
 import com.example.ph19127_mob2041.model.Sach;
 import com.example.ph19127_mob2041.model.Top;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -91,7 +87,7 @@ public class TopFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.rcv_fragmentTop);
+        recyclerView = view.findViewById(R.id.rcv_TopFragment_showTop10Sach);
 
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);

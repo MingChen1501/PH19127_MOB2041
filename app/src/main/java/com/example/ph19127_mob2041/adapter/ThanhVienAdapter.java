@@ -152,14 +152,14 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
 
         public ThanhVienHolder(@NonNull View itemView) {
             super(itemView);
-            tvMaThanhVien = itemView.findViewById(R.id.tv_view_item_thanh_vien_maThanhVien);
-            tvTenThanhVien = itemView.findViewById(R.id.tv_view_item_thanh_vien_tenThanhVien);
-            tvSoDienThoai = itemView.findViewById(R.id.tv_view_item_thanh_vien_soDienThoai);
+            tvMaThanhVien = itemView.findViewById(R.id.tv_ThanhVienFragment_ThanhVienViewItem_maThanhVien);
+            tvTenThanhVien = itemView.findViewById(R.id.tv_ThanhVienFragment_ThanhVienViewItem_tenThanhVien);
+            tvSoDienThoai = itemView.findViewById(R.id.tv_ThanhVienFragment_ThanhVienViewItem_soDienThoai);
 
-            ivIcon = itemView.findViewById(R.id.iv_view_item_thanh_vien_icon);
-            ivDelete = itemView.findViewById(R.id.iv_view_item_thanh_vien_delete);
+            ivIcon = itemView.findViewById(R.id.iv_ThanhVienFragment_ThanhVienViewItem_icon);
+            ivDelete = itemView.findViewById(R.id.iv_ThanhVienFragment_ThanhVienViewItem_deleteItem);
 
-            cardViewThanhVien = itemView.findViewById(R.id.cardViewThanhVien);
+            cardViewThanhVien = itemView.findViewById(R.id.cardView_ThanhVienFragment_ThanhVienViewItem);
         }
     }
 }

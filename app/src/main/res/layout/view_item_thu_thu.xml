@@ -7,14 +7,14 @@
     app:contentPadding="10dp"
     android:layout_margin="8dp"
     app:cardElevation="20dp"
-    android:id="@+id/cardView_thuThuAdapter">
+    android:id="@+id/cardView_ThuThuFragment_ThuThuViewItem">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <ImageView
             android:layout_gravity="center"
-            android:id="@+id/iv_thuThuAdapter_icon"
+            android:id="@+id/iv_ThuThuFragment_ThuThuViewItem_Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -27,7 +27,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_thuThuAdapter_id"
+                android:id="@+id/tv_ThuThuFragment_ThuThuViewItem_maThuThu"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Mã thủ thư"
@@ -36,7 +36,7 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/tv_thuThuAdapter_name"
+                android:id="@+id/tv_ThuThuFragment_ThuThuViewItem_tenThuThu"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Tên thủ thư"
@@ -44,7 +44,7 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/tv_thuThuAdapter_phoneNumber"
+                android:id="@+id/tv_ThuThuFragment_ThuThuViewItem_soDienThoai"
                 android:layout_width="150dp"
                 android:gravity="center"
                 android:textStyle="italic"
@@ -53,7 +53,7 @@
                 android:textSize="15sp" />
         </LinearLayout>
         <ImageView
-            android:id="@+id/iv_thuThuAdapter_delete"
+            android:id="@+id/iv_ThuThuFragment_ThuThuViewItem_deleteItem"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -18,11 +18,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -128,19 +126,19 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                 Spinner spnLoaiSach, spnSach, spnThanhVien;
                 Button btnSua, btnHuy;
 
-                tvNgayMuon = view.findViewById(R.id.tvNgayMuon_dialogUpdatePhieuMuon);
-                tvGiaThue = view.findViewById(R.id.tvGia_dialogUpdatePhieuMuon);
+                tvNgayMuon = view.findViewById(R.id.tv_dialogUpdatePhieuMuon_ngayMuon);
+                tvGiaThue = view.findViewById(R.id.tv_dialogUpdatePhieuMuon_giaSach);
 
-                etMaPhieuMuon = view.findViewById(R.id.etPhieuMuon_dialogUpdatePhieuMuon);
+                etMaPhieuMuon = view.findViewById(R.id.et_dialogUpdatePhieuMuon_phieuMuon);
 
-                spnLoaiSach = view.findViewById(R.id.spnLoaiSach_dialogUpdatePhieuMuon);
-                spnSach = view.findViewById(R.id.spnSach_dialogUpdatePhieuMuon);
-                spnThanhVien = view.findViewById(R.id.spnThanhVien_dialogUpdatePhieuMuon);
+                spnLoaiSach = view.findViewById(R.id.spn_dialogUpdatePhieuMuon_loaiSach);
+                spnSach = view.findViewById(R.id.spn_dialogUpdatePhieuMuon_sach);
+                spnThanhVien = view.findViewById(R.id.spn_dialogUpdatePhieuMuon_thanhVien);
 
-                swTrangThai = view.findViewById(R.id.swDaTraSach_dialogUpdatePhieuMuon);
+                swTrangThai = view.findViewById(R.id.sw_dialogUpdatePhieuMuon_daTraSach);
 
-                btnSua = view.findViewById(R.id.btnSua_dialogUpdatePhieuMuon);
-                btnHuy = view.findViewById(R.id.btnQuayLai_dialogUpdatePhieuMuon);
+                btnSua = view.findViewById(R.id.btn_dialogUpdatePhieuMuon_sua);
+                btnHuy = view.findViewById(R.id.btn_dialogUpdatePhieuMuon_quayLai);
                 /*
                 * tvNgayMuon use MaterialDatePicker*/
                 String NgayMuon = simpleDateFormat.format(phieuMuon.getNgayMuon());
@@ -334,18 +332,18 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
 
         public PhieuMuonViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvMaPhieuMuon = itemView.findViewById(R.id.tvMaPhieuMuon);
-            tvMaThanhVien = itemView.findViewById(R.id.tvThanhVien);
-            tvMaSach = itemView.findViewById(R.id.tvTenSach);
-            tvLoaiSach = itemView.findViewById(R.id.tvTenLoaiSach);
-            tvMaThuThu = itemView.findViewById(R.id.tvThuThu);
-            tvNgayMuon = itemView.findViewById(R.id.tvNgayMuon);
-            tvTienTrangThai = itemView.findViewById(R.id.tvThongTin);
+            tvMaPhieuMuon = itemView.findViewById(R.id.tv_PhieuMuonFragment_viewItemPhieuMuon_maPhieuMuon);
+            tvMaThanhVien = itemView.findViewById(R.id.tv_PhieuMuonFragment_viewItemPhieuMuon_tenThanhVien);
+            tvMaSach = itemView.findViewById(R.id.tv_PhieuMuonFragment_viewItemPhieuMuon_tenSach);
+            tvLoaiSach = itemView.findViewById(R.id.tv_PhieuMuonFragment_viewItemPhieuMuon_LoaiSach);
+            tvMaThuThu = itemView.findViewById(R.id.tv_PhieuMuonFragment_viewItemPhieuMuon_tenThuThu);
+            tvNgayMuon = itemView.findViewById(R.id.tv_PhieuMuonFragment_viewItemPhieuMuon_ngayMuonSach);
+            tvTienTrangThai = itemView.findViewById(R.id.tv_PhieuMuonFragment_viewItemPhieuMuon_giaTienVaTrangThai);
 
-            ivIcon = itemView.findViewById(R.id.ivIcon);
-            ivDelete = itemView.findViewById(R.id.ivDelete);
+            ivIcon = itemView.findViewById(R.id.iv_PhieuMuonFragment_viewItemPhieuMuon_icon);
+            ivDelete = itemView.findViewById(R.id.iv_PhieuMuonFragment_viewItemPhieuMuon_deleteItem);
 
-            cardViewPhieuMuon = itemView.findViewById(R.id.cardViewPhieuMuon);
+            cardViewPhieuMuon = itemView.findViewById(R.id.cardView_PhieuMuonFragment_viewItemPhieuMuon);
         }
     }
 }

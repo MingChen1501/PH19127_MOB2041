@@ -10,11 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ph19127_mob2041.R;
-import com.example.ph19127_mob2041.model.Sach;
 import com.example.ph19127_mob2041.model.Top;
 
 import java.util.List;
-import java.util.Map;
 
 public class SachTopAdapter extends RecyclerView.Adapter<SachTopAdapter.ViewHolder>{
     private Context context;
@@ -35,12 +33,12 @@ public class SachTopAdapter extends RecyclerView.Adapter<SachTopAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Top element = topRecord.get(position);
-        holder.tvIndex.setText("TOP: " + position + 1);
+        holder.tvIndex.setText("TOP: " + (position + 1));
         holder.tvId.setText("Mã sách" + element.getId());
-        holder.tvTieuDe.setText("Tiêu đề" + element.getTitle());
-        holder.tvTacGia.setText("Tác giả" + element.getAuthor());
-        holder.tvGia.setText("Mã sách" + element.getCost());
-        holder.tvSoLuong.setText("Mã sách" + element.getAmount());
+        holder.tvTieuDe.setText("Tiêu đề: " + element.getTitle());
+        holder.tvTacGia.setText("Tác giả: " + element.getAuthor());
+        holder.tvGia.setText("Mã sách: " + element.getCost());
+        holder.tvSoLuong.setText("Số lượng: " + element.getAmount());
 //        holder.tvIndex.setText("Mã sách" + element.getId());
     }
 
@@ -53,13 +51,13 @@ public class SachTopAdapter extends RecyclerView.Adapter<SachTopAdapter.ViewHold
         TextView tvIndex, tvId, tvTieuDe, tvTenLoai, tvTacGia, tvGia, tvSoLuong;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvIndex = itemView.findViewById(R.id.tv_topAdapter_index);
-            tvId = itemView.findViewById(R.id.tv_topAdapter_maSach);
-            tvTieuDe = itemView.findViewById(R.id.tv_topAdapter_tieuDe);
-            tvTenLoai = itemView.findViewById(R.id.tv_topAdapter_TenLoaiSach);
-            tvTacGia = itemView.findViewById(R.id.tv_topAdapter_tacGia);
-            tvGia = itemView.findViewById(R.id.tv_topAdapter_donGia);
-            tvSoLuong = itemView.findViewById(R.id.tv_topAdapter_soLuong);
+            tvIndex = itemView.findViewById(R.id.tv_TopFragment_viewItemSachTop10_topNumber);
+            tvId = itemView.findViewById(R.id.tv_TopFragment_viewItemSachTop10_maSach);
+            tvTieuDe = itemView.findViewById(R.id.tv_TopFragment_viewItemSachTop10_tieuDe);
+            tvTenLoai = itemView.findViewById(R.id.tv_TopFragment_viewItemSachTop10_tenLoai);
+            tvTacGia = itemView.findViewById(R.id.tv_TopFragment_viewItemSachTop10_tacGia);
+            tvGia = itemView.findViewById(R.id.tv_TopFragment_viewItemSachTop10_giaThue);
+            tvSoLuong = itemView.findViewById(R.id.tv_TopFragment_viewItemSachTop10_soLuongDaThue);
         }
     }
 }

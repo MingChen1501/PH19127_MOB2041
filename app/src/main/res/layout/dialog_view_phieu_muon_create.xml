@@ -29,7 +29,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
         <EditText
-            android:id="@+id/etPhieuMuon_dialogCreatePhieuMuon"
+            android:id="@+id/et_dialogCreatePhieuMuon_maPhieuMuon"
             android:hint="nhập mã phiếu mượn"
             android:layout_width="match_parent"
             android:enabled="false"
@@ -44,7 +44,7 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spnLoaiSach_dialogCreatePhieuMuon"
+            android:id="@+id/spn_dialogCreatePhieuMuon_loaiSach"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="18dp" />
@@ -58,12 +58,12 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spnSach_dialogCreatePhieuMuon"
+            android:id="@+id/spn_dialogCreatePhieuMuon_sach"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="18dp" />
         <TextView
-            android:id="@+id/tvGia_dialogCreatePhieuMuon"
+            android:id="@+id/tv_dialogCreatePhieuMuon_giaSach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -80,19 +80,19 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spnThanhVien_dialogCreatePhieuMuon"
+            android:id="@+id/spn_dialogCreatePhieuMuon_thanhVien"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="18dp" />
 
         <TextView
             android:padding="10dp"
-            android:id="@+id/tvNgayMuon_dialogCreatePhieuMuon"
+            android:id="@+id/tv_dialogCreatePhieuMuon_ngayMuon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nhập ngày mượn *"/>
         <Switch
-            android:id="@+id/swDaTraSach_dialogCreatePhieuMuon"
+            android:id="@+id/sw_dialogCreatePhieuMuon_daTraSach"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:textSize="25sp"
@@ -111,7 +111,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnSua_dialogCreatePhieuMuon"
+                android:id="@+id/btn_dialogCreatePhieuMuon_sua"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
@@ -120,7 +120,7 @@
                 android:text="THÊM MỚI" />
 
             <Button
-                android:id="@+id/btnQuayLai_dialogCreatePhieuMuon"
+                android:id="@+id/btn_dialogCreatePhieuMuon_quayLai"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"

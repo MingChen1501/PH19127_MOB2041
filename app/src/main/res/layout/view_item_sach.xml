@@ -7,14 +7,14 @@
     app:contentPadding="10dp"
     android:layout_margin="8dp"
     app:cardElevation="20dp"
-    android:id="@+id/cardviewSach">
+    android:id="@+id/cardView_SachFragment_viewItemSach">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <ImageView
             android:layout_gravity="center"
-            android:id="@+id/iv_sachAdapter_icon"
+            android:id="@+id/iv_SachFragment_viewItemSach_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -28,7 +28,7 @@
 
 
             <TextView
-                android:id="@+id/tv_sachAdapter_maSach"
+                android:id="@+id/tv_SachFragment_viewItemSach_maSach"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="mã sách"
@@ -37,7 +37,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_sachAdapter_tieuDe"
+                android:id="@+id/tv_SachFragment_viewItemSach_tieuDe"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tiêu đề sách"
@@ -45,7 +45,7 @@
                 android:gravity="center"
                 android:textStyle="bold" />
             <TextView
-                android:id="@+id/tv_sachAdapter_TenLoaiSach"
+                android:id="@+id/tv_SachFragment_viewItemSach_tenLoai"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tên loại sách"
@@ -53,7 +53,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_sachAdapter_tacGia"
+                android:id="@+id/tv_SachFragment_viewItemSach_tacGia"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tác giả sách"
@@ -62,7 +62,7 @@
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/tv_sachAdapter_donGia"
+                android:id="@+id/tv_SachFragment_viewItemSach_donGia"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="đơn giá"
@@ -83,7 +83,7 @@
 
 
         <ImageView
-            android:id="@+id/iv_sachAdapter_xoa"
+            android:id="@+id/iv_SachFragment_viewItemSach_deleteItem"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

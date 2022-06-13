@@ -7,14 +7,14 @@
     app:contentPadding="10dp"
     android:layout_margin="8dp"
     app:cardElevation="20dp"
-    android:id="@+id/cardViewLoaiSach">
+    android:id="@+id/cardView_LoaiSachFragment_viewItemLoaiSach">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <ImageView
             android:layout_gravity="center"
-            android:id="@+id/ivIcon_view_item_loai_sach"
+            android:id="@+id/iv_LoaiSachFragment_viewItemLoaiSach_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvMaLoaiSach_view_item_loai_sach"
+                android:id="@+id/tv_LoaiSachFragment_viewItemLoaiSach_maLoaiSach"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -35,7 +35,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvTenLoaiSach_view_item_loai_sach"
+                android:id="@+id/tv_LoaiSachFragment_viewItemLoaiSach_tenLoaiSach"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -46,7 +46,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/ivDelete_view_item_loai_sach"
+            android:id="@+id/iv_LoaiSachFragment_viewItemLoaiSach_delItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

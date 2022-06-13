@@ -7,12 +7,12 @@
     tools:context=".fragment.PhieuMuonFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvPhieuMuon"
+        android:id="@+id/rcv_PhieuMuonFragment_showPhieuMuonList"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddPhieuMuon"
+        android:id="@+id/fab_PhieuMuonFragment_AddPhieuMuon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

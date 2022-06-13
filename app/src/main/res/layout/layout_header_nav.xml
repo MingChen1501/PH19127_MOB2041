@@ -13,7 +13,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_MainActivity_logoInNvView"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:contentDescription="@string/nav_header_desc"
@@ -21,7 +21,7 @@
         app:srcCompat="@drawable/emthree" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/tv_MainActivity_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"

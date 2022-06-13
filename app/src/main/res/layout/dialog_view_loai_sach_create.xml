@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:background="#65FFFF8D"
         android:scrollbars="vertical"
         android:orientation="vertical">
 
@@ -28,7 +29,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
         <EditText
-            android:id="@+id/etMaLoaiSach_dialogCreateLoaiSach"
+            android:id="@+id/et_dialogCreateLoaiSach_maLoaiSach"
             android:hint="nhập tên loại sách"
             android:enabled="false"
             android:layout_width="match_parent"
@@ -42,7 +43,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
         <EditText
-            android:id="@+id/etTenLoaiSach_dialogCreateLoaiSach"
+            android:id="@+id/et_dialogCreateLoaiSach_tenLoaiSach"
             android:hint="nhập tên loại sách"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -55,7 +56,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnCreate_dialogCreateLoaiSach"
+                android:id="@+id/btn_dialogCreateLoaiSach_create"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
@@ -64,7 +65,7 @@
                 android:text="THÊM MỚI" />
 
             <Button
-                android:id="@+id/btnCancel_dialogCreatePhieuMuon"
+                android:id="@+id/btn_dialogCreatePhieuMuon_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
