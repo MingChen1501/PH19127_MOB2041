@@ -69,8 +69,8 @@ public class ThanhVienFragment extends Fragment {
             }
 
             private void openDialogCreate() {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                LayoutInflater inflater = LayoutInflater.from(mContext);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                LayoutInflater inflater = LayoutInflater.from(getContext());
                 View view = inflater.inflate(R.layout.dialog_view_thanh_vien_create, null);
                 builder.setView(view);
                 Dialog dialog = builder.create();
@@ -88,20 +88,32 @@ public class ThanhVienFragment extends Fragment {
                 btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String idThanhVien = etMaThanhVien.getText().toString();
-                        String tenThanhVien = etTenThanhVien.getText().toString();
-                        String soDienThoai = etSoDienThoai.getText().toString();
-                        ThanhVien thanhVienTemp = new ThanhVien(idThanhVien,
-                                tenThanhVien,
-                                soDienThoai);
-                        if (mThanhVienDAO.insert(thanhVienTemp) != -1) {
-                            mThanhVienList.clear();
-                            mThanhVienList.addAll(mThanhVienDAO.getAll());
-                            dialog.dismiss();
-                            mThanhVienAdapter.notifyDataSetChanged();
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        try {
+                            String idThanhVien = etMaThanhVien.getText().toString();
+                            String tenThanhVien = etTenThanhVien.getText().toString();
+                            String soDienThoai = etSoDienThoai.getText().toString();
+                            if (idThanhVien.isEmpty()) throw new IllegalArgumentException("id");
+                            if (tenThanhVien.isEmpty()) throw new IllegalArgumentException("ten");
+                            if (soDienThoai.isEmpty()) throw new IllegalArgumentException("sdt");
+                            ThanhVien thanhVienTemp = new ThanhVien(idThanhVien,
+                                    tenThanhVien,
+                                    soDienThoai);
+                            if (mThanhVienDAO.insert(thanhVienTemp) != -1) {
+                                mThanhVienList.clear();
+                                mThanhVienList.addAll(mThanhVienDAO.getAll());
+                                dialog.dismiss();
+                                mThanhVienAdapter.notifyDataSetChanged();
+                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (IllegalArgumentException e) {
+                            if (e.getMessage().equals("id"))
+                                Toast.makeText(getContext(), "Id không được để trống", Toast.LENGTH_SHORT).show();
+                            if (e.getMessage().equals("ten"))
+                                Toast.makeText(getContext(), "tên không được để trống", Toast.LENGTH_SHORT).show();
+                            if (e.getMessage().equals("sdt"))
+                                Toast.makeText(getContext(), "số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

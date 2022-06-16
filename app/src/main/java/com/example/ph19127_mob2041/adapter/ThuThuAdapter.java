@@ -88,28 +88,46 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
                 btnUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!etPassword2.getText().equals(etPassword.getText())) {
-                            etPassword2.setError("mật khẩu không giống");
-                            etPassword.setError("mật khẩu không giống");
-                            return;
-                        }
-                        thuThu.setMaThuThu(etId.getText().toString());
-                        thuThu.setPassword(etPassword.getText().toString());
-                        thuThu.setHoTen(etName.getText().toString());
-                        thuThu.setSoDienThoai(etNumberPhone.getText().toString());
+                        try {
+                            if (etId.getText().toString().isEmpty()) throw new IllegalArgumentException("id");
+                            if (etName.getText().toString().isEmpty()) throw new IllegalArgumentException("name");
+                            if (etPassword.getText().toString().isEmpty()) throw new IllegalArgumentException("password");
+                            if (etPassword2.getText().toString().isEmpty()) throw new IllegalArgumentException("password2");
+                            if (etNumberPhone.getText().toString().isEmpty()) throw new IllegalArgumentException("sdt");
 
-                        if (mThuThuDAO.update(thuThu) > 0) {
-                            Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                            mThuThuList.get(indexOfElement).setMaThuThu(thuThu.getMaThuThu());
-                            mThuThuList.get(indexOfElement).setHoTen(thuThu.getHoTen());
-                            mThuThuList.get(indexOfElement).setPassword(thuThu.getPassword());
-                            mThuThuList.get(indexOfElement).setSoDienThoai(thuThu.getSoDienThoai());
-                            notifyDataSetChanged();
-                            dialog.dismiss();
-                            Log.d("d", mThuThuList.toString());
-                        } else {
-                            Toast.makeText(mContext, "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                            //TODO validate ...
+                            if (!etPassword2.getText().toString().equals(etPassword.getText().toString())) {
+                                etPassword2.setError("mật khẩu không giống");
+                                return;
+                            }
+                            thuThu.setMaThuThu(etId.getText().toString());
+                            thuThu.setPassword(etPassword.getText().toString());
+                            thuThu.setHoTen(etName.getText().toString());
+                            thuThu.setSoDienThoai(etNumberPhone.getText().toString());
+
+                            if (mThuThuDAO.update(thuThu) > 0) {
+                                Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                mThuThuList.get(indexOfElement).setMaThuThu(thuThu.getMaThuThu());
+                                mThuThuList.get(indexOfElement).setHoTen(thuThu.getHoTen());
+                                mThuThuList.get(indexOfElement).setPassword(thuThu.getPassword());
+                                mThuThuList.get(indexOfElement).setSoDienThoai(thuThu.getSoDienThoai());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                                Log.d("d", mThuThuList.toString());
+                            } else {
+                                Toast.makeText(mContext, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                                //TODO validate ...
+                            }
+                        } catch (IllegalArgumentException e) {
+                            if (e.getMessage().equals("id"))
+                                etId.setError("trống");
+                            if (e.getMessage().equals("name"))
+                                etName.setError("trống");
+                            if (e.getMessage().equals("password"))
+                                etPassword.setError("trống");
+                            if (e.getMessage().equals("password2"))
+                                etPassword2.setError("trống");
+                            if (e.getMessage().equals("sdt"))
+                                etNumberPhone.setError("trống");
                         }
                     }
                 });
@@ -125,19 +143,27 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuAdapter.PhieuMuonV
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("Xóa thủ thư").setMessage("Xóa " + thuThu.toString() + " sẽ xóa theo\nCác phiếu mượn liên quan" +
-                        "\nBạn có chắc chắn sẽ xóa " + thuThu.toString() + " ?");
+                builder.setTitle("Xóa thủ thư")
+                        .setMessage("Xóa " + thuThu.toString());
 
                 builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (mThuThuDAO.delete(thuThu) != 0) {
-                            Toast.makeText(mContext, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            mThuThuList.remove(thuThu);
-                            notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(mContext, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        try {
+                            if (mThuThuDAO.delete(thuThu) != 0) {
+                                Toast.makeText(mContext, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                mThuThuList.remove(thuThu);
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(mContext, "Không thể xóa thủ thư" +
+                                    " vì đã tồn tại phiếu mượn liên quan tới thủ thư này",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
                         }
+
                     }
                 });
                 builder.setPositiveButton("Quay Lại", new DialogInterface.OnClickListener() {

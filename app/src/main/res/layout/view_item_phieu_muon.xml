@@ -20,52 +20,54 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/ic_baseline_library_books_24"/>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
+            android:gravity="center"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/tv_PhieuMuonFragment_viewItemPhieuMuon_maPhieuMuon"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="mã phiếu mượn"
+                android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="20sp"/>
             <TextView
                 android:id="@+id/tv_PhieuMuonFragment_viewItemPhieuMuon_tenSach"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="ten sach"
                 android:textSize="17sp"/>
             <TextView
                 android:id="@+id/tv_PhieuMuonFragment_viewItemPhieuMuon_LoaiSach"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="loai sach"
                 android:textSize="14sp"
                 android:textStyle="italic"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
             <TextView
                 android:id="@+id/tv_PhieuMuonFragment_viewItemPhieuMuon_tenThanhVien"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="thong tin thanh vien"
                 android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tv_PhieuMuonFragment_viewItemPhieuMuon_tenThuThu"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="thong tin thu thu"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_PhieuMuonFragment_viewItemPhieuMuon_ngayMuonSach"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="ngay muon"
                 android:textSize="14sp"/>
             <TextView
@@ -73,14 +75,15 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="tien - trang thai"
+                android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="18sp"/>
         </LinearLayout>
         <ImageView
             android:id="@+id/iv_PhieuMuonFragment_viewItemPhieuMuon_deleteItem"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_baseline_delete_24"/>
 

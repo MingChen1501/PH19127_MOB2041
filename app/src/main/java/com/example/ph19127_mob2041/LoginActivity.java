@@ -40,9 +40,9 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     String id = etId.getText().toString();
                     String pasword = etPassword.getText().toString();
-                    if (id.isEmpty()) throw new NullPointerException(EMPTY);
+                    if (id.isEmpty() || pasword.isEmpty()) throw new NullPointerException(EMPTY);
                     ThuThu accountRequest = mThuThuDao.getById(id);
-                    Toast.makeText(LoginActivity.this, accountRequest.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, accountRequest.toString(), Toast.LENGTH_SHORT).show();
                     boolean isremember = chkRemember.isChecked();
                     if (id.equals("admin") && pasword.equals(accountRequest.getPassword())) {
                         intent.putExtra("id", accountRequest.getMaThuThu());
@@ -66,13 +66,15 @@ public class LoginActivity extends AppCompatActivity {
                             etId.setText("");
                             etPassword.setText("");
                         }
-                    } else {
-                        Toast.makeText(LoginActivity.this, "không đúng", Toast.LENGTH_SHORT).show();
+                    } else if (!id.equals(accountRequest.getMaThuThu())){
+                        Toast.makeText(LoginActivity.this, "tài khoản chưa tồn tại", Toast.LENGTH_SHORT).show();
+                    } else if (!pasword.equals(accountRequest.getPassword())) {
+                        Toast.makeText(LoginActivity.this, "mật khẩu không đúng", Toast.LENGTH_SHORT).show();
                     }
                 } catch (NullPointerException e) {
                     if (e.getMessage().equals(EMPTY)) {
                         e.printStackTrace();
-                        Toast.makeText(LoginActivity.this, "Chưa tồn tại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "không được để trống", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

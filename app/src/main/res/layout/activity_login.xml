@@ -57,7 +57,7 @@
             android:backgroundTint="#DD2C00"
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
-            android:text="THOÁT"/>
+            android:text="Thoát"/>
     </LinearLayout>
 
 </LinearLayout>

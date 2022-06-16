@@ -99,22 +99,22 @@ public class SachDAO implements DAO<Sach> {
     @Override
     public long delete(Sach sach) {
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
-            int a = db.delete(DBHelper.TABLE_PHIEU_MUON,
+            /*int a = db.delete(DBHelper.TABLE_PHIEU_MUON,
                     DBHelper.PHIEU_MUON_ID_SACH + " = ? ",
-                    new String[] {sach.getMaSach()});
+                    new String[] {sach.getMaSach()});*/
             int b = db.delete(DBHelper.TABLE_SACH,
                     DBHelper.SACH_ID + " = ?",
                     new String[] {sach.getMaSach()});
-            return a + b;
+            return b;
         }
     }
     public List<Top> getTopTenRecordWithPhieuMuon() {
         List<Top> res = new ArrayList<>();
-        String query = "SELECT " + DBHelper.PHIEU_MUON_ID_SACH + ", " +
+        /*String query = "SELECT " + DBHelper.PHIEU_MUON_ID_SACH + ", " +
                 "count("+ DBHelper.PHIEU_MUON_ID_SACH +") AS count" +
                 " FROM " + DBHelper.TABLE_PHIEU_MUON + " " +
                 "GROUP BY " + DBHelper.PHIEU_MUON_ID_SACH + " " +
-                "ORDER BY count DESC LIMIT 10";
+                "ORDER BY count DESC LIMIT 10";*/
         String query2 = "SELECT s.*, count(pm.maSach) AS count FROM PhieuMuon pm JOIN sach s ON pm.maSach LIKE s.maSach GROUP BY pm.maSach ORDER BY count DESC LIMIT 10";
         try (SQLiteDatabase db = helper.getReadableDatabase();
              Cursor cs = db.rawQuery(query2, null)) {

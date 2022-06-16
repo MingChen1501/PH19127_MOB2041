@@ -38,19 +38,7 @@ public class PhieuMuonDAO implements DAO<PhieuMuon>{
             if (cs != null && cs.getCount() > 0) {
                 cs.moveToFirst();
                 while (!cs.isAfterLast()) {
-                    DateFormat dateFormat = new DateFormat() {
-                        @NonNull
-                        @Override
-                        public StringBuffer format(@NonNull Date date, @NonNull StringBuffer toAppendTo, @NonNull FieldPosition fieldPosition) {
-                            return null;
-                        }
 
-                        @Nullable
-                        @Override
-                        public Date parse(@NonNull String source, @NonNull ParsePosition pos) {
-                            return null;
-                        }
-                    };
                     //TODO replace new Date() to dateFormat.parse()...
                     String idPM = cs.getString(0);
                     String idSach = cs.getString(1);

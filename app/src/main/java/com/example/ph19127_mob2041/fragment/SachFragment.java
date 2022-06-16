@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.ParcelFormatException;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,7 +102,7 @@ public class SachFragment extends Fragment {
                 );
                 spnLoaiSach.setAdapter(spnLoaiSachAdapter);
                 spnLoaiSach.setSelection(0);
-                spnLoaiSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                /*spnLoaiSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         sachByLoaiSachList.clear();
@@ -115,7 +117,7 @@ public class SachFragment extends Fragment {
                     public void onNothingSelected(AdapterView<?> parent) {
                         //TODO không biết làm gì. có thể set item cũ vào nếu không select item nào
                     }
-                });
+                });*/
 
                 btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -125,21 +127,39 @@ public class SachFragment extends Fragment {
 
                     private void addSach() {
                         //TODO code add PhieuMuon to database
-                        String maLoaiSach = ((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach();
-                        String maSach = etMaSach.getText().toString().substring(1);
-                        String tieuDe = etTieuDe.getText().toString();
-                        String tacGia = etTacGia.getText().toString();
-                        double donGia = Double.parseDouble(etGiaSach.getText().toString());
+                        try {
+                            if (loaiSachList.isEmpty()) throw new NullPointerException("loaiSach");
+                            String maLoaiSach = ((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach();
+                            String maSach = etMaSach.getText().toString().substring(1);
+                            String tieuDe = etTieuDe.getText().toString();
+                            String tacGia = etTacGia.getText().toString();
+                            if (tieuDe.isEmpty()) throw new NullPointerException("tieuDe");
+                            if (tacGia.isEmpty()) throw new NullPointerException("tacGia");
+                            double donGia = Double.parseDouble(etGiaSach.getText().toString());
 
-                        Sach sachTemp = new Sach(maSach, maLoaiSach, tieuDe, tacGia, donGia);
-                        if (sachDAO.insert(sachTemp) != -1) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            sachList.clear();
-                            sachList.addAll(sachDAO.getAll());
-                            dialog.dismiss();
-                            sachAdapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            Sach sachTemp = new Sach(maSach, maLoaiSach, tieuDe, tacGia, donGia);
+                            if (sachDAO.insert(sachTemp) != -1) {
+                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                sachList.clear();
+                                sachList.addAll(sachDAO.getAll());
+                                dialog.dismiss();
+                                sachAdapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (NullPointerException e) {
+                            if (e.getMessage().equals("loaiSach"))
+                                Toast.makeText(getContext(), "Loại sách đang chưa có, hãy tạo loại sách trước", Toast.LENGTH_SHORT).show();
+                            if (e.getMessage().equals("tieuDe"))
+                                Toast.makeText(getContext(), "Tiêu đề không được để trống", Toast.LENGTH_SHORT).show();
+                            if (e.getMessage().equals("tacGia"))
+                                Toast.makeText(getContext(), "Tác giả không được để trống", Toast.LENGTH_SHORT).show();
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), "giá sách không được để trống", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Log.d("SachFragment", "addSach: lỗi không xác định");
+                            e.printStackTrace();
                         }
                     }
                 });

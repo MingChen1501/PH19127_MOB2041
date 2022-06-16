@@ -158,6 +158,7 @@ public class PhieuMuonFragment extends Fragment {
                 spnLoaiSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        //TODO bug khi loại sách empty. spnSach setSelection null
                         spnSach.setEnabled(true);
                         sachListByLoaiSach.clear();
                         for (Sach sach : sachList) {
@@ -168,9 +169,14 @@ public class PhieuMuonFragment extends Fragment {
 
                         spnSachAdapter.notifyDataSetChanged();
                         spnSach.setSelection(0);
-                        tvGiaThue
-                                .setText(String.valueOf(((Sach)spnSach.getSelectedItem()).getDonGia()));
-                    }
+                        if (sachListByLoaiSach.isEmpty()) {
+                            tvGiaThue.setText("0");
+                        } else {
+                            tvGiaThue
+                                    .setText(String.valueOf(((Sach)spnSach.getSelectedItem()).getDonGia()));
+                        }
+
+                        }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
@@ -194,6 +200,7 @@ public class PhieuMuonFragment extends Fragment {
                     private void openDatePickerDialog() {
                         materialDatePicker.show(getActivity().getSupportFragmentManager()
                                 , "METARIAL DATE PICKER FRM PHIEU MUON");
+                        tvNgayMuon.setOnClickListener(null);
                     }
                 });
                 materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
@@ -218,27 +225,27 @@ public class PhieuMuonFragment extends Fragment {
                 btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        try {
-                            addPhieuMuon();
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                        addPhieuMuon();
                     }
 
-                    private void addPhieuMuon() throws ParseException {
+                    private void addPhieuMuon() {
                         //TODO code add PhieuMuon to database
                         try {
                             String idPhieuMuon = etPhieuMuon.getText().toString().substring(1);
+                            if (loaiSachList.isEmpty()) throw new Exception("loaiSach");
+                            if (sachListByLoaiSach.isEmpty()) throw new Exception("sach");
+                            if (thanhVienList.isEmpty()) throw new Exception("thanhVien");
                             String idSach = ((Sach)spnSach.getSelectedItem()).getMaSach();
                             String idThanhVien = ((ThanhVien)spnThanhVien.getSelectedItem()).getMaThanhVien();
                             String idThuThu = userId;
                             boolean isDaTra = swDaTra.isChecked();
+                            //TODO xử lí lại ngayMuon
                             Date ngayMuon = new SimpleDateFormat("dd-MM-yyyy").
                                     parse((tvNgayMuon.getText().toString()).substring(10));
-
-                            if (idSach.isEmpty()) throw new Exception("Sach");
-                            if (idThanhVien.isEmpty()) throw new Exception("ThanhVien");
-                            if (idThuThu.isEmpty()) throw new Exception("ThuThu");
+                            if (tvNgayMuon.getText().toString().substring(10).isEmpty()) throw new Exception("ngayMuon");
+//                            if (idSach.isEmpty()) throw new Exception("Sach");
+//                            if (idThanhVien.isEmpty()) throw new Exception("thanhVien");
+                            if (idThuThu.isEmpty()) throw new Exception("thuThu");
 
                             PhieuMuon newPhieuMuon = new PhieuMuon(idPhieuMuon,idThanhVien, idSach, idThuThu, ngayMuon, isDaTra);
                             if (phieuMuonDAO.insert(newPhieuMuon) != -1) {
@@ -252,23 +259,37 @@ public class PhieuMuonFragment extends Fragment {
                                 Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                             }
                         } catch (IndexOutOfBoundsException e) {
+                            Log.d(TAG, "addPhieuMuon: " + (tvNgayMuon.getText().toString()).length());
                             Log.d(TAG, "addPhieuMuon: id substring() OR date subString()");
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Chưa chọn ngày mượn", Toast.LENGTH_SHORT).show();
                         } catch (ParseException e) {
                             Log.d(TAG, "addPhieuMuon: Date ngayMuon khong the parse");
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "lỗi ngày mượn", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                             switch (e.getMessage()) {
-                                case "Sach":
+                                case "loaiSach":
+                                    Log.d(TAG, "addPhieuMuon: loại sách null");
+                                    Toast.makeText(getContext(), "Chưa tạo loại sách", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case "sach":
                                     Log.d(TAG, "addPhieuMuon: Sach null");
+                                    Toast.makeText(getContext(), "Chưa tạo sách", Toast.LENGTH_SHORT).show();
                                     break;
-                                case "ThanhVien":
+                                case "thanhVien":
                                     Log.d(TAG, "addPhieuMuon: ThanhVien null");
+                                    Toast.makeText(getContext(), "Chưa tạo thành viên", Toast.LENGTH_SHORT).show();
                                     break;
-                                case "ThuThu":
+                                case "thuThu":
                                     Log.d(TAG, "addPhieuMuon: ThuThu null");
+                                    Toast.makeText(getContext(), "Chưa tạo thủ thư", Toast.LENGTH_SHORT).show();
                                     break;
+                                case "ngayMuon":
+                                    Log.d(TAG, "addPhieuMuon: ngayMuon null");
+                                    Toast.makeText(getContext(), "Chưa chọn ngày tạo phiếu mượn", Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    Log.d(TAG, "addPhieuMuon: khum xác định");
                             }
                         }
 

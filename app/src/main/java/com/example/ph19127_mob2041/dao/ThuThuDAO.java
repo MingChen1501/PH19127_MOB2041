@@ -93,13 +93,13 @@ public class ThuThuDAO implements DAO<ThuThu> {
     @Override
     public long delete(ThuThu thuThu) {
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
-            int a = db.delete(DBHelper.TABLE_PHIEU_MUON,
+            /*int a = db.delete(DBHelper.TABLE_PHIEU_MUON,
                     DBHelper.PHIEU_MUON_ID_THU_THU + " = ?",
-                    new String[] {thuThu.getMaThuThu()});
+                    new String[] {thuThu.getMaThuThu()});*/
             int b = db.delete(DBHelper.TABLE_THU_THU
                     , DBHelper.THU_THU_ID + " = ?"
                     , new String[] {thuThu.getMaThuThu()});
-            return a + b;
+            return b;
         }
     }
     public int login(String id, String pass) {

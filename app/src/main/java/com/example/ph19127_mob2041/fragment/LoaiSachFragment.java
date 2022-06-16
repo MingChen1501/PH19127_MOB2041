@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,18 +87,26 @@ public class LoaiSachFragment extends Fragment {
 
                     private void addLoaiSach() {
                         //TODO code add PhieuMuon to database
-                        String maLoaiSach = etMaLoaiSach.getText().toString().substring(1);
-                        String tenLoaiSach = etTenLoaiSach.getText().toString();
-                        LoaiSach newLoaiSach = new LoaiSach(maLoaiSach, tenLoaiSach);
-                        if (loaiSachDAO.insert(newLoaiSach) != -1) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            loaiSachList.clear();
-                            loaiSachList.addAll(loaiSachDAO.getAll());
-                            dialog.dismiss();
-                            loaiSachAdapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        try {
+                            String maLoaiSach = etMaLoaiSach.getText().toString().substring(1);
+                            String tenLoaiSach = etTenLoaiSach.getText().toString();
+                            if (tenLoaiSach.isEmpty()) throw new NullPointerException("Tên loại sách không được trống");
+                            LoaiSach newLoaiSach = new LoaiSach(maLoaiSach, tenLoaiSach);
+                            if (loaiSachDAO.insert(newLoaiSach) != -1) {
+                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                loaiSachList.clear();
+                                loaiSachList.addAll(loaiSachDAO.getAll());
+                                dialog.dismiss();
+                                loaiSachAdapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (NullPointerException e) {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Log.d("LoaiSachFragment", "addLoaiSach: lỗi không xác định");
                         }
+
                     }
                 });
                 btnHuy.setOnClickListener(new View.OnClickListener() {

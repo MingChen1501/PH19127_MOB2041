@@ -86,7 +86,7 @@ public class LoaiSachDAO implements DAO<LoaiSach>{
         try (SQLiteDatabase db = helper.getWritableDatabase()) {
 
 
-            int a = db.delete(DBHelper.TABLE_PHIEU_MUON,
+            /*int a = db.delete(DBHelper.TABLE_PHIEU_MUON,
                     DBHelper.PHIEU_MUON_ID_SACH + " in (" +
                             "SELECT "+ DBHelper.SACH_ID +" FROM " +
                             DBHelper.TABLE_SACH + " " +
@@ -98,7 +98,7 @@ public class LoaiSachDAO implements DAO<LoaiSach>{
             int b = db.delete(DBHelper.TABLE_SACH,
                     DBHelper.SACH_ID_LOAI_SACH + " = ?",
                     new String[] {loaiSach.getMaLoaiSach()});
-            //delete record from table sach
+            //delete record from table sach*/
 
 
             int c = db.delete(DBHelper.TABLE_LOAI_SACH
@@ -106,7 +106,7 @@ public class LoaiSachDAO implements DAO<LoaiSach>{
                     , new String[] {loaiSach.getMaLoaiSach()});
             //delete record from table loai sach
 
-            return a + b + c;
+            return c;
         }
     }
 }

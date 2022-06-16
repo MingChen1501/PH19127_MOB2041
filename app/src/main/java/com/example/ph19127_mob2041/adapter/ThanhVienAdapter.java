@@ -25,7 +25,7 @@ import com.example.ph19127_mob2041.model.ThanhVien;
 import java.util.List;
 
 public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.ThanhVienHolder> {
-    private Context mContext;
+    private final Context mContext;
     private ThanhVienDAO mthanhVienDAO;
     private List<ThanhVien> mthanhVienList;
 //    private List<Sach> sachListByLoaiSach;
@@ -83,19 +83,38 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
                 btnSua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        thanhVien.setTenThanhVien(etTenThanhVien.getText().toString());
-                        thanhVien.setSoDienThoai(etSoDienThoai.getText().toString());
+                        try {
+                            if (etMaThanhVien.getText().toString().isEmpty()) throw new IllegalArgumentException("id");
+                            if (etTenThanhVien.getText().toString().isEmpty()) throw new IllegalArgumentException("ten");
+                            if (etSoDienThoai   .getText().toString().isEmpty()) throw new IllegalArgumentException("sdt");
+                            thanhVien.setTenThanhVien(etTenThanhVien.getText().toString());
+                            thanhVien.setSoDienThoai(etSoDienThoai.getText().toString());
 
-                        if (mthanhVienDAO.update(thanhVien) > 0) {
-                            Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                            mthanhVienList.clear();
-                            mthanhVienList.addAll(mthanhVienDAO.getAll());
-                            notifyDataSetChanged();
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(mContext, "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                            //TODO validate ...
+                            if (mthanhVienDAO.update(thanhVien) > 0) {
+                                Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                mthanhVienList.clear();
+                                mthanhVienList.addAll(mthanhVienDAO.getAll());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(mContext, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                                //TODO validate ...
+                            }
+                        } catch (IllegalArgumentException e) {
+                            if (e.getMessage().equals("id")) {
+                                Toast.makeText(mContext, "chưa có id", Toast.LENGTH_SHORT).show();
+
+                            }
+                            if (e.getMessage().equals("ten")) {
+                                Toast.makeText(mContext, "tên không được bỏ trống", Toast.LENGTH_SHORT).show();
+
+                            }
+                            if (e.getMessage().equals("sdt")) {
+                                Toast.makeText(mContext, "số điện thoại không được bỏ trống", Toast.LENGTH_SHORT).show();
+
+                            }
                         }
+
                     }
                 });
                 btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -110,21 +129,26 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("Xóa thành viên").setMessage("Xóa " + thanhVien.toString() +
-                        " sẽ xóa theo các phiếu mượn liên quan" +
-                        "\nBạn có chắc chắn sẽ xóa " + thanhVien.toString() + " ?");
+                builder.setTitle("Xóa thành viên").setMessage("Xóa " + thanhVien.toString());
 
                 builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (mthanhVienDAO.delete(thanhVien) != 0) {
-                            Toast.makeText(mContext, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            mthanhVienList.clear();
-                            mthanhVienList.addAll(mthanhVienDAO.getAll());
-                            notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(mContext, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    public void onClick(DialogInterface dialog, int which){
+                        try {
+                            if (mthanhVienDAO.delete(thanhVien) != 0) {
+                                Toast.makeText(mContext, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                mthanhVienList.clear();
+                                mthanhVienList.addAll(mthanhVienDAO.getAll());
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(mContext, "Không thể xóa thành viên" +
+                                    " vì đã tồn tại những phiếu mượn liên quan tới thành viên này",
+                                    Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
                 builder.setPositiveButton("Quay Lại", new DialogInterface.OnClickListener() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,18 +81,25 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.PhieuM
                 btnSua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        loaiSach.setTenLoaiSach(etTenLoaiSach.getText().toString());
+                        try {
+                            loaiSach.setTenLoaiSach(etTenLoaiSach.getText().toString());
+                            if (loaiSach.getTenLoaiSach().isEmpty()) throw new NullPointerException("Tên loại sách không đưuọc để trống");
 
-                        if (loaiSachDAO.update(loaiSach) > 0) {
-                            Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                            loaiSachList.clear();
-                            loaiSachList.addAll(loaiSachDAO.getAll());
-                            notifyDataSetChanged();
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                            //TODO validate ...
+                            if (loaiSachDAO.update(loaiSach) > 0) {
+                                Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                loaiSachList.clear();
+                                loaiSachList.addAll(loaiSachDAO.getAll());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (NullPointerException e) {
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Log.d("LoaiSachAdapter", "onClick: lỗi không xác định");
                         }
+
                     }
                 });
                 btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -106,20 +114,27 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.PhieuM
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Xóa Loại Sách").setMessage("Xóa " + loaiSach.toString() + " sẽ xóa theo \nCác sách liên quan \nCác phiếu mượn liên quan" +
-                        "\nBạn có chắc chắn sẽ xóa " + loaiSach.toString() + " ?");
+                builder.setTitle("Xóa Loại Sách").setMessage("Xóa " + loaiSach.toString());
 
                 builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (loaiSachDAO.delete(loaiSach) != 0) {
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            loaiSachList.clear();
-                            loaiSachList.addAll(loaiSachDAO.getAll());
-                            notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        try {
+                            if (loaiSachDAO.delete(loaiSach) != 0) {
+                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                loaiSachList.clear();
+                                loaiSachList.addAll(loaiSachDAO.getAll());
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(context, "Không thể xóa loại sách" +
+                                    " vì đã tồn tại những sách thuộc loại sách này",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
                         }
+
                     }
                 });
                 builder.setPositiveButton("Quay Lại", new DialogInterface.OnClickListener() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,23 +110,39 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewH
                 btnSua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sach.setMaLoaiSach(((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach());
+                        try {
+                            if (loaiSachList.isEmpty()) throw new NullPointerException("loaiSach");
+                            sach.setMaLoaiSach(((LoaiSach)spnLoaiSach.getSelectedItem()).getMaLoaiSach());
+                            if (etTieuDe.getText().toString().isEmpty()) throw new NullPointerException("tieuDe");
+                            if (etTacGia.getText().toString().isEmpty()) throw new NullPointerException("tacGia");
+                            sach.setDonGia(Double.parseDouble(etDonGia.getText().toString()));
+                            sach.setTieuDe(etTieuDe.getText().toString());
+                            sach.setTacGia(etTacGia.getText().toString());
 
-
-                        sach.setTieuDe(etTieuDe.getText().toString());
-                        sach.setTacGia(etTacGia.getText().toString());
-                        sach.setDonGia(Double.parseDouble(etDonGia.getText().toString()));
-
-                        if (sachDAO.update(sach) > 0) {
-                            Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                            sachList.clear();
-                            sachList.addAll(sachDAO.getAll());
-                            notifyDataSetChanged();
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                            //TODO validate ...
+                            if (sachDAO.update(sach) > 0) {
+                                Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                sachList.clear();
+                                sachList.addAll(sachDAO.getAll());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                                //TODO validate ...
+                            }
+                        } catch (NullPointerException e) {
+                            if (e.getMessage().equals("loaiSach"))
+                                Toast.makeText(context, "Loại sách đang chưa có, hãy tạo loại sách trước", Toast.LENGTH_SHORT).show();
+                            if (e.getMessage().equals("tieuDe"))
+                                Toast.makeText(context, "Tiêu đề không được để trống", Toast.LENGTH_SHORT).show();
+                            if (e.getMessage().equals("tacGia"))
+                                Toast.makeText(context, "Tác giả không được để trống", Toast.LENGTH_SHORT).show();
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(context, "giá sách không được để trống", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Log.d("SachFragment", "addSach: lỗi không xác định");
+                            e.printStackTrace();
                         }
+
                     }
                 });
                 btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -145,15 +162,23 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.PhieuMuonViewH
                 builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (sachDAO.delete(sach) != 0) {
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            sachList.clear();
-                            sachList.addAll(sachDAO.getAll());
-                            notifyDataSetChanged();
+                        try {
+                            if (sachDAO.delete(sach) != 0) {
+                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                sachList.clear();
+                                sachList.addAll(sachDAO.getAll());
+                                notifyDataSetChanged();
 
-                        } else {
-                            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(context, "Không thể xóa sách" +
+                                    " vì đã tồn tại phiếu mượn liên quan tới cuốn sách này",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
                         }
+
                     }
                 });
                 AlertDialog alertDialog = builder.create();
